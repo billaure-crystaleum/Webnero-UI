@@ -80,7 +80,7 @@ var ModelViewController = {
         }
         return ModelViewController.coinState = which;
     },
-    coins: { coin: ['etnx','etnxp','ltnx','gldx','crfi'] },
+    coins: { coin: ['etnx','etnxp','crfi'] },
     setCoinData: function(coin, data){
         
         return localStorage.setItem(coin+"Data", data);       
