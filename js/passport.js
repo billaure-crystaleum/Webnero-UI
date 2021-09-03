@@ -1109,34 +1109,34 @@ var PassportPipeline = {
         var passport = PassportPipeline.get_passport_local(version);
         console.log("passport_local:");
         console.log(passport);
-        console.log("1");
+        console.log("Electronero Passport registration checkpoint: 1");
         console.log(this.passportParams);
         PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
             if(response){
                 let passportLogin = JSON.parse(response);
                 if(passportLogin.hasOwnProperty("error")){
-                    loginFail();
+                    registerFail();
                     return;
                 }
                 PassportPipeline.setCoinUUID(coinSymbol, passportLogin);
                 this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                 this.passportParams.code = parseInt(PassportPipeline.loadCode());
                 this.passportParams.method = 'add_code';
-                console.log("2");
+                console.log("Electronero Passport registration checkpoint: 2");
                 console.log(this.passportParams);
                 PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
                     if(response){
                         console.log(response); 
                         let passportCheckCode = JSON.parse(response);
                         if(passportCheckCode.hasOwnProperty("error")){
-                            loginCodeFail();
+                            registerCodeFail();
                             return;
                         }
                         ModelViewController.coinState++
                         if(ModelViewController.coinState>=5){
                            location.href = "verify.html";
                            }
-                        console.log("3");
+                        console.log("Electronero Passport registration checkpoint: 3");
                         console.log(this.passportParams);
                         operationCallback(coinSymbol);
                     }

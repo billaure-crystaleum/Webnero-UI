@@ -275,20 +275,23 @@ var ModelViewController = {
         });
     },
     initVerification: function(coinSymbol){
-            if(coinSymbol){
-                ModelViewController.coinState++
-            }
-            
+            console.log(ModelViewController.coinState);
+            let coin_state = ModelViewController.coinState;
+            $.event.trigger({
+                type: "init.done",
+                coin: coinSymbol
+            });
+            var successful = function(){
+                let success_msg = "Electronero Passport account registration successful! Check email to verify your account. For assistance, contact support@electronero.org"
+                return success_msg;
+            }; 
+            if(coin_state >= 5){            
             //ModelViewController.initLevel++;
             if(!PassportPipeline.hasValidSession())
             {
                 location.href = "verify.html";
             }
-
-            $.event.trigger({
-                type: "init.done",
-                coin: coinSymbol
-            });
+            };
     },
     initDashboard: function(){
             location.href = "index.html";
@@ -338,6 +341,8 @@ $(document).on("init.done", function(e){
         $("#spinner-modal").modal('hide');
         if(location.pathname.indexOf("login") > -1) {
             location.href = location.href.replace("login", "index");
+        } else if(ModelViewController.initLevel >= 5 && location.pathname.indexOf("register") > -1) {
+            location.href = location.href.replace("register", "index");
         } else {
             ModelViewController.fillData();
         }

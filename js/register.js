@@ -39,7 +39,7 @@ $(document).on("click", "#pin-code", function(){
         console.log("passport_registration:");
         console.log(passport);  
         // register all coins simultaneously
-        let coins = ModelViewController.coins.coin;             
+        let coins = ModelViewController.coins.coin; 
         PassportPipeline.registerOperation("etnx", ModelViewController.initVerification, passport_registration);
         PassportPipeline.registerOperation("etnxp", ModelViewController.initVerification, passport_registration);
         PassportPipeline.registerOperation("ltnx", ModelViewController.initVerification, passport_registration);
@@ -50,10 +50,22 @@ $(document).on("click", "#pin-code", function(){
     }
 });
 
-function registerFail(message){
-    $(".alert-danger").html("Registration error: " + message);
-    $(".alert-danger").css("display", "block");
-    $("#spinner-modal").modal('hide');
+register_operations = {
+    registerFail: function(message){
+        $(".alert-danger").html("Registration error: " + message);
+        $(".alert-danger").css("display", "block");
+        $("#spinner-modal").modal('hide');
+    },
+    registerCodeFail: function(message){
+        $(".alert-danger").html("Registration error: " + message);
+        $(".alert-danger").css("display", "block");
+        $("#spinner-modal").modal('hide');
+    },
+    registerSuccess: function(message){
+        $(".alert-danger").html("Registration error: " + message);
+        $(".alert-danger").css("display", "block");
+        $("#spinner-modal").modal('hide');
+    },
 }
 
 function validateField(){
