@@ -1,5 +1,6 @@
 var PassportPipeline = {
-
+    
+    
     passportParams: { 
                      method: '',
                      username: '',
@@ -122,6 +123,13 @@ var PassportPipeline = {
                      bounty_twitter: '',
                      bounty_telegram: '',
                      bounty_facebook: ''
+    },
+    passport_local:{
+            api: PassportPipeline.passportParams.coinAPIurl ? PassportPipeline.passportParams.coinAPIurl : null,
+            uid: PassportPipeline.passportParams.uid ? PassportPipeline.passportParams.uid : null,
+            email: PassportPipeline.passportParams.email ? PassportPipeline.passportParams.email : null,
+            password: PassportPipeline.passportParams.password ? PassportPipeline.passportParams.password : null,
+            method: PassportPipeline.passportParams.method ? PassportPipeline.passportParams.method : null
     },
     statusMessage: function(message){
         if(!message){
@@ -248,11 +256,11 @@ var PassportPipeline = {
             var i = 0;
             for(i;i<coins.length;i++){
                 // get uid  
-                this.passportParams.uid = parseInt(this.getCoinUUID(coins[i]));
+                this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coins[i]));
                 console.log("UUID log");
                 console.log(this.passportParams.uid)
                 // get code
-                this.passportParams.code = parseInt(this.loadCode());
+                this.passportParams.code = parseInt(PassportPipeline.loadCode());
                 console.log("CODE log");
                 console.log(this.passportParams.uid)
                 // init coins[i]
@@ -1036,23 +1044,17 @@ var PassportPipeline = {
     },
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
         if(passport_local === null || passport_local === undefined){
-            passport_local = {
-            api: this.passportParams.coinAPIurl ? this.passportParams.coinAPIurl : null,
-            uid: this.passportParams.uid ? this.passportParams.uid : null,
-            email: this.passportParams.email ? this.passportParams.email : null,
-            password: this.passportParams.password ? this.passportParams.password : null,
-            method: this.passportParams.method ? this.passportParams.method : null
-            };
+            passport_local = PassportPipeline.passport_local;
         };
         console.log("performOperation");
         this.loadParams();        
         this.passportParams.method = 'login';
         this.setMethod('login');
-        this.passportParams.coinAPIurl = this.getPassportApi(coinSymbol);
+        this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;               
         var passport = PassportPipeline.get_passport_local();
         console.log("passport_local:");
-        console.log(JSON.stringify(passport));
+        console.log(passport);
         var version = 'passport_active'; 
         console.log("Checkpoint: 1");
         console.log(this.passportParams);
@@ -1066,10 +1068,10 @@ var PassportPipeline = {
                     return;
                 }
                 this.setCoinUUID(coinSymbol, passportLogin);
-                this.passportParams.uid = parseInt(this.getCoinUUID(coinSymbol));
+                this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                 console.log("UUID log");
                 console.log(this.passportParams.uid)
-                this.passportParams.code = parseInt(this.loadCode());
+                this.passportParams.code = parseInt(PassportPipeline.loadCode());
                 this.passportParams.method = 'check_code';
                 this.setMethod('check_code');
                 console.log("Checkpoint: 2");
@@ -1103,7 +1105,7 @@ var PassportPipeline = {
     registerOperation: function(coinSymbol, operationCallback){
         this.loadParams();        
         this.passportParams.method = 'register';
-        this.passportParams.coinAPIurl = this.getPassportApi(coinSymbol);
+        this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;
         console.log("1");
         console.log(this.passportParams);
@@ -1115,8 +1117,8 @@ var PassportPipeline = {
                     return;
                 }
                 this.setCoinUUID(coinSymbol, passportLogin);
-                this.passportParams.uid = parseInt(this.getCoinUUID(coinSymbol));
-                this.passportParams.code = parseInt(this.loadCode());
+                this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
+                this.passportParams.code = parseInt(PassportPipeline.loadCode());
                 this.passportParams.method = 'add_code';
                 console.log("2");
                 console.log(this.passportParams);
