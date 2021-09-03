@@ -12,7 +12,7 @@ $(document).ready(function(){
     } else if(sessionStorage.fromLogin == "true"){
         var passport = PassportPipeline.get_passport_local("passport_active");
         console.log("passport_active:");
-        console.log((JSON.stringify(passport));
+        console.log(passport);
         PassportPipeline.startCryptoEngine("poll", passport);
         ModelViewController.fillData();
         sessionStorage.setItem("fromLogin", false);
@@ -23,7 +23,7 @@ $(document).ready(function(){
         ModelViewController.fillData();
         var passport = PassportPipeline.get_passport_local("passport_active");
         console.log("passport_active:");
-        console.log(JSON.stringify(passport));
+        console.log(passport);
         PassportPipeline.startCryptoEngine("poll", passport);
         setInterval(ModelViewController.refreshDataLight, 60000);
     }
