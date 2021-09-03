@@ -29,7 +29,7 @@ $(document).on("click", "#pin-code", function(){
         };
         
         set_passport_local(passport_local);
-        var passport = PassportPipeline.get_passport_local());
+        var passport = PassportPipeline.get_passport_local();
         console.log("passport");
         console.log(passport);            
         var count = 0;
