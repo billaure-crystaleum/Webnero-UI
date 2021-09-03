@@ -1096,11 +1096,19 @@ var PassportPipeline = {
             }
         });
     },
-    registerOperation: function(coinSymbol, operationCallback){
+    registerOperation: function(coinSymbol, operationCallback, passport_local = null){
+        if(passport_local === null || passport_local === undefined){
+            var version = 'passport_registration';     
+            passport_local = PassportPipeline.get_passport_local();
+        }; 
         PassportPipeline.loadParams();        
         this.passportParams.method = 'register';
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;
+        var version = 'passport_registration';     
+        var passport = PassportPipeline.get_passport_local(version);
+        console.log("passport_local:");
+        console.log(passport);
         console.log("1");
         console.log(this.passportParams);
         PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
@@ -1125,7 +1133,7 @@ var PassportPipeline = {
                             return;
                         }
                         ModelViewController.coinState++
-                        if(ModelViewController.coinState>=4){
+                        if(ModelViewController.coinState>=5){
                            location.href = "verify.html";
                            }
                         console.log("3");

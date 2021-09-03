@@ -40,11 +40,11 @@ $(document).on("click", "#pin-code", function(){
         console.log(passport);  
         // register all coins simultaneously
         let coins = ModelViewController.coins.coin; 
-        PassportPipeline.performOperation("etnx", ModelViewController.initVerification, passport_registration);
-        PassportPipeline.performOperation("etnxp", ModelViewController.initVerification, passport_registration);
-        PassportPipeline.performOperation("ltnx", ModelViewController.initVerification, passport_registration);
-        PassportPipeline.performOperation("gldx", ModelViewController.initVerification, passport_registration);
-        PassportPipeline.performOperation("crfi", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.registerOperation("etnx", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.registerOperation("etnxp", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.registerOperation("ltnx", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.registerOperation("gldx", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.registerOperation("crfi", ModelViewController.initVerification, passport_registration);
       
 
     }
