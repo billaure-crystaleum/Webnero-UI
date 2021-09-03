@@ -219,6 +219,9 @@ var PassportPipeline = {
     
     startCryptoEngine: function(operation, passport_local){
     console.log(passport_local);
+        if(!operation || operation === null || operation === undefined){
+            var operation = "poll";
+        };
     console.log(operation);
         let etnx_data = {};
         let etnxp_data = {};
@@ -231,7 +234,7 @@ var PassportPipeline = {
             ltnx: null,
             gldx: null, 
             crfi: null
-        }
+        };
         function poll(passport_local){
             // should get the wallet contents for ETNX
             PassportPipeline.setMethod('getaddr');
