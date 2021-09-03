@@ -123,14 +123,7 @@ var PassportPipeline = {
                      bounty_twitter: '',
                      bounty_telegram: '',
                      bounty_facebook: ''
-    },
-    passport_local:{
-            api: PassportPipeline.passportParams.coinAPIurl ? PassportPipeline.passportParams.coinAPIurl : null,
-            uid: PassportPipeline.passportParams.uid ? PassportPipeline.passportParams.uid : null,
-            email: PassportPipeline.passportParams.email ? PassportPipeline.passportParams.email : null,
-            password: PassportPipeline.passportParams.password ? PassportPipeline.passportParams.password : null,
-            method: PassportPipeline.passportParams.method ? PassportPipeline.passportParams.method : null
-    },
+    },    
     statusMessage: function(message){
         if(!message){
             message = "ONLINE";
@@ -1044,18 +1037,19 @@ var PassportPipeline = {
     },
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
         if(passport_local === null || passport_local === undefined){
-            passport_local = PassportPipeline.passport_local;
-        };
+            var version = 'passport_active';     
+            passport_local = PassportPipeline.get_passport_local();
+        };        
         console.log("performOperation");
         this.loadParams();        
         this.passportParams.method = 'login';
         this.setMethod('login');
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
-        this.passportParams.uid = null;               
+        this.passportParams.uid = null;           
+        var version = 'passport_active';     
         var passport = PassportPipeline.get_passport_local();
         console.log("passport_local:");
         console.log(passport);
-        var version = 'passport_active'; 
         console.log("Checkpoint: 1");
         console.log(this.passportParams);
         this.remoteCall(coinSymbol,this.passportParams).then((response) => {
