@@ -293,8 +293,7 @@ var ModelViewController = {
     initDashboard: function(){
             location.href = "index.html";
             $.event.trigger({
-                type: "init.done",
-                coin: coinSymbol
+                type: "init.done"
             });
     },
 
