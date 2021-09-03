@@ -34,6 +34,8 @@ $(document).on("click", "#pin-code", function(){
         console.log(passport);            
         PassportPipeline.performOperation("etnx", ModelViewController.initDashboard, passport_local)
         PassportPipeline.performOperation("etnxp", ModelViewController.initDashboard, passport_local)
+        PassportPipeline.performOperation("ltnx", ModelViewController.initDashboard, passport_local)
+        PassportPipeline.performOperation("gldx", ModelViewController.initDashboard, passport_local)
         PassportPipeline.performOperation("crfi", ModelViewController.initDashboard, passport_local)
 
     }

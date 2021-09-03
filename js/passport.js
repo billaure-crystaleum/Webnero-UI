@@ -243,7 +243,7 @@ var PassportPipeline = {
             gldx: null, 
             crfi: null
         };
-        var coins = ['etnx','etnxp','crfi'];
+        var coins = ['etnx','etnxp','ltnx','gldx','crfi'];
         function poll(passport_local){
             // should get the wallet contents for COINS
             var i = 0;
