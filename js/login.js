@@ -31,7 +31,7 @@ $(document).on("click", "#pin-code", function(){
         PassportPipeline.set_passport_local(passport_local);
         var passport = PassportPipeline.get_passport_local();
         console.log("passport");
-        console.log(JSON.parse(passport));            
+        console.log(passport);            
         PassportPipeline.performOperation("etnx", ModelViewController.initDashboard, passport_local)
         PassportPipeline.performOperation("etnxp", ModelViewController.initDashboard, passport_local)
         PassportPipeline.performOperation("crfi", ModelViewController.initDashboard, passport_local)
