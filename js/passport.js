@@ -218,8 +218,8 @@ var PassportPipeline = {
     },
     
     startCryptoEngine: function(operation = "poll"){
-        var passport = PassportPipeline.get_passport_local());
-        var passport_local = PassportPipeline.get_passport_local());
+        var passport = PassportPipeline.get_passport_local();
+        var passport_local = PassportPipeline.get_passport_local();
         console.log("passport II");
         console.log(passport);  
         if(!operation || operation === null || operation === undefined){
@@ -1164,7 +1164,7 @@ var PassportPipeline = {
             method: this.passportParams.method ? this.passportParams.method : null
         };
         set_passport_local(passport_local);        
-        var passport = PassportPipeline.get_passport_local());
+        var passport = PassportPipeline.get_passport_local();
         console.log("1");
         console.log(this.passportParams);
         this.remoteCall(coinSymbol,this.passportParams).then((response) => {
