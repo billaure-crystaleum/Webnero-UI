@@ -217,7 +217,7 @@ var PassportPipeline = {
             });
     },
     
-    startCryptoEngine: function(operation){
+    startCryptoEngine: function(operation = "poll"){
         var passport = PassportPipeline.get_passport_local());
         var passport_local = PassportPipeline.get_passport_local());
         console.log("passport II");
