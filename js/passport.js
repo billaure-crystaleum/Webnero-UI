@@ -217,11 +217,13 @@ var PassportPipeline = {
             });
     },
     
-    startCryptoEngine: function(operation = "poll"){
-        var passport = PassportPipeline.get_passport_local();
-        var passport_local = PassportPipeline.get_passport_local();
+    startCryptoEngine: function(operation = "poll", version = "passport_active"){
+        if(version != "passport_active"){
+            var passport_local = PassportPipeline.get_passport_local(version);
+        }
+        var passport_local = PassportPipeline.get_passport_local("passport_active");
         console.log("passport II");
-        console.log(passport);  
+        console.log(passport_local);  
         if(!operation || operation === null || operation === undefined){
             var operation = "poll";
         }; console.log(operation);
