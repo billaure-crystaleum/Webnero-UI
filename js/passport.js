@@ -1080,10 +1080,10 @@ var PassportPipeline = {
                             loginCodeFail();
                             return;
                         }
-                        PassportPipeline.set_passport_local(passport_local, version);
-                        var passport_active = PassportPipeline.get_passport_local(version);
-                        console.log("passport_active:");
-                        console.log(passport_active);
+                            PassportPipeline.set_passport_local(passport_local, version);
+                            var passport_active = PassportPipeline.get_passport_local(version);
+                            console.log("passport_active:");
+                            console.log(passport_active);
                             if(ModelViewController.coinState){
                                console.log("MVC.coinState:")
                                console.log(ModelViewController.coinState)
@@ -1099,7 +1099,7 @@ var PassportPipeline = {
     registerOperation: function(coinSymbol, operationCallback, passport_local = null){
         if(passport_local === null || passport_local === undefined){
             var version = 'passport_registration';     
-            passport_local = PassportPipeline.get_passport_local();
+            passport_local = PassportPipeline.get_passport_local(version);
         }; 
         PassportPipeline.loadParams();        
         this.passportParams.method = 'register';
@@ -1115,7 +1115,7 @@ var PassportPipeline = {
             if(response){
                 let passportLogin = JSON.parse(response);
                 if(passportLogin.hasOwnProperty("error")){
-                    registerFail();
+                    register_operations.registerFail(passportLogin.hasOwnProperty("error"));
                     return;
                 }
                 PassportPipeline.setCoinUUID(coinSymbol, passportLogin);
@@ -1129,13 +1129,17 @@ var PassportPipeline = {
                         console.log(response); 
                         let passportCheckCode = JSON.parse(response);
                         if(passportCheckCode.hasOwnProperty("error")){
-                            registerCodeFail();
+                            register_operations.registerCodeFail(passportCheckCode.hasOwnProperty("error"));
                             return;
-                        }
-                        ModelViewController.coinState++
-                        if(ModelViewController.coinState>=5){
-                           location.href = "verify.html";
-                           }
+                        }   
+                            PassportPipeline.set_passport_local(passport_local, version);
+                            var passport_active = PassportPipeline.get_passport_local(version);
+                            console.log("passport_active:");
+                            console.log(passport_active);
+                            ModelViewController.coinState++
+                            if(ModelViewController.coinState>=5){
+                            location.href = "verify.html";
+                            }
                         console.log("Electronero Passport registration checkpoint: 3");
                         console.log(this.passportParams);
                         operationCallback(coinSymbol);
