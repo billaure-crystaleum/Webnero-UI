@@ -218,6 +218,7 @@ var PassportPipeline = {
     },
     
     startCryptoEngine: function(operation = "poll", version = "passport_active"){
+        
         if(version != "passport_active"){
             var passport_local = PassportPipeline.get_passport_local(version);
         }
@@ -227,8 +228,8 @@ var PassportPipeline = {
         if(!operation || operation === null || operation === undefined){
             var operation = "poll";
         }; console.log(operation);
-//         ModelViewController.coinState = 0;
-//         ModelViewController.initLevel = 0;
+        // ModelViewController.coinState = 0;
+        // ModelViewController.initLevel = 0;
         let etnx_data = {};
         let etnxp_data = {};
         let ltnx_data = {};
@@ -246,7 +247,16 @@ var PassportPipeline = {
             // should get the wallet contents for COINS
             var i = 0;
             for(i;i<coins.length;i++){
-                ModelViewController.initCoin(coins[i],passport_local);
+                // get uid  
+                this.passportParams.uid = parseInt(this.getCoinUUID(coins[i]));
+                console.log("UUID log");
+                console.log(this.passportParams.uid)
+                // get code
+                this.passportParams.code = parseInt(this.loadCode());
+                console.log("CODE log");
+                console.log(this.passportParams.uid)
+                // init coins[i]
+                ModelViewController.initCoin(coins[i], passport_local);
             };    
         };
             function etnx(passport_local){
@@ -1025,7 +1035,7 @@ var PassportPipeline = {
         };
     },
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
-        if(passport_local === null){
+        if(passport_local === null || passport_local === undefined){
             passport_local = {
             api: this.passportParams.coinAPIurl ? this.passportParams.coinAPIurl : null,
             uid: this.passportParams.uid ? this.passportParams.uid : null,
