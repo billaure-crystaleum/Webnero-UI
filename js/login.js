@@ -27,17 +27,17 @@ $(document).on("click", "#pin-code", function(){
             pin: pin_code ? pin_code : null,
             method: 'login'
         };
-            PassportPipeline.performOperation("etnx", ModelViewController.initCoin, passport_local)
-            PassportPipeline.performOperation("etnxp", ModelViewController.initCoin, passport_local)
-            PassportPipeline.performOperation("crfi", ModelViewController.initCoin, passport_local)
-            PassportPipeline.startCryptoEngine("poll", passport_local);
-            location.href = "login.html";
-//         var count = 0;
-//         for(count>0; count < coins.length; count++){
-//             console.log("count before: " + count);
-            
-//             console.log("count after: " + count);
-//         };
+        
+        set_passport_local(passport_local);
+        var passport = PassportPipeline.get_passport_local());
+        console.log("passport");
+        console.log(passport);            
+        var count = 0;
+        for(count>0; count < coins.length; count++){
+            console.log("count before: " + count);
+            PassportPipeline.performOperation(coins[count], ModelViewController.initDashboard, passport_local)
+            console.log("count after: " + count);
+        };
     }
 });
 
