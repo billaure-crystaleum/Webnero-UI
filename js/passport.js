@@ -247,7 +247,8 @@ var PassportPipeline = {
             var i = 0;
             for(i;i<coins.length;i++){
                 ModelViewController.initCoin(coins[i],passport_local);
-            };            
+            };    
+        };
             function etnx(passport_local){
             PassportPipeline.setMethod('getaddr');
             PassportPipeline.loadParams();
