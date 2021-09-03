@@ -217,12 +217,16 @@ var PassportPipeline = {
             });
     },
     
-    startCryptoEngine: function(operation, passport_local){
-    console.log(passport_local);
+    startCryptoEngine: function(operation){
+        var passport = PassportPipeline.get_passport_local());
+        var passport_local = PassportPipeline.get_passport_local());
+        console.log("passport II");
+        console.log(passport);  
         if(!operation || operation === null || operation === undefined){
             var operation = "poll";
-        };
-    console.log(operation);
+        }; console.log(operation);
+        ModelViewController.coinState = 0;
+        ModelViewController.initLevel = 0;
         let etnx_data = {};
         let etnxp_data = {};
         let ltnx_data = {};
@@ -249,12 +253,12 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log("error");
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
                         status.etnx = true;
-                        ModelViewController.setCoinData(coinSymbol, response);
+                        ModelViewController.setCoinData("etnx", response);
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
                         $.event.trigger({
@@ -277,12 +281,12 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log("error");
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
                         status.etnxp = true;
-                        ModelViewController.setCoinData(coinSymbol, response);
+                        ModelViewController.setCoinData("etnxp", response);
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
                         $.event.trigger({
@@ -305,12 +309,12 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log("error");
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
                         status.ltnx = true;
-                        ModelViewController.setCoinData(coinSymbol, response);
+                        ModelViewController.setCoinData("ltnx", response);
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
                         $.event.trigger({
@@ -333,12 +337,12 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log("error");
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
                         status.gldx = true;
-                        ModelViewController.setCoinData(coinSymbol, response);
+                        ModelViewController.setCoinData("gldx", response);
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
                         $.event.trigger({
@@ -361,12 +365,12 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log("error");
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
                         status.crfi = true;
-                        ModelViewController.setCoinData(coinSymbol, response);
+                        ModelViewController.setCoinData("crfi", response);
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
                         $.event.trigger({
@@ -1139,6 +1143,12 @@ var PassportPipeline = {
 //         return this.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
         return sessionStorage.getItem(coinSymbol+"_uuid");
     },
+    set_passport_local: function(passportParams){
+        return sessionStorage.setItem("passport_local", passportParams);
+    },
+    get_passport_local: function(){
+        return sessionStorage.getItem("passport_local");
+    },
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
         console.log("performOperation");
         this.loadParams();        
@@ -1153,6 +1163,8 @@ var PassportPipeline = {
             password: this.passportParams.password ? this.passportParams.password : null,
             method: this.passportParams.method ? this.passportParams.method : null
         };
+        set_passport_local(passport_local);        
+        var passport = PassportPipeline.get_passport_local());
         console.log("1");
         console.log(this.passportParams);
         this.remoteCall(coinSymbol,this.passportParams).then((response) => {
