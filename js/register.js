@@ -25,10 +25,8 @@ $(document).on("click", "#pin-code", function(){
         PassportPipeline.setMethod('register');
         PassportPipeline.setCode(pin_code);
         PassportPipeline.setCredentials(($("#email").val(), $("#password").val(), true));
-            
-            // loop through coins.coin and register all coins simultaneously
-            let coins = ModelViewController.coins.coin;
-            ModelViewController.returnState();
+        ModelViewController.returnState();
+        // loop through coins.coin and register all coins simultaneously
         let coins = ModelViewController.coins.coin; 
         for (var i=0;i<coins.length;i++) {
                 PassportPipeline.performOperation(coins[i], ModelViewController.initVerification)   
