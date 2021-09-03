@@ -1040,7 +1040,7 @@ var PassportPipeline = {
         };       
         var passport = PassportPipeline.get_passport_local();
         console.log("passport_local:");
-        console.log(JSON.parse(passport));
+        console.log(JSON.strinify(passport));
         var version = 'passport_active'; 
         console.log("Checkpoint: 1");
         console.log(this.passportParams);
