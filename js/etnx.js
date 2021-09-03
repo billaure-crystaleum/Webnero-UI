@@ -254,7 +254,7 @@ var ModelViewController = {
         console.log("coinstate pre++: " + ModelViewController.coinState);
         ModelViewController.coinState++;
         console.log("coinstate post++: " + ModelViewController.coinState);
-        PassportPipeline.remoteCall(coinSymbol,PassportPipeline.passportParams).then((response) => {
+        PassportPipeline.remoteCall(coinSymbol,passportParams).then((response) => {
             if(response){
                 console.log(response); 
                 let passportBalance = JSON.parse(response);
