@@ -49,7 +49,7 @@ $(document).on("click", "#pin-code", function(){
         $("#spinner-modal").modal('show');
         PassportPipeline.setMethod('register');
         PassportPipeline.setCode(pin_code);
-        PassportPipeline.setCredentials(($("#email").val(), $("#password").val(), true));
+        PassportPipeline.setCredentials($("#email").val(), $("#password").val(), true);
         ModelViewController.returnState();
         let passport_registration = {
             api: PassportPipeline.passportParams.coinAPIurl ? PassportPipeline.passportParams.coinAPIurl : null,
@@ -65,11 +65,11 @@ $(document).on("click", "#pin-code", function(){
         console.log(passport);  
         // register all coins simultaneously
         let coins = ModelViewController.coins.coin; 
-        PassportPipeline.registerOperation("etnx", ModelViewController.initVerification, passport_registration);
-        PassportPipeline.registerOperation("etnxp", ModelViewController.initVerification, passport_registration);
-        PassportPipeline.registerOperation("ltnx", ModelViewController.initVerification, passport_registration);
-        PassportPipeline.registerOperation("gldx", ModelViewController.initVerification, passport_registration);
-        PassportPipeline.registerOperation("crfi", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.registerOperation("etnx", ModelViewController.initVerification, passport);
+        PassportPipeline.registerOperation("etnxp", ModelViewController.initVerification, passport);
+        PassportPipeline.registerOperation("ltnx", ModelViewController.initVerification, passport);
+        PassportPipeline.registerOperation("gldx", ModelViewController.initVerification, passport);
+        PassportPipeline.registerOperation("crfi", ModelViewController.initVerification, passport);
       
 
     }
