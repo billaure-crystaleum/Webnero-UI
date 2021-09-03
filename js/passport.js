@@ -1199,26 +1199,25 @@ var PassportPipeline = {
                 console.log(this.passportParams);
                 this.remoteCall(coinSymbol, this.passportParams).then((response) => {
                     if(response){
-                        console.log(response); 
-                        let passportCheckCode = JSON.parse(response);
+                      console.log(response); 
+                      let passportCheckCode = JSON.parse(response);
                         if(passportCheckCode.hasOwnProperty("error")){
                             let checkError = passportCheckCode.hasOwnProperty("error");
                             console.log(checkError);
                             loginCodeFail();
                             return;
-                        } else {
-                            PassportPipeline.set_passport_local(passport_local, version);
-                            var passport_active = PassportPipeline.get_passport_local(version);
-                            console.log("passport_active:");
-                            console.log(passport_active);
-                            if(ModelViewController.coinState){
-                                console.log("MVC.coinState:")
-                               console.log(ModelViewController.coinState)
-                               }
-                            console.log("Checkpoint: 3");
-                            console.log(this.passportParams);
-                            operationCallback(coinSymbol);
                         }
+                        PassportPipeline.set_passport_local(passport_local, version);
+                        var passport_active = PassportPipeline.get_passport_local(version);
+                        console.log("passport_active:");
+                        console.log(passport_active);
+                            if(ModelViewController.coinState){
+                               console.log("MVC.coinState:")
+                               console.log(ModelViewController.coinState)
+                            }
+                        console.log("Checkpoint: 3");
+                        console.log(this.passportParams);
+                        operationCallback(coinSymbol);
                     }
                 });
             }
