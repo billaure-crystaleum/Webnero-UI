@@ -4,7 +4,7 @@ $(function() {
 
 window.onload = function() {
   ModelViewController.isLogin = false;
-  setInterval(PassportPipeline.statusMessage("Folio Updated!"), 300000);
+  setInterval(PassportPipeline.statusMessage("Folio Updated!"), 9999);
 }
 $(document).ready(function(){
     if(!PassportPipeline.hasValidSession()){ 
@@ -16,7 +16,7 @@ $(document).ready(function(){
         PassportPipeline.startCryptoEngine("poll", passport);
         ModelViewController.fillData();
         sessionStorage.setItem("fromLogin", false);
-        setInterval(ModelViewController.refreshData, 150000);
+        setInterval(ModelViewController.refreshData, 360000);
         // set a key to authenticate crystalID 
         PassportPipeline.setUUkey('crfi');  
     } else {
@@ -25,6 +25,6 @@ $(document).ready(function(){
         console.log("passport_active:");
         console.log(passport);
         PassportPipeline.startCryptoEngine("poll", passport);
-        setInterval(ModelViewController.refreshDataLight, 60000);
+        setInterval(ModelViewController.refreshDataLight, 180000);
     }
 });
