@@ -1040,7 +1040,7 @@ var PassportPipeline = {
         };       
         var passport = PassportPipeline.get_passport_local();
         console.log("passport_local:");
-        console.log(passport);
+        console.log(JSON.parse(passport));
         var version = 'passport_active'; 
         console.log("Checkpoint: 1");
         console.log(this.passportParams);
@@ -1055,7 +1055,7 @@ var PassportPipeline = {
                 }
                 this.setCoinUUID(coinSymbol, passportLogin);
                 this.passportParams.uid = parseInt(this.getCoinUUID(coinSymbol));
-                console.log("UUID log")
+                console.log("UUID log");
                 console.log(this.passportParams.uid)
                 this.passportParams.code = parseInt(this.loadCode());
                 this.passportParams.method = 'check_code';
