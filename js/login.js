@@ -31,13 +31,10 @@ $(document).on("click", "#pin-code", function(){
         PassportPipeline.set_passport_local(passport_local);
         var passport = PassportPipeline.get_passport_local();
         console.log("passport");
-        console.log(passport);            
-        var count = 0;
-        for(count>0; count < coins.length; count++){
-            console.log("count before: " + count);
-            PassportPipeline.performOperation(coins[count], ModelViewController.initDashboard, passport_local)
-            console.log("count after: " + count);
-        };
+        console.log(JSON.parse(passport));            
+        PassportPipeline.performOperation(coins[count], ModelViewController.initDashboard, passport_local)
+        console.log("count after: " + count);
+
     }
 });
 
