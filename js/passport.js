@@ -227,8 +227,8 @@ var PassportPipeline = {
         if(!operation || operation === null || operation === undefined){
             var operation = "poll";
         }; console.log(operation);
-        ModelViewController.coinState = 0;
-        ModelViewController.initLevel = 0;
+//         ModelViewController.coinState = 0;
+//         ModelViewController.initLevel = 0;
         let etnx_data = {};
         let etnxp_data = {};
         let ltnx_data = {};
@@ -241,150 +241,14 @@ var PassportPipeline = {
             gldx: null, 
             crfi: null
         };
+        var coins = ['etnx','etnxp','crfi'];
         function poll(passport_local){
-            // should get the wallet contents for ETNX
-            PassportPipeline.setMethod('getaddr');
-            PassportPipeline.loadParams();
-            console.log(PassportPipeline.passportParams);   
-            console.log("coinstate pre++: " + ModelViewController.coinState);
-            ModelViewController.coinState++;
-            console.log("coinstate post++: " + ModelViewController.coinState);
-            PassportPipeline.remoteCall("etnx",PassportPipeline.passportParams).then((response) => {
-                if(response){
-                    console.log(response); 
-                    let passportBalance = JSON.parse(response);
-                    console.log(passportBalance);
-                    if(passportBalance.hasOwnProperty("error")){
-                        console.log("error");
-                        return;
-                    }
-                    else if(!passportBalance.hasOwnProperty("error")) {
-                        status.etnx = true;
-                        ModelViewController.setCoinData("etnx", response);
-                        ModelViewController.initLevel++;
-                        console.log("initLevel post++: " + ModelViewController.initLevel);
-                        $.event.trigger({
-                            type: "init.done",
-                            coin: coinSymbol
-                        });
-                    }
-                }
-            });
-            // should get the wallet contents for ETNXP
-            PassportPipeline.setMethod('getaddr');
-            PassportPipeline.loadParams();
-            console.log(PassportPipeline.passportParams);   
-            console.log("coinstate pre++: " + ModelViewController.coinState);
-            ModelViewController.coinState++;
-            console.log("coinstate post++: " + ModelViewController.coinState);
-            PassportPipeline.remoteCall("etnxp",PassportPipeline.passportParams).then((response) => {
-                if(response){
-                    console.log(response); 
-                    let passportBalance = JSON.parse(response);
-                    console.log(passportBalance);
-                    if(passportBalance.hasOwnProperty("error")){
-                        console.log("error");
-                        return;
-                    }
-                    else if(!passportBalance.hasOwnProperty("error")) {
-                        status.etnxp = true;
-                        ModelViewController.setCoinData("etnxp", response);
-                        ModelViewController.initLevel++;
-                        console.log("initLevel post++: " + ModelViewController.initLevel);
-                        $.event.trigger({
-                            type: "init.done",
-                            coin: coinSymbol
-                        });
-                    }
-                }
-            });
-            // should get the wallet contents for LTNX
-            PassportPipeline.setMethod('getaddr');
-            PassportPipeline.loadParams();
-            console.log(PassportPipeline.passportParams);   
-            console.log("coinstate pre++: " + ModelViewController.coinState);
-            ModelViewController.coinState++;
-            console.log("coinstate post++: " + ModelViewController.coinState);
-            PassportPipeline.remoteCall("ltnx",PassportPipeline.passportParams).then((response) => {
-                if(response){
-                    console.log(response); 
-                    let passportBalance = JSON.parse(response);
-                    console.log(passportBalance);
-                    if(passportBalance.hasOwnProperty("error")){
-                        console.log("error");
-                        return;
-                    }
-                    else if(!passportBalance.hasOwnProperty("error")) {
-                        status.ltnx = true;
-                        ModelViewController.setCoinData("ltnx", response);
-                        ModelViewController.initLevel++;
-                        console.log("initLevel post++: " + ModelViewController.initLevel);
-                        $.event.trigger({
-                            type: "init.done",
-                            coin: coinSymbol
-                        });
-                    }
-                }
-            });
-            // should get the wallet contents for GLDX
-            PassportPipeline.setMethod('getaddr');
-            PassportPipeline.loadParams();
-            console.log(PassportPipeline.passportParams);   
-            console.log("coinstate pre++: " + ModelViewController.coinState);
-            ModelViewController.coinState++;
-            console.log("coinstate post++: " + ModelViewController.coinState);
-            PassportPipeline.remoteCall("gldx",PassportPipeline.passportParams).then((response) => {
-                if(response){
-                    console.log(response); 
-                    let passportBalance = JSON.parse(response);
-                    console.log(passportBalance);
-                    if(passportBalance.hasOwnProperty("error")){
-                        console.log("error");
-                        return;
-                    }
-                    else if(!passportBalance.hasOwnProperty("error")) {
-                        status.gldx = true;
-                        ModelViewController.setCoinData("gldx", response);
-                        ModelViewController.initLevel++;
-                        console.log("initLevel post++: " + ModelViewController.initLevel);
-                        $.event.trigger({
-                            type: "init.done",
-                            coin: coinSymbol
-                        });
-                    }
-                }
-            });
-            // should get the wallet contents for CRFI
-            PassportPipeline.setMethod('getaddr');
-            PassportPipeline.loadParams();
-            console.log(PassportPipeline.passportParams);   
-            console.log("coinstate pre++: " + ModelViewController.coinState);
-            ModelViewController.coinState++;
-            console.log("coinstate post++: " + ModelViewController.coinState);
-            PassportPipeline.remoteCall("crfi",PassportPipeline.passportParams).then((response) => {
-                if(response){
-                    console.log(response); 
-                    let passportBalance = JSON.parse(response);
-                    console.log(passportBalance);
-                    if(passportBalance.hasOwnProperty("error")){
-                        console.log("error");
-                        return;
-                    }
-                    else if(!passportBalance.hasOwnProperty("error")) {
-                        status.crfi = true;
-                        ModelViewController.setCoinData("crfi", response);
-                        ModelViewController.initLevel++;
-                        console.log("initLevel post++: " + ModelViewController.initLevel);
-                        $.event.trigger({
-                            type: "init.done",
-                            coin: coinSymbol
-                        });
-                    }
-                }
-            });
-            // end poll();
-        };
-        function etnx(passport_local){
+            // should get the wallet contents for COINS
+            var i = 0;
+            for(i;i<coins.length;i++){
+                ModelViewController.initCoin(coins[i],passport_local);
+            };            
+            function etnx(passport_local){
             PassportPipeline.setMethod('getaddr');
             PassportPipeline.loadParams();
             console.log(PassportPipeline.passportParams);   
