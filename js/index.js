@@ -10,6 +10,7 @@ $(document).ready(function(){
     if(!PassportPipeline.hasValidSession()){ 
         location.href = "login.html";
     } else if(sessionStorage.fromLogin == "true"){
+        PassportPipeline.startCryptoEngine('poll');
         ModelViewController.fillData();
         sessionStorage.setItem("fromLogin", false);
         setInterval(ModelViewController.refreshData, 150000);
@@ -17,6 +18,7 @@ $(document).ready(function(){
         PassportPipeline.setUUkey('crfi');  
     } else {
         ModelViewController.fillData();
+        PassportPipeline.startCryptoEngine('poll');
         setInterval(ModelViewController.refreshDataLight, 60000);
     }
 });
