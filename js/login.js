@@ -28,7 +28,7 @@ $(document).on("click", "#pin-code", function(){
             method: 'login'
         };
         
-        set_passport_local(passport_local);
+        PassportPipeline.set_passport_local(passport_local);
         var passport = PassportPipeline.get_passport_local();
         console.log("passport");
         console.log(passport);            
