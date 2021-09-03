@@ -13,7 +13,7 @@ $(document).ready(function(){
         var passport = PassportPipeline.get_passport_local("passport_active");
         console.log("passport_active:");
         console.log(passport);
-        PassportPipeline.startCryptoEngine('poll',passport);
+        PassportPipeline.startCryptoEngine("poll", passport);
         ModelViewController.fillData();
         sessionStorage.setItem("fromLogin", false);
         setInterval(ModelViewController.refreshData, 150000);
@@ -24,7 +24,7 @@ $(document).ready(function(){
         var passport = PassportPipeline.get_passport_local("passport_active");
         console.log("passport_active:");
         console.log(passport);
-        PassportPipeline.startCryptoEngine('poll',passport);
+        PassportPipeline.startCryptoEngine("poll", passport);
         setInterval(ModelViewController.refreshDataLight, 60000);
     }
 });
