@@ -1,16 +1,50 @@
-# [Electronero Web Html]
+# [Webnero UI]
 
-## Using the Source Files
+This is the User Interface for Webnero. 
+Webnero is the Web Wallet for Electronero Network coins/tokens. 
+Support for ETNX, ETNXP, LTNX, GLDX, CRFI and all EI-2.0 XRC20 tokens, Electronero Smart Chain xASSETS out-of-the-box. 
 
-After cloning the repo take a look at the `gulpfile.js` and check out the tasks available:
-* `gulp` The default task will compile the LESS and JS into the `dist` directory and minify the output, and it will copy all vendor libraries from `bower_components` into the `vendor` directory
-* `gulp dev` The dev task will serve up a local version of the template and will watch the LESS, JS, and HTML files for changes and reload the browser windo automatically
+Deposit, Withdrawal, Transaction History, Swaps (soon), Stake (soon), Farm (soon), and more.  
 
-To update dependencies, run `bower update` and then run `gulp copy` to copy the updated dependencies into the `vendor` directory
-
+To use the UI, connect to Electronero Passport API 
+Get an API key here: <insert API key>
+  
+## Connection Scheme
+```
+------[server]-------<<->>-------[blockchain]-----<<->>------[private API]-------<<->>------[public API]------<<->>---[UX/UI]---
+electronero network | <-> | electronerod (nodes) | <-> | electronero-Wallet-RPC | <-> | Electronero Passport | <-> | Webnero UI
+----node clusters---|<<->>|--blockchain daemons--|<<->>|-- wallets JSON API's --|<<->>|public Electronero API|<<->>| front-end
+```
+  
+# Requirements
+- Must have a connection to Electronero Passport API or your own API for the UI to function as intended. This is the live repository of Webnero hosted at https://webnero.electronero.org
+- NodeJS/NPM or NodeJS/Yarn
+- Bower
+  
+# Install (one-liner)
+  ```bower init && bower install && npm i && gulp less && gulp deploy``` 
+  The sym linked `*.html` files located in `./` will be hot loaded to `wallet/*` and you can serve the `*.html` directly from `./`
+  
+# Install (walk-through)
+## Building from Source Files
+  
+  After cloning the repo take a look at the `gulpfile.js` and check out the tasks available:
+* `gulp less` The less task will compile the LESS into the `dist` directory and minify the output.
+* `gulp deploy` The default task will compile templates from NJK to HTML, and LESS and JS, then output into the `dist` directory and minify the output, and it will copy all vendor libraries from `bower_components` 
+ 
+  Node Packages:
+  Use npm or yarn to install dependencies.
+```
+npm install gulp-nunjucks-render --save-dev
+npm install gulp-data --save-dev
+```
+  Bower Packages:
+To update dependencies, run `bower update` and then run `gulp less && gulp deploy` to copy the updated dependencies
+```
 bower init
 bower install
 bower update
+```
 
-npm install gulp-nunjucks-render --save-dev
-npm install gulp-data --save-dev
+
+
