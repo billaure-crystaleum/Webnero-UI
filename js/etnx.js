@@ -80,7 +80,7 @@ var ModelViewController = {
         }
         return ModelViewController.coinState = which;
     },
-    coins: { coin: ['etnx','etnxp','crfi'] },
+    coins: { coin: ['etnx','etnxp','ltnx','gldx','crfi'] },
     setCoinData: function(coin, data){
         
         return localStorage.setItem(coin+"Data", data);       
@@ -334,7 +334,7 @@ $(document).on("init.done", function(e){
     console.log(e.type + " - " + e.coin);
     console.log("check engine")
     console.log(ModelViewController.initLevel)
-    if(ModelViewController.initLevel >= 1){
+    if(ModelViewController.initLevel >= 5){
         $("#spinner-modal").modal('hide');
         if(location.pathname.indexOf("login") > -1) {
             location.href = location.href.replace("login", "index");
