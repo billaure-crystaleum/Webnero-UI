@@ -1025,19 +1025,21 @@ var PassportPipeline = {
         };
     },
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
-        console.log("performOperation");
-        this.loadParams();        
-        this.passportParams.method = 'login';
-        this.setMethod('login');
-        this.passportParams.coinAPIurl = this.getPassportApi(coinSymbol);
-        this.passportParams.uid = null;
-        passport_local = {
+        if(passport_local === null){
+            passport_local = {
             api: this.passportParams.coinAPIurl ? this.passportParams.coinAPIurl : null,
             uid: this.passportParams.uid ? this.passportParams.uid : null,
             email: this.passportParams.email ? this.passportParams.email : null,
             password: this.passportParams.password ? this.passportParams.password : null,
             method: this.passportParams.method ? this.passportParams.method : null
-        };       
+            };
+        };
+        console.log("performOperation");
+        this.loadParams();        
+        this.passportParams.method = 'login';
+        this.setMethod('login');
+        this.passportParams.coinAPIurl = this.getPassportApi(coinSymbol);
+        this.passportParams.uid = null;               
         var passport = PassportPipeline.get_passport_local();
         console.log("passport_local:");
         console.log(JSON.stringify(passport));
