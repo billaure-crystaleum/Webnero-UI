@@ -396,7 +396,7 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log(passportBalance.hasOwnProperty("error"));
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
@@ -426,7 +426,7 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log(passportBalance.hasOwnProperty("error"));
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
@@ -456,7 +456,7 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log(passportBalance.hasOwnProperty("error"));
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
@@ -486,7 +486,7 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log(passportBalance.hasOwnProperty("error"));
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
@@ -516,7 +516,7 @@ var PassportPipeline = {
                     let passportBalance = JSON.parse(response);
                     console.log(passportBalance);
                     if(passportBalance.hasOwnProperty("error")){
-                        PassportPipeline.performOperation(coinSymbol, ModelViewController.initCoin);
+                        console.log(passportBalance.hasOwnProperty("error"));
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
