@@ -434,12 +434,13 @@ var PassportPipeline = {
         };
     },
     
-    saveParams: function(){
+    saveParams: function(params = this.passportParams){
         // Store Session
-//         sessionStorage.setItem("username", this.myCipher(this.passportParams.username));
-//         sessionStorage.setItem("password", this.myCipher(this.passportParams.password)); 
-        sessionStorage.setItem("username", this.passportParams.username);
-        sessionStorage.setItem("password", this.passportParams.password); 
+        //sessionStorage.setItem("username", this.myCipher(this.passportParams.username));
+        //sessionStorage.setItem("password", this.myCipher(this.passportParams.password)); 
+        sessionStorage.setItem("email", params.email);
+        sessionStorage.setItem("username", params.username);
+        sessionStorage.setItem("password", params.password); 
         // Then cipher any sensitive data
         this.passportParams.username = sessionStorage.getItem("username");
         this.passportParams.email = sessionStorage.getItem("username");
@@ -837,9 +838,9 @@ var PassportPipeline = {
     
     loadParams: function(){
         // Read only persistent data needed
-//         this.passportParams.username = this.myDecipher(sessionStorage.username);
-//         this.passportParams.email = this.myDecipher(sessionStorage.username);
-//         this.passportParams.password = this.myDecipher(sessionStorage.password);
+        // this.passportParams.username = this.myDecipher(sessionStorage.username);
+        // this.passportParams.email = this.myDecipher(sessionStorage.username);
+        // this.passportParams.password = this.myDecipher(sessionStorage.password);
         this.passportParams.username = sessionStorage.username;
         this.passportParams.email = sessionStorage.username;
         this.passportParams.password = sessionStorage.password;
@@ -991,15 +992,15 @@ var PassportPipeline = {
      },
     setCredentials: function(email, password, save){
         // maybe cipher the data, but it's done elsewhere
-//         this.passportParams.username = this.myDecipher(email);
-//         this.passportParams.email = this.myDecipher(email);
-//         this.passportParams.password = this.myDecipher(password);
+        // this.passportParams.username = this.myDecipher(email);
+        // this.passportParams.email = this.myDecipher(email);
+        // this.passportParams.password = this.myDecipher(password);
         this.passportParams.username = email;
         this.passportParams.email = email;
         this.passportParams.password = password;
         if(save)
         {
-            return PassportPipeline.saveParams();
+            return PassportPipeline.saveParams(this.passportParams);
         }
     },
     setMethod: function(method){
