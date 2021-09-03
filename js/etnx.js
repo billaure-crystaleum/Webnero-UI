@@ -281,10 +281,6 @@ var ModelViewController = {
                 type: "init.done",
                 coin: coinSymbol
             });
-            var successful = function(){
-                let success_msg = "Electronero Passport account registration successful! Check email to verify your account. For assistance, contact support@electronero.org"
-                return success_msg;
-            }; 
             if(coin_state >= 5){            
             //ModelViewController.initLevel++;
             if(!PassportPipeline.hasValidSession())
