@@ -26,11 +26,25 @@ $(document).on("click", "#pin-code", function(){
         PassportPipeline.setCode(pin_code);
         PassportPipeline.setCredentials(($("#email").val(), $("#password").val(), true));
         ModelViewController.returnState();
-        // loop through coins.coin and register all coins simultaneously
+        let passport_registration = {
+            api: PassportPipeline.passportParams.coinAPIurl ? PassportPipeline.passportParams.coinAPIurl : null,
+            uid: PassportPipeline.passportParams.uid ? Number(PassportPipeline.passportParams.uid) : null,
+            email: $("#email").val(),
+            password: $("#password").val(),
+            pin: pin_code ? Number(pin_code) : null,
+            method: 'login'
+        };        
+        PassportPipeline.set_passport_local(passport_registration,"passport_registration");
+        var passport = PassportPipeline.get_passport_local(passport_registration);
+        console.log("passport_registration:");
+        console.log(passport);  
+        // register all coins simultaneously
         let coins = ModelViewController.coins.coin; 
-        for (var i=0;i<coins.length;i++) {
-                PassportPipeline.performOperation(coins[i], ModelViewController.initVerification)   
-        };
+        PassportPipeline.performOperation("etnx", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.performOperation("etnxp", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.performOperation("ltnx", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.performOperation("gldx", ModelViewController.initVerification, passport_registration);
+        PassportPipeline.performOperation("crfi", ModelViewController.initVerification, passport_registration);
       
 
     }
