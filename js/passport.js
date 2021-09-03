@@ -249,13 +249,13 @@ var PassportPipeline = {
             var i = 0;
             for(i;i<coins.length;i++){
                 // get uid  
-                this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coins[i]));
+                PassportPipeline.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coins[i]));
                 console.log("UUID log");
                 console.log(this.passportParams.uid)
                 // get code
-                this.passportParams.code = parseInt(PassportPipeline.loadCode());
+                PassportPipeline.passportParams.code = parseInt(PassportPipeline.loadCode());
                 console.log("CODE log");
-                console.log(this.passportParams.uid)
+                console.log(PassportPipeline.passportParams.uid)
                 // init coins[i]
                 ModelViewController.initCoin(coins[i], passport_local);
             };    
