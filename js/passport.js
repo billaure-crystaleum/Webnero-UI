@@ -1207,7 +1207,7 @@ var PassportPipeline = {
                             loginCodeFail();
                             return;
                         } else {
-                            set_passport_local(passport_local, version);
+                            PassportPipeline.set_passport_local(passport_local, version);
                             var passport_active = PassportPipeline.get_passport_local(version);
                             console.log("passport_active:");
                             console.log(passport_active);
