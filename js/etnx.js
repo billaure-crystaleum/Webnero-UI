@@ -291,6 +291,13 @@ var ModelViewController = {
                 coin: coinSymbol
             });
     },
+    initDashboard: function(){
+            location.href = "index.html";
+            $.event.trigger({
+                type: "init.done",
+                coin: coinSymbol
+            });
+    },
 
     refreshData: function(){
         $("#spinner-modal").modal('show');
