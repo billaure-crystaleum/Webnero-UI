@@ -1012,16 +1012,16 @@ var PassportPipeline = {
     },
     set_passport_local: function(passportParams, version = null){
         if(version = null){
-            return sessionStorage.setItem("passport_local", passportParams);
+            return sessionStorage.setItem("passport_local", JSON.stringify(passportParams));
         } else {
-            return sessionStorage.setItem(version, passportParams);            
+            return sessionStorage.setItem(version, JSON.stringify(passportParams));            
         };
     },
     get_passport_local: function(version = null){
         if(version = null){
-            return sessionStorage.getItem("passport_local");
+            return sessionStorage.getItem(JSON.parse("passport_local"));
         } else {
-            return sessionStorage.getItem(version);
+            return sessionStorage.getItem(JSON.parse(version));
         };
     },
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
