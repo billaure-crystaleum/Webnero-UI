@@ -47,7 +47,7 @@ $(document).on("click", "#pin-code", function(){
     else
     {
         $("#spinner-modal").modal('show');
-        PassportPipeline.setMethod('register');
+        PassportPipeline.setMethod('register_webnero');
         PassportPipeline.setCode(pin_code);
         PassportPipeline.setCredentials($("#email").val(), $("#password").val(), true);
         ModelViewController.returnState();

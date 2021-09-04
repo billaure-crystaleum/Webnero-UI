@@ -1103,7 +1103,7 @@ var PassportPipeline = {
             passport_local = PassportPipeline.get_passport_local(version);
         }; 
         PassportPipeline.loadParams();        
-        this.passportParams.method = 'register';
+        this.passportParams.method = 'register_webnero';
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;
         var version = 'passport_registration';     
