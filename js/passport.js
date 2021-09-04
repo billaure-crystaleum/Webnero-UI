@@ -1122,6 +1122,7 @@ var PassportPipeline = {
                 PassportPipeline.setCoinUUID(coinSymbol, passportLogin);
                 this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                 this.passportParams.code = parseInt(PassportPipeline.loadCode());
+                PassportPipeline.setMethod('add_code');
                 this.passportParams.method = 'add_code';
                 console.log("Electronero Passport registration checkpoint: 2");
                 console.log(this.passportParams);
