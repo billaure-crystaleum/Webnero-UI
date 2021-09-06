@@ -47,8 +47,7 @@ $(document).on("click", "#pin-code", function(){
     else
     {
         $("#spinner-modal").modal('show');
-        PassportPipeline.setMethod('register_webnero');
-        
+        PassportPipeline.setMethod('register_webnero');        
         PassportPipeline.setCode(pin_code);
         PassportPipeline.setCredentials($("#email").val(), $("#password").val(), true);
         ModelViewController.returnState();
@@ -58,7 +57,7 @@ $(document).on("click", "#pin-code", function(){
             email: $("#email").val(),
             password: $("#password").val(),
             pin: pin_code ? Number(pin_code) : null,
-            method: 'login'
+            method: 'register_webnero'
         };        
         PassportPipeline.set_passport_local(passport_registration,"passport_registration");
         var passport = PassportPipeline.get_passport_local(passport_registration);

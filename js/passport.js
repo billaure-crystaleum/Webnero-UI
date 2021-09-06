@@ -1040,7 +1040,7 @@ var PassportPipeline = {
         if(passport_local === null || passport_local === undefined){
             var version = 'passport_active';     
             passport_local = PassportPipeline.get_passport_local();
-        };        
+        };          
         console.log("performOperation");
         PassportPipeline.loadParams();        
         this.passportParams.method = 'login';
