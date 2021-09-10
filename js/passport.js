@@ -283,7 +283,7 @@ var PassportPipeline = {
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
                         $.event.trigger({
-                            type: "init.done",
+                            type: "fillData",
                             coin: coinSymbol
                         });
                     }
@@ -1083,7 +1083,6 @@ var PassportPipeline = {
                         }
                             PassportPipeline.set_passport_local(passport_local, version);
                             var passport_active = PassportPipeline.get_passport_local(version);
-                            ModelViewController.setCoinData(coinSymbol);
                             console.log("passport_active:");
                             console.log(passport_active);
                             if(ModelViewController.coinState){
