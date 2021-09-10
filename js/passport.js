@@ -755,17 +755,24 @@ var PassportPipeline = {
                 && sessionStorage.hasOwnProperty("password")
                 && sessionStorage.hasOwnProperty("code")
     },
-    resetPassword: function(coinSymbol, email, password, repeat, key_set = false){
+    resetPassword: function(coinSymbol, email, password = false, repeat = false, key_set = false){
         console.log("resetPassword");
-        if(!coinSymbol){
-    coinSymbol = 'crfi'; // default crfi
-    };
+        if(coinSymbol === 'all' && password != false){
+            var repeated_password = password;
+            PassportPipeline.resetPassword('etnx', email, password, repeated_password, true)
+            PassportPipeline.resetPassword('etnxp', email, password, repeated_password, true);
+            PassportPipeline.resetPassword('ltnx', email, password, repeated_password, true);
+            PassportPipeline.resetPassword('gldx', email, password, repeated_password, true);
+            PassportPipeline.resetPassword('crfi', email, password, repeated_password, true);
+        }
+        
     this.passportParams.method = 'reset_password';
+    this.setMethod('reset_password');
         if(key_set == false){
             this.passportParams.email = email;
         console.log(this.passportParams.email);
         }
-        if(key_set == true && password != null){
+        if(key_set == true && password != null || key_set == true && password != false){
             if(password != repeat){
                 resetFail();
                 return;
@@ -773,6 +780,7 @@ var PassportPipeline = {
             this.loadHash();
             this.passportParams.password = password;
             this.passportParams.method = 'reset_password_settings';
+            this.setMethod('reset_password_settings');
         }
     PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
                 console.log("reset init");
