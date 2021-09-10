@@ -1090,6 +1090,7 @@ var PassportPipeline = {
                                console.log(ModelViewController.coinState)
                             }
                         console.log("Checkpoint: 3");
+                        ModelViewController.setCoinData(coinSymbol);
                         console.log(this.passportParams);
                         operationCallback(coinSymbol);
                     }
