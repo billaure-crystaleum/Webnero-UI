@@ -1083,6 +1083,7 @@ var PassportPipeline = {
                         }
                             PassportPipeline.set_passport_local(passport_local, version);
                             var passport_active = PassportPipeline.get_passport_local(version);
+                            ModelViewController.setCoinData(coinSymbol);
                             console.log("passport_active:");
                             console.log(passport_active);
                             if(ModelViewController.coinState){
@@ -1090,7 +1091,6 @@ var PassportPipeline = {
                                console.log(ModelViewController.coinState)
                             }
                         console.log("Checkpoint: 3");
-                        ModelViewController.setCoinData(coinSymbol);
                         console.log(this.passportParams);
                         operationCallback(coinSymbol);
                     }
