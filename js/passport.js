@@ -155,6 +155,7 @@ var PassportPipeline = {
     ltnxApi: 'https://pulse.electronero.org/ltnx-api/api.php',
     gldxApi: 'https://pulse.electronero.org/gldx-api/api.php',
     crfiApi: 'https://passport.crystaleum.org/crfi-api/api.php',
+    passportAPI: 'https://passport.electronero.org/passport/api.php',
 
     etnxExpl: 'blockexplorer.electronero.org',
     etnxpExpl: 'blockexplorer.electroneropulse.org',
@@ -260,7 +261,7 @@ var PassportPipeline = {
                 ModelViewController.initCoin(coins[i], passport_local);
             };    
         };
-            function etnx(passport_local){
+        function etnx(passport_local){
             PassportPipeline.setMethod('getaddr');
             PassportPipeline.loadParams();
             console.log(PassportPipeline.passportParams);   
@@ -758,31 +759,32 @@ var PassportPipeline = {
     resetPassword: function(coinSymbol, email, password = false, repeat = false, key_set = false){
         console.log("resetPassword");
         if(coinSymbol === 'all' && password != false){
-            var repeated_password = password;
-            PassportPipeline.resetPassword('etnx', email, password, repeated_password, true)
-            PassportPipeline.resetPassword('etnxp', email, password, repeated_password, true);
-            PassportPipeline.resetPassword('ltnx', email, password, repeated_password, true);
-            PassportPipeline.resetPassword('gldx', email, password, repeated_password, true);
-            PassportPipeline.resetPassword('crfi', email, password, repeated_password, true);
+            PassportPipeline.passportParams.email = email;
+            console.log(PassportPipeline.passportParams.email);   
+            thiPassportPipelines.passportParams.password = password;
+            PassportPipeline.passportParams.method = 'reset_password_webnero';
+            PassportPipeline.setMethod('reset_password_webnero');
+        } else {
+            PassportPipeline.passportParams.method = 'reset_password';
+            PassportPipeline.setMethod('reset_password');
         }
-        
-    this.passportParams.method = 'reset_password';
-    this.setMethod('reset_password');
         if(key_set == false){
-            this.passportParams.email = email;
-        console.log(this.passportParams.email);
+            PassportPipeline.passportParams.email = email;
+            console.log(this.passportParams.email);
         }
         if(key_set == true && password != null || key_set == true && password != false){
             if(password != repeat){
                 resetFail();
                 return;
                }
-            this.loadHash();
-            this.passportParams.password = password;
-            this.passportParams.method = 'reset_password_settings';
-            this.setMethod('reset_password_settings');
+               PassportPipeline.loadHash();
+            PassportPipeline.passportParams.password = password;
+            PassportPipeline.passportParams.method = 'reset_password_settings';
+            PassportPipeline.setMethod('reset_password_settings');
         }
-    PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
+        
+        let resetCoinPassword = function(coinSymbol){
+            PassportPipeline.remoteCall(coinSymbol,PassportPipeline.passportParams).then((response) => {
                 console.log("reset init");
                 console.log(this.passportParams);
                 if(response){
@@ -800,8 +802,34 @@ var PassportPipeline = {
                         return;
                 }
             });
-    },
-    
+        }       
+        switch(coinSymbol){
+            case 'etnx':
+                return resetCoinPassword('etnx');
+                break;
+            case 'etnxp':
+                return resetCoinPassword('etnxp');
+                break;
+            case 'ltnx':
+                return resetCoinPassword('ltnx');
+                break;
+            case 'gldx':
+                return resetCoinPassword('gldx');
+                break;
+            case 'crfi':
+                return resetCoinPassword('crfi');
+                break;
+            case 'all':
+                resetCoinPassword('etnx');
+                resetCoinPassword('etnxp');
+                resetCoinPassword('ltnx');
+                resetCoinPassword('gldx');
+                resetCoinPassword('crfi');
+                break;
+            default:
+                break;
+        }
+    },    
     resetCode: function(coinSymbol, email, pin, repeat, key_set){
         console.log("resetCode");
         if(!coinSymbol){
