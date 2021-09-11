@@ -784,7 +784,7 @@ var PassportPipeline = {
         }
         
         let resetCoinPassword = function(coinSymbol){
-            PassportPipeline.remoteCall(coinSymbol,PassportPipeline.passportParams).then((response) => {
+            PassportPipeline.remoteCallPassport(coinSymbol,PassportPipeline.passportParams).then((response) => {
                 console.log("reset init");
                 console.log(this.passportParams);
                 if(response){
@@ -889,7 +889,15 @@ var PassportPipeline = {
                     data: this.passportParams
                 });
     },   
-    
+    remoteCallPassport: function(coinSymbol,passportAPI){
+        return $.ajax({
+                    url: this.passportAPI,
+                    coin: coinSymbol.toString(),
+                    type: 'POST',
+                    cache: false,
+                    data: this.passportParams
+                });
+    },       
     saveRates: function(usdt, btc, eth, ltc, crfi, coin){ 
         console.log("saveRates");
         if (coin != null && coin != undefined){
