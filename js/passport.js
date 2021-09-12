@@ -1064,7 +1064,6 @@ var PassportPipeline = {
         function poll(passport_local){
             // get code
             let code = parseInt(PassportPipeline.loadCode());
-            this.passportParams.password = password;
             // should get the wallet contents for COINS
             var i = 0;
             for(i;i<coins.length;i++){
@@ -1091,8 +1090,9 @@ var PassportPipeline = {
                     console.log("UUID log: "+passport.uid);
                     console.log("CODE log: "+passport_local.code );
                     console.log('Success: '+passport);
+                    const passportParams = passport;
                     // init coins[i]
-                    ModelViewController.initCoin(coins[i], passport_local);
+                    ModelViewController.initCoin(coins[i], passportParams);
                 }).
                 catch(function () {
                     console.log('Err: '+passport);
