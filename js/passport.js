@@ -1050,14 +1050,12 @@ var PassportPipeline = {
             for(i;i<coins.length;i++){
                 // get uid  
                 passport_local.uid = parseInt(PassportPipeline.getCoinUUID(coins[i]));
-                console.log("UUID log");
+                console.log("UUID log: "+passport_local.uid);
                 // get code
                 passport_local.code = parseInt(PassportPipeline.loadCode());
-                console.log("CODE log");
-                console.log(PassportPipeline.passportParams.code)
+                console.log("CODE log: "+passport_local.code );
                 console.log("passport_local log");
                 console.log(passport_local)
-                passport_local.code=PassportPipeline.passportParams.code;
                 // init coins[i]
                 ModelViewController.initCoin(coins[i], passport_local);
             };    
@@ -1080,7 +1078,7 @@ var PassportPipeline = {
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
-                        status.gldx = true;
+                        PassportPipeline.status.gldx = true;
                         ModelViewController.setCoinData(coinSymbol, response);
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
@@ -1110,7 +1108,7 @@ var PassportPipeline = {
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
-                        status.gldx = true;
+                        PassportPipeline.status.gldx = true;
                         ModelViewController.setCoinData(coinSymbol, response);
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
@@ -1140,7 +1138,7 @@ var PassportPipeline = {
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
-                        status.gldx = true;
+                        PassportPipeline.status.gldx = true;
                         ModelViewController.setCoinData(coinSymbol, response);
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
@@ -1159,8 +1157,8 @@ var PassportPipeline = {
             console.log("coinstate pre++: " + ModelViewController.coinState);
             ModelViewController.coinState++;
             console.log("coinstate post++: " + ModelViewController.coinState);
-            this.passportParams.coinAPIurl = PassportPipeline.gldxApi;
-            PassportPipeline.remoteCall("gldx",this.passportParams).then((response) => {
+            PassportPipeline.passportParams.coinAPIurl = PassportPipeline.gldxApi;
+            PassportPipeline.remoteCall("gldx",PassportPipeline.passportParams).then((response) => {
                 if(response){
                     console.log(response); 
                     let passportBalance = JSON.parse(response);
@@ -1170,7 +1168,7 @@ var PassportPipeline = {
                         return;
                     }
                     else if(!passportBalance.hasOwnProperty("error")) {
-                        status.gldx = true;
+                        PassportPipeline.status.gldx = true;
                         ModelViewController.setCoinData(coinSymbol, response);
                         ModelViewController.initLevel++;
                         console.log("initLevel post++: " + ModelViewController.initLevel);
