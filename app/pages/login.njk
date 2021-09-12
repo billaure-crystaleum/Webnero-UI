@@ -7,7 +7,7 @@
         
         <div class="row banner-content content-desktop">
 
-                    <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div id="left" class="col-lg-3 col-md-3 col-sm-3">
                       <br><br><br><br>
                       <div class="container">
                       <div class="skill">
@@ -30,7 +30,7 @@
                     </div>
                  </div></div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-6 nclick network">
+                    <div id="middle" class="col-lg-6 col-md-6 col-sm-6 nclick network">
                         <div class="row text-center nclick">
                         <div class="col-sm-4 col-md-4 col-lg-4 nclick floatingE">
                           <a class="hclick" href='https://electronero.org'>
@@ -233,6 +233,10 @@
     <script type="text/javascript" src="../dist/js/login-utils.js?v=4129"></script>
     <script type="text/javascript" src="../dist/js/login.js?v=4257"></script>
     <script>
+    document.getElementById("login").onclick = function() { 
+        document.getElementById("left").style.display = "none";
+        document.getElementById("middle").style.display = "none";
+     };
     let number = document.getElementById("number");
     let counter = 0;
     setInterval(() => {
