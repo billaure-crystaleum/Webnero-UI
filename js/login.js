@@ -6,7 +6,7 @@ $(document).on("click", "#login", function(){
 
 $(document).on("click", "#pin-code", function(){
     $(".alert").css("display", "none");
-    var pin_value = document.getElementById("pin-code").innerHTML;
+    var pin_value = pin_code;
     if(pin_value.length < 5){
         $(".alert-danger").html("Please provide 5 digits");
         $(".alert-danger").css("display", "block");
@@ -25,7 +25,7 @@ $(document).on("click", "#pin-code", function(){
             uid: PassportPipeline.passportParams.uid ? Number(PassportPipeline.passportParams.uid) : null,
             email: $("#email").val(),
             password: $("#password").val(),
-            pin: pin_value ? parseInt(pin_value) : null,
+            pin: pin_value,
             method: 'login'
         };
         PassportPipeline.set_passport_local(passport_local);
