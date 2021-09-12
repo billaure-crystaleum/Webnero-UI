@@ -3,6 +3,7 @@ var PassportPipeline = {
     
     passportParams: { 
                      method: '',
+                     ctr: 0,
                      username: '',
                      email: '',
                      password: '',
@@ -1091,6 +1092,7 @@ var PassportPipeline = {
                     console.log("CODE log: "+passport_local.code );
                     console.log(passport);
                     const passportParams = passport;
+                    PassportPipeline.set_passport_local(passportParams,"passport_final");
                     // init coins[i]
                     ModelViewController.initCoin(coins[i], passportParams);
                 }).
