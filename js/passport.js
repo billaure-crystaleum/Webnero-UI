@@ -1079,7 +1079,7 @@ var PassportPipeline = {
                     password: PassportPipeline.passportParams.password
                 };
                 // get uid  
-                if(passport.uid != null && passport.code != null && passport.email != null && passport.password != null passport.uid != undefined && passport.code != undefined && passport.email != undefined && passport.password != undefined) {
+                if(passport.uid != null && passport.code != null && passport.email != null && passport.password != null && passport.uid != undefined && passport.code != undefined && passport.email != undefined && passport.password != undefined) {
                 resolve(passport);
                 } else {
                 reject(passport);
