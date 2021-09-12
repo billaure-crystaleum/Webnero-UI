@@ -1081,7 +1081,7 @@ var PassportPipeline = {
                 if(data.uid != null) {
                 resolve(data);
                 } else {
-                reject();
+                reject(data);
                 }
             });
                 
@@ -1094,7 +1094,7 @@ var PassportPipeline = {
                     // init coins[i]
                     ModelViewController.initCoin(coins[i], passportParams);
                 }).
-                catch(function () {
+                catch(function (passport) {
                     console.log('Err: '+passport);
                 });
             };    
