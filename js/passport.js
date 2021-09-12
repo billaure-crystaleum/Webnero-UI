@@ -838,6 +838,7 @@ var PassportPipeline = {
     setCode: function(code){
         // We needed it for refresh data
         this.passportParams.code = code; 
+        console.log("CODE: "+code)
         return sessionStorage.setItem("code", code);
     },
     loadCode: function(){
