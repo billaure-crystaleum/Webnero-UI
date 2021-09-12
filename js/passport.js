@@ -1072,13 +1072,13 @@ var PassportPipeline = {
                 const x = "geeksforgeeks";
                 const y = "geeksforgeeks";
                 var passport = {
-                    uid: parseInt(PassportPipeline.getCoinUUID(coins[i])),
+                    uid: parseInt(PassportPipeline.getCoinUUID(coins[i])) ? parseInt(PassportPipeline.getCoinUUID(coins[i])) : null,
                     code: parseInt(code),
                     email: passport_local.email,
                     password: passport_local.password
                 };
                 // get uid  
-                if(data.uid != null) {
+                if(passport.uid != null) {
                 resolve(passport);
                 } else {
                 reject(passport);
