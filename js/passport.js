@@ -848,7 +848,8 @@ var PassportPipeline = {
     setCoinUUID: function(coinSymbol, passportLogin){
         return sessionStorage.setItem(coinSymbol+"_uuid", parseInt(passportLogin.data.uid));
     },
-    getCoinUUID: function(coinSymbol, version = null){
+    getCoinUUID: function(coinSymbol){
+        console.log(sessionStorage.getItem(coinSymbol+"_uuid"));
         // return this.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
         return sessionStorage.getItem(coinSymbol+"_uuid");
     },
