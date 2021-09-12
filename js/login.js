@@ -25,7 +25,7 @@ $(document).on("click", "#pin-code", function(){
             uid: PassportPipeline.passportParams.uid ? Number(PassportPipeline.passportParams.uid) : null,
             email: $("#email").val(),
             password: $("#password").val(),
-            pin: pin_value ? Number(pin_value) : null,
+            pin: pin_value ? parseInt(pin_value) : null,
             method: 'login'
         };
         PassportPipeline.set_passport_local(passport_local);

@@ -842,14 +842,14 @@ var PassportPipeline = {
         return sessionStorage.setItem("code", code);
     },
     loadCode: function(){
-//         return this.passportParams.code = this.myDecipher(sessionStorage.code);
-        return this.passportParams.code = sessionStorage.getItem('code');
+        // return this.passportParams.code = this.myDecipher(sessionStorage.code);
+        return this.passportParams.code = parseInt(sessionStorage.getItem('code'));
     },
     setCoinUUID: function(coinSymbol, passportLogin){
-        return sessionStorage.setItem(coinSymbol+"_uuid", passportLogin.data.uid);
+        return sessionStorage.setItem(coinSymbol+"_uuid", parseInt(passportLogin.data.uid));
     },
     getCoinUUID: function(coinSymbol, version = null){
-//         return this.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
+        // return this.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
         return sessionStorage.getItem(coinSymbol+"_uuid");
     },
     set_passport_local: function(passportParams, version = null){
@@ -877,7 +877,7 @@ var PassportPipeline = {
         this.setMethod('login');
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;           
-        var version = 'passport_active';     
+        var version = 'passport_local';     
         var passport = PassportPipeline.get_passport_local(version);
         version = 'passport_active'; 
         console.log("passport_local:");
