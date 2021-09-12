@@ -7,28 +7,34 @@
         
         <div id="banner-content" class="row banner-content">
 
-                    <div id="left" class="col-lg-2 col-md-2 col-sm-2 content-desktop-only">
-                      <br><br><br><br>
-                      <div class="container">
-                      <div class="skill">
-                      <div class="outer">
-                        <div class="inner">
-                          <div id="number">
-                         </div>
-                        </div>
-                      </div><br><h3 class="floatingSwap font">Development is almost complete</h3>
-
-                  <svg xmlns="https://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
-                   <defs>
-                       <linearGradient id="GradientColor">
-                          <stop offset="0%" stop-color="#e91e63" />
-                          <stop offset="100%" stop-color="#673ab7" />
-                      </linearGradient>
-                    </defs>
-                    <circle cx="80" cy="80" r="70" stroke-linecap="round" />
-                  </svg>
+                    <div id="get_logged_in" class="col-md-4">
+                <div class="login-panel panel panel-etnx z_click">
+                    <div class="panel-heading" style="text-align: center">
+                        {% for coin in coins %}
+                            <img height="40px" width="40px" src="../img/{{coin}}.png" />
+                        {% endfor %}
                     </div>
-                 </div></div>
+                    <div class="panel-body">
+                        <div class="alert alert-danger" style="display: none">
+                            Login fail, please check email and password
+                        </div>
+                        <div class="alert alert-success" style="display: none">
+                            Login successful, retrieving data from {{coin}} blockchain, please wait
+                        </div>
+                        <div role="form z_click">
+                            <fieldset>
+                                <div class="form-group z_click">
+                                    <input id="email" class="z_click form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                </div>
+                                <div class="form-group z_click">
+                                    <input id="password" class="z_click form-control" placeholder="Password" name="password" type="password" value="">
+                                </div>
+                                <button id="login" class="z_click btn btn-lg btn-login btn-block btn-primary">Login</button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div> 
 
                     <div id="middle" class="col-lg-6 col-md-6 col-sm-6 nclick network content-desktop-only">
                         <div class="row text-center nclick">
@@ -117,34 +123,30 @@
                       </div><!-- .row  -->  
 
                       </div> <!-- .header-content -->              
-            <div id="get_logged_in" class="col-md-4">
-                <div class="login-panel panel panel-etnx z_click">
-                    <div class="panel-heading" style="text-align: center">
-                        {% for coin in coins %}
-                            <img height="40px" width="40px" src="../img/{{coin}}.png" />
-                        {% endfor %}
+
+            <div id="left" class="col-lg-2 col-md-2 col-sm-2 content-desktop-only">
+                      <br><br><br><br>
+                      <div class="container">
+                      <div class="skill">
+                      <div class="outer">
+                        <div class="inner">
+                          <div id="number">
+                         </div>
+                        </div>
+                      </div><br><h3 class="floatingSwap font">Development is almost complete</h3>
+
+                  <svg xmlns="https://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+                   <defs>
+                       <linearGradient id="GradientColor">
+                          <stop offset="0%" stop-color="#e91e63" />
+                          <stop offset="100%" stop-color="#673ab7" />
+                      </linearGradient>
+                    </defs>
+                    <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+                  </svg>
                     </div>
-                    <div class="panel-body">
-                        <div class="alert alert-danger" style="display: none">
-                            Login fail, please check email and password
-                        </div>
-                        <div class="alert alert-success" style="display: none">
-                            Login successful, retrieving data from {{coin}} blockchain, please wait
-                        </div>
-                        <div role="form z_click">
-                            <fieldset>
-                                <div class="form-group z_click">
-                                    <input id="email" class="z_click form-control" placeholder="E-mail" name="email" type="email" autofocus>
-                                </div>
-                                <div class="form-group z_click">
-                                    <input id="password" class="z_click form-control" placeholder="Password" name="password" type="password" value="">
-                                </div>
-                                <button id="login" class="z_click btn btn-lg btn-login btn-block btn-primary">Login</button>
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
-            </div>  
+                 </div></div>
+
     </div> <!-- End Row -->              
             {% include "../templates/pin-code.njk" %}
     </div>
