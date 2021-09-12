@@ -484,7 +484,7 @@ var PassportPipeline = {
                         return;
                     }   
                         const aindex = parseFloat(passportGetAindex.data);
-                        PassportPipeline.passportParams.aindex = aindex;
+                        this.passportParams.aindex = aindex;
                         PassportPipeline.setWalletAindex(coinSymbol, aindex);
                         console.log(passportGetAindex);
                         console.log(passportGetAindex.data);
@@ -762,32 +762,31 @@ var PassportPipeline = {
     resetPassword: function(coinSymbol, email, password = false, repeat = false, key_set = false){
         console.log("resetPassword");
         if(coinSymbol === 'all' && password != false){
-            PassportPipeline.passportParams.email = email;
-            console.log(PassportPipeline.passportParams.email);   
-            thiPassportPipelines.passportParams.password = password;
-            PassportPipeline.passportParams.method = 'reset_password_webnero';
-            PassportPipeline.setMethod('reset_password_webnero');
+            this.passportParams.email = email;  
+            this.passportParams.password = password;
+            this.passportParams.method = 'reset_password_webnero';
+            this.setMethod('reset_password_webnero');
         } else {
-            PassportPipeline.passportParams.method = 'reset_password';
-            PassportPipeline.setMethod('reset_password');
+            this.passportParams.method = 'reset_password';
+            this.setMethod('reset_password');
         }
         if(key_set == false){
-            PassportPipeline.passportParams.email = email;
-            console.log(this.passportParams.email);
+            this.passportParams.email = email;
         }
         if(key_set == true && password != null || key_set == true && password != false){
             if(password != repeat){
                 resetFail();
                 return;
                }
-               PassportPipeline.loadHash();
-            PassportPipeline.passportParams.password = password;
-            PassportPipeline.passportParams.method = 'reset_password_settings';
-            PassportPipeline.setMethod('reset_password_settings');
+            this.loadHash();
+            this.passportParams.password = password;
+            this.passportParams.method = 'reset_password_settings';
+            this.setMethod('reset_password_settings');
+            console.log(this.passportParams);
         }
         
         let resetCoinPassword = function(coinSymbol){
-            PassportPipeline.remoteCallPassport(coinSymbol,PassportPipeline.passportParams).then((response) => {
+            PassportPipeline.remoteCallPassport(coinSymbol,this.passportParams).then((response) => {
                 console.log("reset init");
                 console.log(this.passportParams);
                 if(response){
@@ -836,9 +835,9 @@ var PassportPipeline = {
     resetCode: function(coinSymbol, email, pin, repeat, key_set){
         console.log("resetCode");
         if(!coinSymbol){
-    coinSymbol = 'crfi'; // default crfi
-    };
-    PassportPipeline.loadParams();
+        coinSymbol = 'crfi'; // default crfi
+        };
+    this.loadParams();
     this.passportParams.method = 'reset_password';
         if(key_set == false){
             this.passportParams.email = email;
@@ -864,7 +863,7 @@ var PassportPipeline = {
                         resetFail();
                         return;
                     }   
-                        var secure_code = PassportPipeline.this.passportParams.code;
+                        var secure_code = this.passportParams.code;
                         this.passportParams.code = passportResetCode.data;
                         this.setCode(secure_code);
                         PassportPipeline.saveParams();
@@ -880,9 +879,9 @@ var PassportPipeline = {
         // this.passportParams.username = this.myDecipher(sessionStorage.username);
         // this.passportParams.email = this.myDecipher(sessionStorage.username);
         // this.passportParams.password = this.myDecipher(sessionStorage.password);
-        this.passportParams.username = sessionStorage.username;
-        this.passportParams.email = sessionStorage.username;
-        this.passportParams.password = sessionStorage.password;
+        this.passportParams.username = sessionStorage.getItem("username");
+        this.passportParams.email = sessionStorage.getItem("username");
+        this.passportParams.password = sessionStorage.getItem("password");
     },
     remoteCall: function(coinSymbol){
         return $.ajax({
@@ -892,9 +891,9 @@ var PassportPipeline = {
                     data: this.passportParams
                 });
     },   
-    remoteCallPassport: function(coinSymbol,passportAPI){
+    remoteCallPassport: function(coinSymbol){
         return $.ajax({
-                    url: this.passportAPI,
+                    url: this.getPassportApi(coinSymbol),
                     coin: coinSymbol.toString(),
                     type: 'POST',
                     cache: false,
@@ -931,11 +930,11 @@ var PassportPipeline = {
     setUUkey: function(coinSymbol){
         console.log("setUUkey");
         if(!coinSymbol){
-    coinSymbol = 'crfi'; // default crfi
-    };
-    PassportPipeline.loadParams();
+        coinSymbol = 'crfi'; // default crfi
+        };
+    this.loadParams();
     this.passportParams.method = 'set_uu_key';
-    this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
+    this.passportParams.uid = parseInt(this.getCoinUUID(coinSymbol));
     PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
                 console.log("set_uu_key init");
                 if(response){
@@ -963,11 +962,11 @@ var PassportPipeline = {
     getUUkey: function(coinSymbol){
         console.log("getUUkey");
         if(!coinSymbol){
-    coinSymbol = 'crfi'; // default crfi
-    };
-    PassportPipeline.loadParams();
+        coinSymbol = 'crfi'; // default crfi
+        };
+    this.loadParams();
     this.passportParams.method = 'get_uu_key';
-    this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
+    this.passportParams.uid = parseInt(this.getCoinUUID(coinSymbol));
     PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
                 console.log("get_uu_key init");
                 console.log(this.passportParams);
@@ -994,7 +993,7 @@ var PassportPipeline = {
     loadHash: function(){
         console.log("loadHash");
         // Read only persistent data needed
-        this.passportParams.lost_password = sessionStorage.key_hash;
+        this.passportParams.lost_password = sessionStorage.getItem('key_hash');
     },
     getRatesApi: function(coinSymbol){
         console.log("getRatesApi");
@@ -1060,7 +1059,7 @@ var PassportPipeline = {
     },
     loadCode: function(){
 //         return this.passportParams.code = this.myDecipher(sessionStorage.code);
-        return this.passportParams.code = sessionStorage.code;
+        return this.passportParams.code = sessionStorage.getItem('code');
     },
     setCoinUUID: function(coinSymbol, passportLogin){
         return sessionStorage.setItem(coinSymbol+"_uuid", passportLogin.data.uid);
@@ -1086,16 +1085,17 @@ var PassportPipeline = {
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
         if(passport_local === null || passport_local === undefined){
             var version = 'passport_active';     
-            passport_local = PassportPipeline.get_passport_local();
+            passport_local = this.get_passport_local();
         };          
         console.log("performOperation");
-        PassportPipeline.loadParams();        
+        this.loadParams();        
         this.passportParams.method = 'login';
         this.setMethod('login');
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;           
         var version = 'passport_active';     
-        var passport = PassportPipeline.get_passport_local();
+        var passport = PassportPipeline.get_passport_local(version);
+        version = 'passport_active'; 
         console.log("passport_local:");
         console.log(passport);
         console.log("Checkpoint: 1");
@@ -1149,7 +1149,7 @@ var PassportPipeline = {
             var version = 'passport_registration';     
             passport_local = PassportPipeline.get_passport_local(version);
         }; 
-        PassportPipeline.loadParams();        
+        this.loadParams();        
         this.passportParams.method = 'register_webnero';
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;
@@ -1181,7 +1181,7 @@ var PassportPipeline = {
                             register_operations.registerCodeFail(passportCheckCode.hasOwnProperty("error"));
                             return;
                         }   
-                            PassportPipeline.set_passport_local(passport_local, version);
+                            PassportPipeline.set_passport_local(passport, version);
                             var passport_active = PassportPipeline.get_passport_local(version);
                             console.log("passport_active:");
                             console.log(passport_active);
