@@ -117,8 +117,8 @@
                       </div><!-- .row  -->  
 
                       </div> <!-- .header-content -->              
-            <div id="get_logged_in" class="col-md-4 ">
-                <div class="login-panel panel panel-etnx hclick ">
+            <div id="get_logged_in" class="col-md-4">
+                <div class="login-panel panel panel-etnx z_click">
                     <div class="panel-heading" style="text-align: center">
                         {% for coin in coins %}
                             <img height="40px" width="40px" src="../img/{{coin}}.png" />
@@ -131,15 +131,15 @@
                         <div class="alert alert-success" style="display: none">
                             Login successful, retrieving data from {{coin}} blockchain, please wait
                         </div>
-                        <div role="form">
+                        <div role="form z_click">
                             <fieldset>
-                                <div class="form-group">
-                                    <input id="email" class="hclick form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                <div class="form-group z_click">
+                                    <input id="email" class="z_click form-control" placeholder="E-mail" name="email" type="email" autofocus>
                                 </div>
-                                <div class="form-group">
-                                    <input id="password" class="hclick form-control" placeholder="Password" name="password" type="password" value="">
+                                <div class="form-group z_click">
+                                    <input id="password" class="z_click form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
-                                <button id="login" class="hclick btn btn-lg btn-login btn-block btn-primary">Login</button>
+                                <button id="login" class="z_click btn btn-lg btn-login btn-block btn-primary">Login</button>
                             </fieldset>
                         </div>
                     </div>
