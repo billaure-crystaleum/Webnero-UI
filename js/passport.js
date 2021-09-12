@@ -1079,9 +1079,9 @@ var PassportPipeline = {
                 };
                 // get uid  
                 if(data.uid != null) {
-                resolve(data);
+                resolve(passport);
                 } else {
-                reject(data);
+                reject(passport);
                 }
             });
                 
