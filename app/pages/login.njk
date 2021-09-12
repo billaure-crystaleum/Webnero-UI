@@ -6,8 +6,13 @@
     <div class="container">
         
         <div id="banner-content" class="row banner-content">
-
-                    <div id="get_logged_in" class="col-md-4">
+            <div class="col-lg-6 col-md-6 col-sm-6" align="left">
+            <a href="https://webnero.electronero.org/register.html">Create Wallet</a>
+            </div>                     
+            <div class="col-lg-6 col-md-6 col-sm-6" align="right">
+            <a href="https://webnero.electronero.org/reset.html">Recover Wallet</a>
+            </div> 
+            <div id="get_logged_in" class="col-md-4 col-lg-4 col-sm-4">
                 <div class="login-panel panel panel-etnx z_click">
                     <div class="panel-heading" style="text-align: center">
                         {% for coin in coins %}
@@ -21,7 +26,7 @@
                         <div class="alert alert-success" style="display: none">
                             Login successful, retrieving data from {{coin}} blockchain, please wait
                         </div>
-                        <div role="form z_click">
+                        <div role="form" class="z_click">
                             <fieldset>
                                 <div class="form-group z_click">
                                     <input id="email" class="z_click form-control" placeholder="E-mail" name="email" type="email" autofocus>
