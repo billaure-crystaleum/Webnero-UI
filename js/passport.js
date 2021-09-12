@@ -1050,9 +1050,8 @@ var PassportPipeline = {
                 // get uid  
                 passport_local.uid = parseInt(PassportPipeline.getCoinUUID(coins[i]));
                 console.log("UUID log");
-                console.log(this.passportParams.uid)
                 // get code
-                this.passportParams.code = parseInt(PassportPipeline.loadCode());
+                passport_local.code = parseInt(PassportPipeline.loadCode());
                 console.log("CODE log");
                 console.log(this.passportParams.code)
                 console.log("passport_local log");
