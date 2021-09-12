@@ -1089,7 +1089,7 @@ var PassportPipeline = {
                 then(function (passport) {
                     console.log("UUID log: "+passport.uid);
                     console.log("CODE log: "+passport_local.code );
-                    console.log('Success: '+passport);
+                    console.log(passport);
                     const passportParams = passport;
                     // init coins[i]
                     ModelViewController.initCoin(coins[i], passportParams);
@@ -1107,7 +1107,7 @@ var PassportPipeline = {
             ModelViewController.coinState++;
             console.log("coinstate post++: " + ModelViewController.coinState);
             PassportPipeline.passportParams.coinAPIurl = PassportPipeline.etnxApi;
-            PassportPipeline.remoteCall("etnx",thiPassportPipelines.passportParams).then((response) => {
+            PassportPipeline.remoteCall("etnx",PassportPipeline.passportParams).then((response) => {
                 if(response){
                     console.log(response); 
                     let passportBalance = JSON.parse(response);
