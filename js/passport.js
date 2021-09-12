@@ -870,12 +870,12 @@ var PassportPipeline = {
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
         if(passport_local === null || passport_local === undefined){
             var version = 'passport_active';     
-            passport_local = this.get_passport_local();
+            passport_local = this.get_passport_local(version);
         };          
         console.log("performOperation");
-        this.loadParams();        
+        PassportPipeline.loadParams();        
         this.passportParams.method = 'login';
-        this.setMethod('login');
+        PassportPipeline.setMethod('login');
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;           
         var version = 'passport_local';     
@@ -896,13 +896,34 @@ var PassportPipeline = {
                 }
                 PassportPipeline.setCoinUUID(coinSymbol, passportLogin);
                 this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
-                console.log("UUID log");
-                console.log(this.passportParams.uid)
                 this.passportParams.code = parseInt(PassportPipeline.loadCode());
                 this.passportParams.method = 'check_code';
                 this.setMethod('check_code');
                 console.log("Checkpoint: 2");
                 console.log(this.passportParams);
+                
+                const coin_uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
+                console.log("UUID log");
+                console.log(this.passportParams.uid)
+                switch(coinSymbol){
+                    case 'etnx':
+                        PassportPipeline.ctr++;
+                        PassportPipeline.uid_etnx = coin_uid;
+                    case 'etnxp':
+                        PassportPipelinectr++;
+                        PassportPipeline.uid_etnxp = coin_uid;
+                    case 'ltnx':
+                        PassportPipeline.ctr++;
+                        PassportPipeline.uid_ltnx = coin_uid;
+                    case 'gldx':
+                        PassportPipeline.ctr++;
+                        PassportPipeline.uid_gldx = coin_uid;
+                    case 'crfi':
+                        PassportPipeline.ctr++;
+                        PassportPipeline.uid_crfi = coin_uid;
+                    default:
+                        break;
+                }
                 PassportPipeline.remoteCall(coinSymbol, this.passportParams).then((response) => {
                     if(response){
                       console.log(response); 
@@ -1018,12 +1039,8 @@ var PassportPipeline = {
                 break;
         };
     },
-    startCryptoEngine: function(operation = "poll", version = "passport_active"){
+    startCryptoEngine: function(operation = "poll", passport_local){
         
-        if(version != "passport_active"){
-            var passport_local = PassportPipeline.get_passport_local(version);
-        }
-        var passport_local = PassportPipeline.get_passport_local("passport_active");
         console.log("passport II");
         console.log(passport_local);  
         if(!operation || operation === null || operation === undefined){
@@ -1045,19 +1062,41 @@ var PassportPipeline = {
         };
         var coins = ['etnx','etnxp','ltnx','gldx','crfi'];
         function poll(passport_local){
+            // get code
+            let code = parseInt(PassportPipeline.loadCode());
+            this.passportParams.password = password;
             // should get the wallet contents for COINS
             var i = 0;
             for(i;i<coins.length;i++){
+
+            var promise = new Promise(function(resolve, reject) {
+                const x = "geeksforgeeks";
+                const y = "geeksforgeeks";
+                var passport = {
+                    uid: parseInt(PassportPipeline.getCoinUUID(coins[i])),
+                    code: parseInt(code),
+                    email: passport_local.email,
+                    password: passport_local.password
+                };
                 // get uid  
-                passport_local.uid = parseInt(PassportPipeline.getCoinUUID(coins[i]));
-                console.log("UUID log: "+passport_local.uid);
-                // get code
-                passport_local.code = parseInt(PassportPipeline.loadCode());
-                console.log("CODE log: "+passport_local.code );
-                console.log("passport_local log");
-                console.log(passport_local)
-                // init coins[i]
-                ModelViewController.initCoin(coins[i], passport_local);
+                if(data.uid != null) {
+                resolve(data);
+                } else {
+                reject();
+                }
+            });
+                
+            promise.
+                then(function (passport) {
+                    console.log("UUID log: "+passport.uid);
+                    console.log("CODE log: "+passport_local.code );
+                    console.log('Success: '+passport);
+                    // init coins[i]
+                    ModelViewController.initCoin(coins[i], passport_local);
+                }).
+                catch(function () {
+                    console.log('Err: '+passport);
+                });
             };    
         };
         function etnx(passport_local){

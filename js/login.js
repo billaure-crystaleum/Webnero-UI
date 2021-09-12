@@ -22,7 +22,7 @@ $(document).on("click", "#pin-code", function(){
         let coins = ModelViewController.coins.coin; 
         let passport_local = {
             api: PassportPipeline.passportParams.coinAPIurl ? PassportPipeline.passportParams.coinAPIurl : null,
-            uid: PassportPipeline.passportParams.uid ? Number(PassportPipeline.passportParams.uid) : null,
+            uid: PassportPipeline.passportParams.uid ? parseInt(PassportPipeline.passportParams.uid) : null,
             email: $("#email").val(),
             password: $("#password").val(),
             pin: pin_value,
