@@ -5,9 +5,9 @@
 <div class="login-root bodyfade">
     <div class="container">
         
-        <div class="row banner-content content-desktop">
+        <div class="row banner-content ">
 
-                    <div id="left" class="col-lg-2 col-md-2 col-sm-2">
+                    <div id="left" class="col-lg-2 col-md-2 col-sm-2 content-desktop-only">
                       <br><br><br><br>
                       <div class="container">
                       <div class="skill">
@@ -30,7 +30,7 @@
                     </div>
                  </div></div>
 
-                    <div id="middle" class="col-lg-6 col-md-6 col-sm-6 nclick network">
+                    <div id="middle" class="col-lg-6 col-md-6 col-sm-6 nclick network content-desktop-only">
                         <div class="row text-center nclick">
                         <div class="col-sm-4 col-md-4 col-lg-4 nclick floatingE">
                           <a class="hclick" href='https://electronero.org'>
@@ -118,7 +118,7 @@
 
                       </div> <!-- .header-content -->
               
-    <div class="row content-mobile content-desktop">
+    <div class="row">
     <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-crfi">
                     <div class="panel-heading" style="text-align: center">
@@ -149,11 +149,8 @@
                     </div>
                 </div>
             </div>
-    </div> 
-      
+        </div>       
     </div> <!-- End Row -->  
-
-
         {% include "../templates/pin-code.njk" %}
     </div>
     {% include "../templates/modals/spinner.njk" %}
@@ -166,8 +163,7 @@
     <script>
     document.getElementById("login").onclick = function() { 
         document.getElementById("left").style.display = "none";
-        document.getElementById("middle").style.display = "none";        
-        document.getElementById("right").style.display = "block";
+        document.getElementById("middle").style.display = "none";   
      };
     let number = document.getElementById("number");
     let counter = 0;
