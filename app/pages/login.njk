@@ -5,7 +5,7 @@
 <div class="login-root bodyfade">
     <div class="container">
         
-        <div class="row banner-content ">
+        <div id="banner-content" class="row banner-content">
 
                     <div id="left" class="col-lg-2 col-md-2 col-sm-2 content-desktop-only">
                       <br><br><br><br>
@@ -117,7 +117,7 @@
                       </div><!-- .row  -->  
 
                       </div> <!-- .header-content -->              
-            <div class="col-md-4 ">
+            <div id="get_logged_in" class="col-md-4 ">
                 <div class="login-panel panel panel-etnx">
                     <div class="panel-heading" style="text-align: center">
                         {% if (coin) %}
@@ -162,6 +162,8 @@
         document.getElementById("left").style.display = "none";
         document.getElementById("middle").style.display = "none";
         document.getElementById("banner-content").style.display = "none";   
+        var element = document.getElementById("get_logged_in");
+            element.classList.add("col-md-offset-4");
      };
     let number = document.getElementById("number");
     let counter = 0;
