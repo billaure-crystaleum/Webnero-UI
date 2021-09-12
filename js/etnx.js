@@ -251,9 +251,9 @@ var ModelViewController = {
         PassportPipeline.setMethod('getaddr');
         PassportPipeline.loadParams();
         PassportPipeline.passportParams.uid = parseInt(passportParams.uid);   
-        PassportPipeline.passportParams.username = sessionStorage.getItem("username");
-        PassportPipeline.passportParams.email = sessionStorage.getItem("username");
-        PassportPipeline.passportParams.password = sessionStorage.getItem("password"); 
+        PassportPipeline.passportParams.username = passportParams.email;
+        PassportPipeline.passportParams.email = passportParams.email;
+        PassportPipeline.passportParams.password = passportParams.email; 
         PassportPipeline.passportParams.code = parseInt(sessionStorage.getItem('code'));
         console.log("coinstate pre++: " + ModelViewController.coinState);
         ModelViewController.coinState++;
