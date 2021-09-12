@@ -226,11 +226,11 @@ var PassportPipeline = {
         sessionStorage.setItem("email", params.email);
         sessionStorage.setItem("username", params.username);
         sessionStorage.setItem("password", params.password);
-        sessionStorage.setItem("code", params.code); 
+        sessionStorage.setItem("code", parseInt(params.code)); 
         // Then cipher any sensitive data
         this.passportParams.username = sessionStorage.getItem("username");
         this.passportParams.email = sessionStorage.getItem("username");
-        this.passportParams.code = sessionStorage.getItem("code");
+        this.passportParams.code = parseInt(sessionStorage.getItem("code"));
         console.log(this.passportParams.username)   
         console.log(this.passportParams.password)  
         console.log(this.passportParams.code)
@@ -631,7 +631,7 @@ var PassportPipeline = {
                 return;
                }
             this.loadHash();
-            this.passportParams.code = pin;
+            this.passportParams.code = parseInt(pin);
             this.passportParams.method = 'add_code';
         }
     PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
@@ -646,8 +646,8 @@ var PassportPipeline = {
                         resetFail();
                         return;
                     }   
-                        var secure_code = this.passportParams.code;
-                        this.passportParams.code = passportResetCode.data;
+                        var secure_code = parseInt(this.passportParams.code);
+                        this.passportParams.code = parseInt(passportResetCode.data);
                         this.setCode(secure_code);
                         PassportPipeline.saveParams(this.passportParams);
                         console.log(passportResetCode);
@@ -837,7 +837,7 @@ var PassportPipeline = {
     },
     setCode: function(code){
         // We needed it for refresh data
-        this.passportParams.code = code; 
+        this.passportParams.code = parseInt(code); 
         console.log("CODE: "+code)
         return sessionStorage.setItem("code", code);
     },
