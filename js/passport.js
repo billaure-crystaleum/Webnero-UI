@@ -666,7 +666,7 @@ var PassportPipeline = {
         this.passportParams.password = sessionStorage.getItem("password");
         this.passportParams.code = parseInt(sessionStorage.getItem("code"));
     },
-    remoteCall: function(coinSymbol){
+    remoteCall: function(coinSymbol, passportParams){
         return $.ajax({
                     url: this.getPassportApi(coinSymbol),
                     type: 'POST',
@@ -674,7 +674,7 @@ var PassportPipeline = {
                     data: this.passportParams
                 });
     },   
-    remoteCallPassport: function(coinSymbol){
+    remoteCallPassport: function(coinSymbol, passportParams){
         return $.ajax({
                     url: this.getPassportApi(coinSymbol),
                     coin: coinSymbol.toString(),
