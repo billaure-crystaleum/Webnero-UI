@@ -1053,10 +1053,10 @@ var PassportPipeline = {
                 // get code
                 passport_local.code = parseInt(PassportPipeline.loadCode());
                 console.log("CODE log");
-                console.log(this.passportParams.code)
+                console.log(PassportPipeline.passportParams.code)
                 console.log("passport_local log");
                 console.log(passport_local)
-                passport_local.code=this.passportParams.code;
+                passport_local.code=PassportPipeline.passportParams.code;
                 // init coins[i]
                 ModelViewController.initCoin(coins[i], passport_local);
             };    
@@ -1064,12 +1064,12 @@ var PassportPipeline = {
         function etnx(passport_local){
             PassportPipeline.setMethod('getaddr');
             PassportPipeline.loadParams();
-            console.log(this.passportParams);   
+            console.log("passport_local"+passport_local);   
             console.log("coinstate pre++: " + ModelViewController.coinState);
             ModelViewController.coinState++;
             console.log("coinstate post++: " + ModelViewController.coinState);
-            this.passportParams.coinAPIurl = PassportPipeline.etnxApi;
-            PassportPipeline.remoteCall("etnx",this.passportParams).then((response) => {
+            PassportPipeline.passportParams.coinAPIurl = PassportPipeline.etnxApi;
+            PassportPipeline.remoteCall("etnx",thiPassportPipelines.passportParams).then((response) => {
                 if(response){
                     console.log(response); 
                     let passportBalance = JSON.parse(response);
@@ -1093,13 +1093,13 @@ var PassportPipeline = {
         };
         function etnxp(passport_local){
             PassportPipeline.setMethod('getaddr');
-            PassportPipeline.loadParams();
-            console.log(this.passportParams);   
+            PassportPipeline.loadParams(); 
+            console.log("passport_local"+passport_local); 
             console.log("coinstate pre++: " + ModelViewController.coinState);
             ModelViewController.coinState++;
             console.log("coinstate post++: " + ModelViewController.coinState);
-            this.passportParams.coinAPIurl = PassportPipeline.etnxpApi;
-            PassportPipeline.remoteCall("etnxp",this.passportParams).then((response) => {
+            PassportPipeline.passportParams.coinAPIurl = PassportPipeline.etnxpApi;
+            PassportPipeline.remoteCall("etnxp",PassportPipeline.passportParams).then((response) => {
                 if(response){
                     console.log(response); 
                     let passportBalance = JSON.parse(response);
@@ -1124,12 +1124,12 @@ var PassportPipeline = {
         function ltnx(passport_local){
             PassportPipeline.setMethod('getaddr');
             PassportPipeline.loadParams();
-            console.log(this.passportParams);   
+            console.log("passport_local: "+passport_local);   
             console.log("coinstate pre++: " + ModelViewController.coinState);
             ModelViewController.coinState++;
             console.log("coinstate post++: " + ModelViewController.coinState);
-            this.passportParams.coinAPIurl = PassportPipeline.ltnxApi;
-            PassportPipeline.remoteCall("ltnx",this.passportParams).then((response) => {
+            PassportPipeline.passportParams.coinAPIurl = PassportPipeline.ltnxApi;
+            PassportPipeline.remoteCall("ltnx",PassportPipeline.passportParams).then((response) => {
                 if(response){
                     console.log(response); 
                     let passportBalance = JSON.parse(response);
