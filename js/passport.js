@@ -836,22 +836,22 @@ var PassportPipeline = {
     coinSymbol = 'crfi'; // default crfi
     };
     PassportPipeline.loadParams();
-    PassportPipeline.passportParams.method = 'reset_password';
+    this.passportParams.method = 'reset_password';
         if(key_set == false){
-            PassportPipeline.passportParams.email = email;
+            this.passportParams.email = email;
         }
         if(key_set == true && pin != null){
             if(pin != repeat){
                 resetFail();
                 return;
                }
-               PassportPipeline.loadHash();
-            PassportPipeline.passportParams.code = pin;
-            PassportPipeline.passportParams.method = 'add_code';
+            this.loadHash();
+            this.passportParams.code = pin;
+            this.passportParams.method = 'add_code';
         }
-    PassportPipeline.remoteCall(coinSymbol,PassportPipeline.passportParams).then((response) => {
+    PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
                 console.log("reset code init");
-                console.log(PassportPipeline.passportParams);
+                console.log(this.passportParams);
                 if(response){
                     let passportResetCode = JSON.parse(response);
                     if(passportResetCode.hasOwnProperty("error")){
@@ -861,9 +861,9 @@ var PassportPipeline = {
                         resetFail();
                         return;
                     }   
-                        var secure_code = PassportPipeline.passportParams.code;
-                        PassportPipeline.passportParams.code = passportResetCode.data;
-                        PassportPipeline.setCode(secure_code);
+                        var secure_code = PassportPipeline.this.passportParams.code;
+                        this.passportParams.code = passportResetCode.data;
+                        this.setCode(secure_code);
                         PassportPipeline.saveParams();
                         console.log(passportResetCode);
                         resetSuccess();
@@ -877,25 +877,25 @@ var PassportPipeline = {
         // this.passportParams.username = this.myDecipher(sessionStorage.username);
         // this.passportParams.email = this.myDecipher(sessionStorage.username);
         // this.passportParams.password = this.myDecipher(sessionStorage.password);
-        PassportPipeline.passportParams.username = sessionStorage.username;
-        PassportPipeline.passportParams.email = sessionStorage.username;
-        PassportPipeline.passportParams.password = sessionStorage.password;
+        this.passportParams.username = sessionStorage.username;
+        this.passportParams.email = sessionStorage.username;
+        this.passportParams.password = sessionStorage.password;
     },
-    remoteCall: function(coinSymbol,passportParams = PassportPipeline.passportParams){
+    remoteCall: function(coinSymbol){
         return $.ajax({
-                    url: PassportPipeline.getPassportApi(coinSymbol),
+                    url: this.getPassportApi(coinSymbol),
                     type: 'POST',
                     cache: false,
-                    data: passportParams
+                    data: this.passportParams
                 });
     },   
-    remoteCallPassport: function(coinSymbol,passportAPI,passportParams = PassportPipeline.passportParams){
+    remoteCallPassport: function(coinSymbol,passportAPI){
         return $.ajax({
-                    url: PassportPipeline.passportAPI,
+                    url: this.passportAPI,
                     coin: coinSymbol.toString(),
                     type: 'POST',
                     cache: false,
-                    data: passportParams
+                    data: this.passportParams
                 });
     },       
     saveRates: function(usdt, btc, eth, ltc, crfi, coin){ 
@@ -1044,7 +1044,7 @@ var PassportPipeline = {
         this.passportParams.password = password;
         if(save)
         {
-            return PassportPipeline.saveParams(PassportPipeline.passportParams);
+            return PassportPipeline.saveParams(this.passportParams);
         }
     },
     setMethod: function(method){
@@ -1097,7 +1097,7 @@ var PassportPipeline = {
         console.log(passport);
         console.log("Checkpoint: 1");
         console.log(this.passportParams);
-        PassportPipeline.remoteCall(coinSymbol,PassportPipeline.passportParams).then((response) => {
+        PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
             console.log(this.passportParams);
             if(response){
                 console.log(response);
@@ -1115,7 +1115,7 @@ var PassportPipeline = {
                 this.setMethod('check_code');
                 console.log("Checkpoint: 2");
                 console.log(this.passportParams);
-                PassportPipeline.remoteCall(coinSymbol,PassportPipeline.passportParams).then((response) => {
+                PassportPipeline.remoteCall(coinSymbol, this.passportParams).then((response) => {
                     if(response){
                       console.log(response); 
                       let passportCheckCode = JSON.parse(response);
@@ -1156,7 +1156,7 @@ var PassportPipeline = {
         console.log(passport);
         console.log("Electronero Passport registration checkpoint: 1");
         console.log(this.passportParams);
-        PassportPipeline.remoteCall(coinSymbol,PassportPipeline.passportParams).then((response) => {
+        PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
             if(response){
                 let passportLogin = JSON.parse(response);
                 if(passportLogin.hasOwnProperty("error")){
@@ -1170,7 +1170,7 @@ var PassportPipeline = {
                 this.passportParams.method = 'add_code';
                 console.log("Electronero Passport registration checkpoint: 2");
                 console.log(this.passportParams);
-                PassportPipeline.remoteCall(coinSymbol,PassportPipeline.passportParams).then((response) => {
+                PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
                     if(response){
                         console.log(response); 
                         let passportCheckCode = JSON.parse(response);
