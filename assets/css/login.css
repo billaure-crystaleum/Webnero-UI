@@ -55,12 +55,18 @@
                 top: -6px; /* Moves the image 2px closer to the top of the page */
             }
             .nclick {
+              z-index: 800;
               pointer-events: none;
             }
             .nclick a.hclick{
               pointer-events: all;
             }
             .hclick{
+              z-index: 900;
+              pointer-events: all;
+            }
+            .z_click{
+              z-index: 1000;
               pointer-events: all;
             }
             /*Logo carousel*/
