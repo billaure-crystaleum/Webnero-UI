@@ -910,7 +910,7 @@ var PassportPipeline = {
                         PassportPipeline.ctr++;
                         PassportPipeline.uid_etnx = coin_uid;
                     case 'etnxp':
-                        PassportPipelinectr++;
+                        PassportPipeline.ctr++;
                         PassportPipeline.uid_etnxp = coin_uid;
                     case 'ltnx':
                         PassportPipeline.ctr++;
