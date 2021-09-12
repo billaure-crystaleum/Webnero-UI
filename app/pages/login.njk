@@ -3,24 +3,23 @@
 
 {% block content %}
 <div class="login-root bodyfade">
-    <div class="container">
-        
+    <div class="container">        
         <div id="banner-content" class="row banner-content"> 
             <div id="get_logged_in" class="col-md-4 col-lg-4 col-sm-4">
-                <div class="login-panel panel panel-etnx z_click">
+            <div class="login-panel panel panel-etnx z_click">
                     <div class="panel-heading" style="text-align: center">
                         {% for coin in coins %}
                             <img height="40px" width="40px" src="../img/{{coin}}.png" />
                         {% endfor %}
                     </div>
-                    <div class="panel-body">
+                <div class="panel-body">
                         <div class="alert alert-danger" style="display: none">
                             Login fail, please check email and password
                         </div>
                         <div class="alert alert-success" style="display: none">
                             Login successful, retrieving data from {{coin}} blockchain, please wait
                         </div>
-                        <div role="form" class="row z_click">
+                    <div role="form" class="row z_click">
                         <div class="col-lg-6 col-md-6 col-sm-6" align="left">
                         <a href="https://webnero.electronero.org/register.html">Create Wallet</a>
                         </div>                     
@@ -43,12 +42,10 @@
                                 </br>
                                 <a href="https://t.me/etnxsupport">Need Help?</a>
                                 </div>
-                                </div>
-                            </fieldset>
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
             </div> 
 
                     <div id="middle" class="col-lg-6 col-md-6 col-sm-6 nclick network content-desktop-only">
@@ -161,6 +158,8 @@
                   </svg>
                     </div>
                  </div></div>
+                 
+        </div>
 
     </div> <!-- End Row -->              
             {% include "../templates/pin-code.njk" %}
