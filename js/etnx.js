@@ -257,6 +257,7 @@ var ModelViewController = {
         PassportPipeline.passportParams.code = parseInt(sessionStorage.getItem('code'));
         console.log("coinstate pre++: " + ModelViewController.coinState);
         ModelViewController.coinState++;
+        console.log(passportParams)
         console.log("coinstate post++: " + ModelViewController.coinState);
         PassportPipeline.remoteCall(coinSymbol,passportParams).then((response) => {
             if(response){
