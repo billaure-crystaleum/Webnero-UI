@@ -224,17 +224,15 @@ var PassportPipeline = {
         // Store Session
         //sessionStorage.setItem("username", this.myCipher(this.passportParams.username));
         //sessionStorage.setItem("password", this.myCipher(this.passportParams.password)); 
-        sessionStorage.setItem("email", params.email);
         sessionStorage.setItem("username", params.username);
+        sessionStorage.setItem("email", params.email);        
         sessionStorage.setItem("password", params.password);
         sessionStorage.setItem("code", parseInt(params.code)); 
         // Then cipher any sensitive data
         this.passportParams.username = sessionStorage.getItem("username");
-        this.passportParams.email = sessionStorage.getItem("username");
+        this.passportParams.email = sessionStorage.getItem("email");
+        this.passportParams.password = sessionStorage.getItem("password");
         this.passportParams.code = parseInt(sessionStorage.getItem("code"));
-        console.log(this.passportParams.username)   
-        console.log(this.passportParams.password)  
-        console.log(this.passportParams.code)
     },
     setWalletAindex: function(coinSymbol, aindex){ 
         console.log("setWalletAindex");
@@ -664,8 +662,9 @@ var PassportPipeline = {
         // this.passportParams.email = this.myDecipher(sessionStorage.username);
         // this.passportParams.password = this.myDecipher(sessionStorage.password);
         this.passportParams.username = sessionStorage.getItem("username");
-        this.passportParams.email = sessionStorage.getItem("username");
+        this.passportParams.email = sessionStorage.getItem("email");
         this.passportParams.password = sessionStorage.getItem("password");
+        this.passportParams.code = parseInt(sessionStorage.getItem("code"));
     },
     remoteCall: function(coinSymbol){
         return $.ajax({
@@ -1065,6 +1064,7 @@ var PassportPipeline = {
         function poll(passport_local){
             // get code
             let code = parseInt(PassportPipeline.loadCode());
+            PassportPipeline.loadParams();
             // should get the wallet contents for COINS
             var i = 0;
             for(i;i<coins.length;i++){
@@ -1075,11 +1075,11 @@ var PassportPipeline = {
                 var passport = {
                     uid: parseInt(PassportPipeline.getCoinUUID(coins[i])) ? parseInt(PassportPipeline.getCoinUUID(coins[i])) : null,
                     code: parseInt(code),
-                    email: passport_local.email,
-                    password: passport_local.password
+                    email: PassportPipeline.passportParams.email,
+                    password: PassportPipeline.passportParams.password
                 };
                 // get uid  
-                if(passport.uid != null) {
+                if(passport.uid != null && passport.code != null && passport.email != null && passport.password != null passport.uid != undefined && passport.code != undefined && passport.email != undefined && passport.password != undefined) {
                 resolve(passport);
                 } else {
                 reject(passport);
