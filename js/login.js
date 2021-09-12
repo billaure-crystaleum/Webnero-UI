@@ -6,7 +6,8 @@ $(document).on("click", "#login", function(){
 
 $(document).on("click", "#pin-code", function(){
     $(".alert").css("display", "none");
-    if(pin_code.length < 5){
+    var pin_value = document.getElementById("pin-code").innerHTML;
+    if(pin_value.length < 5){
         $(".alert-danger").html("Please provide 5 digits");
         $(".alert-danger").css("display", "block");
     }
@@ -14,7 +15,7 @@ $(document).on("click", "#pin-code", function(){
         $(".alert").css("display", "none");
         $("#spinner-modal").modal('show');
         
-        PassportPipeline.setCode(pin_code);
+        PassportPipeline.setCode(pin_value);
         PassportPipeline.setCredentials($("#email").val(), $("#password").val(), true);
         sessionStorage.setItem("fromLogin", true);
         ModelViewController.returnState();
@@ -24,10 +25,9 @@ $(document).on("click", "#pin-code", function(){
             uid: PassportPipeline.passportParams.uid ? Number(PassportPipeline.passportParams.uid) : null,
             email: $("#email").val(),
             password: $("#password").val(),
-            pin: pin_code ? Number(pin_code) : null,
+            pin: pin_value ? Number(pin_value) : null,
             method: 'login'
         };
-        
         PassportPipeline.set_passport_local(passport_local);
         var passport = PassportPipeline.get_passport_local();
         console.log("passport");
