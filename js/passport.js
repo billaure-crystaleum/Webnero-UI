@@ -256,7 +256,10 @@ var PassportPipeline = {
                 // get code
                 this.passportParams.code = parseInt(PassportPipeline.loadCode());
                 console.log("CODE log");
-                console.log(this.passportParams.uid)
+                console.log(this.passportParams.code)
+                console.log("passport_local log");
+                console.log(passport_local)
+                passport_local.code=this.passportParams.code;
                 // init coins[i]
                 ModelViewController.initCoin(coins[i], passport_local);
             };    
@@ -481,7 +484,7 @@ var PassportPipeline = {
                         return;
                     }   
                         const aindex = parseFloat(passportGetAindex.data);
-                        this.passportParams.aindex = aindex;
+                        PassportPipeline.passportParams.aindex = aindex;
                         PassportPipeline.setWalletAindex(coinSymbol, aindex);
                         console.log(passportGetAindex);
                         console.log(passportGetAindex.data);
@@ -759,17 +762,17 @@ var PassportPipeline = {
     resetPassword: function(coinSymbol, email, password = false, repeat = false, key_set = false){
         console.log("resetPassword");
         if(coinSymbol === 'all' && password != false){
-            this.passportParams.email = email;
-            console.log(this.passportParams.email);   
+            PassportPipeline.passportParams.email = email;
+            console.log(PassportPipeline.passportParams.email);   
             thiPassportPipelines.passportParams.password = password;
-            this.passportParams.method = 'reset_password_webnero';
+            PassportPipeline.passportParams.method = 'reset_password_webnero';
             PassportPipeline.setMethod('reset_password_webnero');
         } else {
-            this.passportParams.method = 'reset_password';
+            PassportPipeline.passportParams.method = 'reset_password';
             PassportPipeline.setMethod('reset_password');
         }
         if(key_set == false){
-            this.passportParams.email = email;
+            PassportPipeline.passportParams.email = email;
             console.log(this.passportParams.email);
         }
         if(key_set == true && password != null || key_set == true && password != false){
@@ -778,13 +781,13 @@ var PassportPipeline = {
                 return;
                }
                PassportPipeline.loadHash();
-            this.passportParams.password = password;
-            this.passportParams.method = 'reset_password_settings';
+            PassportPipeline.passportParams.password = password;
+            PassportPipeline.passportParams.method = 'reset_password_settings';
             PassportPipeline.setMethod('reset_password_settings');
         }
         
         let resetCoinPassword = function(coinSymbol){
-            PassportPipeline.remoteCallPassport(coinSymbol,this.passportParams).then((response) => {
+            PassportPipeline.remoteCallPassport(coinSymbol,PassportPipeline.passportParams).then((response) => {
                 console.log("reset init");
                 console.log(this.passportParams);
                 if(response){
