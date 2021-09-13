@@ -1075,7 +1075,7 @@ var PassportPipeline = {
                 const x = "geeksforgeeks";
                 const y = "geeksforgeeks";
                 var passport = {
-                    uid: parseInt(PassportPipeline.getCoinUUID(coins[o])) ? parseInt(PassportPipeline.getCoinUUID(coins[i])) : null,
+                    uid: parseInt(PassportPipeline.getCoinUUID(coins[o])) ? parseInt(PassportPipeline.getCoinUUID(coins[o])) : null,
                     code: parseInt(code),
                     email: PassportPipeline.passportParams.email,
                     password: PassportPipeline.passportParams.password
