@@ -671,7 +671,7 @@ var PassportPipeline = {
                     url: this.getPassportApi(coinSymbol),
                     type: 'POST',
                     cache: false,
-                    data: this.passportParams
+                    data: passportParams
                 });
     },   
     remoteCallPassport: function(coinSymbol, passportParams){
@@ -680,7 +680,7 @@ var PassportPipeline = {
                     coin: coinSymbol.toString(),
                     type: 'POST',
                     cache: false,
-                    data: this.passportParams
+                    data: passportParams
                 });
     },       
     saveRates: function(usdt, btc, eth, ltc, crfi, coin){ 
