@@ -1098,7 +1098,7 @@ var PassportPipeline = {
                     const passportParams = passport;
                     PassportPipeline.set_passport_local(passportParams,"passport_final");
                     // init coins[i]
-                    ModelViewController.initCoin(coins[i], passportParams);
+                    ModelViewController.initCoin(coins[o], passportParams);
                 }).
                 catch(function (passport) {
                     console.log('Err: '+passport);
@@ -1113,7 +1113,7 @@ var PassportPipeline = {
             ModelViewController.coinState++;
             console.log("coinstate post++: " + ModelViewController.coinState);
             PassportPipeline.passportParams.coinAPIurl = PassportPipeline.etnxApi;
-            PassportPipeline.remoteCall("etnx",PassportPipeline.passportParams).then((response) => {
+            PassportPipeline.remoteCall("etnx",this.passportParams).then((response) => {
                 if(response){
                     console.log(response); 
                     let passportBalance = JSON.parse(response);
