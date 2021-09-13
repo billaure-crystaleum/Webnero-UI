@@ -865,7 +865,7 @@ var PassportPipeline = {
             var data = JSON.parse(sessionStorage.getItem('passport_local')); console.log(data);
             return data;
         } else {
-            var data = JSON.parse(sessionStorage.getItem(version.toString())); console.log(data);
+            var data = JSON.parse(sessionStorage.getItem(version)); console.log(data);
             return data;
         };
     },
