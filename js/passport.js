@@ -1089,7 +1089,9 @@ var PassportPipeline = {
             promise.
                 then(function (passport) {
                     console.log("UUID log: "+passport.uid);
-                    console.log("CODE log: "+passport_local.code );
+                    console.log("CODE log: "+passport.code );
+                    console.log("CODE log: "+passport.code );
+                    console.log("CODE log: "+passport.code );
                     console.log(passport);
                     const passportParams = passport;
                     PassportPipeline.set_passport_local(passportParams,"passport_final");
