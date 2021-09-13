@@ -862,9 +862,11 @@ var PassportPipeline = {
     },
     get_passport_local: function(version = null){
         if(version = null){
-            return sessionStorage.getItem(JSON.parse("passport_local"));
+            var data = JSON.parse(sessionStorage.getItem('passport_local')); console.log(data);
+            return data;
         } else {
-            return sessionStorage.getItem(JSON.parse(version));
+            var data = JSON.parse(sessionStorage.getItem(version.toString())); console.log(data);
+            return data;
         };
     },
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
@@ -1066,14 +1068,14 @@ var PassportPipeline = {
             let code = parseInt(PassportPipeline.loadCode());
             PassportPipeline.loadParams();
             // should get the wallet contents for COINS
-            var i = 0;
-            for(i;i<coins.length;i++){
+            var o = 0;
+            for(o=0;o<coins.length;o++){
 
             var promise = new Promise(function(resolve, reject) {
                 const x = "geeksforgeeks";
                 const y = "geeksforgeeks";
                 var passport = {
-                    uid: parseInt(PassportPipeline.getCoinUUID(coins[i])) ? parseInt(PassportPipeline.getCoinUUID(coins[i])) : null,
+                    uid: parseInt(PassportPipeline.getCoinUUID(coins[o])) ? parseInt(PassportPipeline.getCoinUUID(coins[i])) : null,
                     code: parseInt(code),
                     email: PassportPipeline.passportParams.email,
                     password: PassportPipeline.passportParams.password
