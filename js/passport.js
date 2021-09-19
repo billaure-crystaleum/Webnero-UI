@@ -568,10 +568,10 @@ var PassportPipeline = {
             console.log(this.passportParams);
         }
         
-        let resetCoinPassword = function(coinSymbol){
-            PassportPipeline.remoteCallPassport(coinSymbol,this.passportParams).then((response) => {
+        let resetCoinPassword = function(coinSymbol,passportParams){
+            PassportPipeline.remoteCallPassport(coinSymbol,passportParams).then((response) => {
                 console.log("reset init");
-                console.log(this.passportParams);
+                console.log(passportParams);
                 if(response){
                     let passportReset = JSON.parse(response);
                     if(passportReset.hasOwnProperty("error")){
@@ -581,7 +581,7 @@ var PassportPipeline = {
                         resetFail();
                         return;
                     }   
-                        PassportPipeline.saveParams(this.passportParams);
+                        PassportPipeline.saveParams(passportParams);
                         console.log(passportReset);
                         resetSuccess();
                         return;
@@ -590,34 +590,40 @@ var PassportPipeline = {
         }       
         switch(coinSymbol){
             case 'etnx':
+                var passportParam = this.passportParams;
                 this.passportParams.method = 'reset_password_webnero';
                 this.setMethod('reset_password_webnero')
-                return resetCoinPassword('etnx');
+                return resetCoinPassword('etnx',passportParam);
                 break;
             case 'etnxp':
+                var passportParam = this.passportParams;
                 this.passportParams.method = 'reset_password_webnero';
                 this.setMethod('reset_password_webnero');
-                return resetCoinPassword('etnxp');
+                return resetCoinPassword('etnxp',passportParam);
                 break;
             case 'ltnx':
+                var passportParam = this.passportParams;
                 this.passportParams.method = 'reset_password_webnero';
                 this.setMethod('reset_password_webnero');
-                return resetCoinPassword('ltnx');
+                return resetCoinPassword('ltnx',passportParam);
                 break;
             case 'gldx':
+                var passportParam = this.passportParams;
                 this.passportParams.method = 'reset_password_webnero';
                 this.setMethod('reset_password_webnero');
-                return resetCoinPassword('gldx');
+                return resetCoinPassword('gldx',passportParam);
                 break;
             case 'crfi':
+                var passportParam = this.passportParams;
                 this.passportParams.method = 'reset_password_webnero';
                 this.setMethod('reset_password_webnero');
-                return resetCoinPassword('crfi');
+                return resetCoinPassword('crfi',passportParam);
                 break;
             case 'all':
+                var passportParam = this.passportParams;
                 this.passportParams.method = 'reset_password_webnero';
                 this.setMethod('reset_password_webnero')
-                return resetCoinPassword('etnx');
+                return resetCoinPassword('etnx',passportParam);
                 break;
             default:
                 break;
