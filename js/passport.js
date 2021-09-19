@@ -590,26 +590,34 @@ var PassportPipeline = {
         }       
         switch(coinSymbol){
             case 'etnx':
+                this.passportParams.method = 'reset_password_webnero';
+                this.setMethod('reset_password_webnero')
                 return resetCoinPassword('etnx');
                 break;
             case 'etnxp':
+                this.passportParams.method = 'reset_password_webnero';
+                this.setMethod('reset_password_webnero');
                 return resetCoinPassword('etnxp');
                 break;
             case 'ltnx':
+                this.passportParams.method = 'reset_password_webnero';
+                this.setMethod('reset_password_webnero');
                 return resetCoinPassword('ltnx');
                 break;
             case 'gldx':
+                this.passportParams.method = 'reset_password_webnero';
+                this.setMethod('reset_password_webnero');
                 return resetCoinPassword('gldx');
                 break;
             case 'crfi':
+                this.passportParams.method = 'reset_password_webnero';
+                this.setMethod('reset_password_webnero');
                 return resetCoinPassword('crfi');
                 break;
             case 'all':
-                resetCoinPassword('etnx');
-                resetCoinPassword('etnxp');
-                resetCoinPassword('ltnx');
-                resetCoinPassword('gldx');
-                resetCoinPassword('crfi');
+                this.passportParams.method = 'reset_password_webnero';
+                this.setMethod('reset_password_webnero')
+                return resetCoinPassword('etnx');
                 break;
             default:
                 break;
