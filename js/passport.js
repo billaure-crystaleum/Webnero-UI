@@ -712,8 +712,7 @@ var PassportPipeline = {
                     url: this.getPassportApi("etnx"),
                     type: 'POST',
                     cache: false,
-                    data: passportParams,
-                    method: "reset_password_webnero"
+                    data: passportParams
                 });
     },   
     remoteCallPassport: function(coinSymbol, passportParams){
