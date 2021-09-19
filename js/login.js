@@ -6,7 +6,8 @@ $(document).on("click", "#login", function(){
 
 $(document).on("click", "#pin-code", function(){
     $(".alert").css("display", "none");
-    if(pin_code.length < 5){
+    var pin_value = pin_code;
+    if(pin_value.length < 5){
         $(".alert-danger").html("Please provide 5 digits");
         $(".alert-danger").css("display", "block");
     }
@@ -14,22 +15,23 @@ $(document).on("click", "#pin-code", function(){
         $(".alert").css("display", "none");
         $("#spinner-modal").modal('show');
         
-        PassportPipeline.setCode(pin_code);
+        PassportPipeline.setCode(pin_value);
         PassportPipeline.setCredentials($("#email").val(), $("#password").val(), true);
         sessionStorage.setItem("fromLogin", true);
         ModelViewController.returnState();
         let coins = ModelViewController.coins.coin; 
         let passport_local = {
             api: PassportPipeline.passportParams.coinAPIurl ? PassportPipeline.passportParams.coinAPIurl : null,
-            uid: PassportPipeline.passportParams.uid ? Number(PassportPipeline.passportParams.uid) : null,
+            uid: PassportPipeline.passportParams.uid ? parseInt(PassportPipeline.passportParams.uid) : null,
             email: $("#email").val(),
+            username: $("#email").val(),
             password: $("#password").val(),
-            pin: pin_code ? Number(pin_code) : null,
+            code: pin_value,
+            pin: pin_value,
             method: 'login'
         };
-        
-        PassportPipeline.set_passport_local(passport_local);
-        var passport = PassportPipeline.get_passport_local();
+        PassportPipeline.set_passport_local(passport_local,"passport_local");
+        var passport = PassportPipeline.get_passport_local("passport_local");
         console.log("passport");
         console.log(passport);            
         PassportPipeline.performOperation("etnx", ModelViewController.initDashboard, passport_local)

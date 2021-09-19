@@ -250,11 +250,22 @@ var ModelViewController = {
         console.log("3");
         PassportPipeline.setMethod('getaddr');
         PassportPipeline.loadParams();
-        console.log(PassportPipeline.passportParams);   
+        var passport = PassportPipeline.get_passport_local("passport_final");
+        const passport_final = {
+            uid: parseInt(passport.uid),
+            code: parseInt(passport.code),
+            email: passport.email,
+            password: passport.password,
+        }
+        PassportPipeline.passportParams.uid = parseInt(passportParams.uid);   
+        PassportPipeline.passportParams.username = passport_final.email;
+        PassportPipeline.passportParams.email = passport_final.email;
+        PassportPipeline.passportParams.password = passport_final.password; 
+        PassportPipeline.passportParams.code = passport_final.code;
         console.log("coinstate pre++: " + ModelViewController.coinState);
         ModelViewController.coinState++;
         console.log("coinstate post++: " + ModelViewController.coinState);
-        PassportPipeline.remoteCall(coinSymbol,passportParams).then((response) => {
+        PassportPipeline.remoteCall(coinSymbol,PassportPipeline.passportParams).then((response) => {
             if(response){
                 console.log(response); 
                 let passportBalance = JSON.parse(response);
@@ -333,7 +344,7 @@ $(document).on("init.done", function(e){
     console.log(e.type + " - " + e.coin);
     console.log("check engine")
     console.log(ModelViewController.initLevel)
-    if(ModelViewController.initLevel >= 1){
+    if(ModelViewController.initLevel >= 5){
         $("#spinner-modal").modal('hide');
         if(location.pathname.indexOf("login") > -1) {
             location.href = location.href.replace("login", "index");

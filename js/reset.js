@@ -60,7 +60,5 @@ $(document).on("click", "#reset", function(){
     }
     else {
     PassportPipeline.resetPassword('all', $("#email").val(), "", "", false)
-    //$("#pin-code-container").css("display", "block");
-    //$("#reset-container").css("display", "none");
     }
 });

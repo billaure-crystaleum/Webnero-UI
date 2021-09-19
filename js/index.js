@@ -10,21 +10,97 @@ $(document).ready(function(){
     if(!PassportPipeline.hasValidSession()){ 
         location.href = "login.html";
     } else if(sessionStorage.fromLogin == "true"){
-        var passport = PassportPipeline.get_passport_local("passport_active");
-        console.log("passport_active:");
-        console.log(passport);
-        PassportPipeline.startCryptoEngine("poll", passport);
+        
         ModelViewController.fillData();
         sessionStorage.setItem("fromLogin", false);
-        setInterval(ModelViewController.refreshData, 360000);
+        var coins = ['etnx','etnxp','ltnx','gldx','crfi'];
+        let code = parseInt(PassportPipeline.loadCode());
+        PassportPipeline.loadParams();
+        // should get the wallet contents for COINS
+        var l = 0;
+        for(l;l<coins.length;l++){
+            var promise = new Promise(function(resolve, reject) {
+                const x = "geeksforgeeks";
+                const y = "geeksforgeeks";
+                var passport = {
+                    uid: parseInt(PassportPipeline.getCoinUUID(coins[l])) ? parseInt(PassportPipeline.getCoinUUID(coins[l])) : null,
+                    code: parseInt(code),
+                    email: PassportPipeline.passportParams.email,
+                    password: PassportPipeline.passportParams.password,
+                    method: 'getaddr'
+                };
+                // get uid  
+                if(passport.uid != null && passport.code != null && passport.email != null && passport.password != null && passport.uid != undefined && passport.code != undefined && passport.email != undefined && passport.password != undefined) {
+                resolve(passport);
+                } else {
+                reject(passport);
+                }
+            });                
+            promise.
+                then(function (passport) {
+                    console.log("UUID log: "+passport.uid);
+                    console.log("CODE log: "+passport.code );
+                    console.log("CODE log: "+passport.code );
+                    console.log("CODE log: "+passport.code );
+                    console.log(passport);
+                    const passportParams = passport;
+                    PassportPipeline.set_passport_local(passportParams,"passport_index");
+                    // init coins[i]
+                    console.log("passport_index:");
+                    console.log(passport);
+                    PassportPipeline.startCryptoEngine("poll", passport);
+                }).
+                catch(function (passport) {
+                    console.log('Err: '+passport);
+                });
+            }; 
+        // setInterval(ModelViewController.refreshData, 360000);
         // set a key to authenticate crystalID 
         PassportPipeline.setUUkey('crfi');  
     } else {
         ModelViewController.fillData();
-        var passport = PassportPipeline.get_passport_local("passport_active");
-        console.log("passport_active:");
-        console.log(passport);
-        PassportPipeline.startCryptoEngine("poll", passport);
-        setInterval(ModelViewController.refreshDataLight, 180000);
+        var coins = ['etnx','etnxp','ltnx','gldx','crfi'];
+        let code = parseInt(PassportPipeline.loadCode());
+        PassportPipeline.loadParams();
+        // should get the wallet contents for COINS
+        var l = 0;
+        for(l;l<coins.length;l++){
+            var promise = new Promise(function(resolve, reject) {
+                const x = "geeksforgeeks";
+                const y = "geeksforgeeks";
+                var passport = {
+                    uid: parseInt(PassportPipeline.getCoinUUID(coins[l])) ? parseInt(PassportPipeline.getCoinUUID(coins[l])) : null,
+                    code: parseInt(code),
+                    email: PassportPipeline.passportParams.email,
+                    password: PassportPipeline.passportParams.password,
+                    method: 'getaddr'
+                };
+                // get uid  
+                if(passport.uid != null && passport.code != null && passport.email != null && passport.password != null && passport.uid != undefined && passport.code != undefined && passport.email != undefined && passport.password != undefined) {
+                resolve(passport);
+                } else {
+                reject(passport);
+                }
+            });                
+            promise.
+                then(function (passport) {
+                    console.log("UUID log: "+passport.uid);
+                    console.log("CODE log: "+passport.code );
+                    console.log("CODE log: "+passport.code );
+                    console.log("CODE log: "+passport.code );
+                    console.log(passport);
+                    const passportParams = passport;
+                    PassportPipeline.set_passport_local(passportParams,"passport_index");
+                    // init coins[i]
+                    console.log("passport_index:");
+                    console.log(passport);
+                    PassportPipeline.startCryptoEngine("poll", passport);
+                }).
+                catch(function (passport) {
+                    console.log('Err: '+passport);
+                });
+            }; 
+ 
+        //setInterval(ModelViewController.refreshDataLight, 180000);
     }
 });
