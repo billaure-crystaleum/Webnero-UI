@@ -150,11 +150,11 @@ var PassportPipeline = {
     myCipher: Crypto.encryptData(Crypto.salt()),
     myDecipher: Crypto.decryptData(Crypto.salt()),
 
-    etnxApi: 'https://pulse.electronero.org/api-etnx/api.php',
-    etnxpApi: 'https://pulse.electronero.org/etnxp-api/api.php',
-    etnxcApi: 'https://pulse.electronero.org/etnxc-api/api.php',
-    ltnxApi: 'https://pulse.electronero.org/ltnx-api/api.php',
-    gldxApi: 'https://pulse.electronero.org/gldx-api/api.php',
+    etnxApi: 'https://passport.electronero.org/api-etnx/api.php',
+    etnxpApi: 'https://passport.electronero.org/etnxp-api/api.php',
+    etnxcApi: 'https://passport.electronero.org/etnxc-api/api.php',
+    ltnxApi: 'https://passport.electronero.org/ltnx-api/api.php',
+    gldxApi: 'https://passport.electronero.org/gldx-api/api.php',
     crfiApi: 'https://passport.crystaleum.org/crfi-api/api.php',
     passportAPI: 'https://passport.electronero.org/passport/api.php',
 
