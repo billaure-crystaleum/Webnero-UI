@@ -549,6 +549,7 @@ var PassportPipeline = {
             this.passportParams.method = 'reset_password_webnero';
             this.setMethod('reset_password_webnero');
         } else {
+            this.passportParams.email = email;  
             this.passportParams.method = 'reset_password';
             this.setMethod('reset_password');
         }
