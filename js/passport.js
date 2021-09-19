@@ -568,8 +568,8 @@ var PassportPipeline = {
             console.log(this.passportParams);
         }
         
-        let resetCoinPassword = function(coinSymbol,passportParams){
-            PassportPipeline.remoteCall(coinSymbol,passportParams).then((response) => {
+        let resetCoinPassword = function(passportParams){
+            PassportPipeline.remoteCallX(passportParams).then((response) => {
                 console.log("reset init");
                 console.log(passportParams);
                 if(response){
@@ -588,31 +588,62 @@ var PassportPipeline = {
                 }
             });
         }       
-        var passportParam = {
-            email: email,
-            method: 'reset_password_webnero'
-        }; 
-        PassportPipeline.setMethod('reset_password_webnero')
         switch(coinSymbol){
             case 'etnx':
+                var passportParam = {
+                    email: email,
+                    method: 'reset_password_webnero'
+                }; 
+                PassportPipeline.setMethod('reset_password_webnero');
                 return resetCoinPassword('etnx',passportParam);
                 break;
             case 'etnxp':
+                var passportParam = {
+                    email: email,
+                    method: 'reset_password_webnero'
+                }; 
+                PassportPipeline.setMethod('reset_password_webnero');
                 return resetCoinPassword('etnxp',passportParam);
                 break;
             case 'ltnx':
+                var passportParam = {
+                    email: email,
+                    method: 'reset_password_webnero'
+                }; 
+                PassportPipeline.setMethod('reset_password_webnero');
                 return resetCoinPassword('ltnx',passportParam);
                 break;
             case 'gldx':
+                var passportParam = {
+                    email: email,
+                    method: 'reset_password_webnero'
+                }; 
+                PassportPipeline.setMethod('reset_password_webnero');
                 return resetCoinPassword('gldx',passportParam);
                 break;
             case 'crfi':
+                var passportParam = {
+                    email: email,
+                    method: 'reset_password_webnero'
+                }; 
+                PassportPipeline.setMethod('reset_password_webnero');
                 return resetCoinPassword('crfi',passportParam);
                 break;
             case 'all':
+                var passportParam = {
+                    email: email,
+                    method: 'reset_password_webnero'
+                }; 
+                PassportPipeline.setMethod('reset_password_webnero');
                 return resetCoinPassword('etnx',passportParam);
                 break;
             default:
+                var passportParam = {
+                    email: email,
+                    method: 'reset_password_webnero'
+                }; 
+                PassportPipeline.setMethod('reset_password_webnero');
+                return resetCoinPassword('etnx',passportParam);
                 break;
         }
     },    
@@ -674,6 +705,15 @@ var PassportPipeline = {
                     type: 'POST',
                     cache: false,
                     data: passportParams
+                });
+    },     
+    remoteCallX: function(passportParams){
+        return $.ajax({
+                    url: this.getPassportApi("etnx"),
+                    type: 'POST',
+                    cache: false,
+                    data: passportParams,
+                    method: "reset_password_webnero"
                 });
     },   
     remoteCallPassport: function(coinSymbol, passportParams){
