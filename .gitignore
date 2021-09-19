@@ -4,4 +4,5 @@ test/
 node_modules/
 plugins/
 dist/
+raw_blockchain/
 package-lock.json
