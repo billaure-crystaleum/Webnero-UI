@@ -569,7 +569,7 @@ var PassportPipeline = {
         }
         
         let resetCoinPassword = function(coinSymbol,passportParams){
-            PassportPipeline.remoteCallPassport(coinSymbol,passportParams).then((response) => {
+            PassportPipeline.remoteCall(coinSymbol,passportParams).then((response) => {
                 console.log("reset init");
                 console.log(passportParams);
                 if(response){
