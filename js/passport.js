@@ -568,10 +568,10 @@ var PassportPipeline = {
             console.log(this.passportParams);
         }
         
-        let resetCoinPassword = function(passportParams){
-            PassportPipeline.remoteCallX(passportParams).then((response) => {
+        let resetCoinPassword = function(passportParam){
+            PassportPipeline.remoteCallX(passportParam).then((response) => {
                 console.log("reset init");
-                console.log(passportParams);
+                console.log(passportParam);
                 if(response){
                     let passportReset = JSON.parse(response);
                     if(passportReset.hasOwnProperty("error")){
@@ -581,7 +581,7 @@ var PassportPipeline = {
                         resetFail();
                         return;
                     }   
-                        PassportPipeline.saveParams(passportParams);
+                        // PassportPipeline.saveParams(passportParam);
                         console.log(passportReset);
                         resetSuccess();
                         return;
@@ -707,12 +707,12 @@ var PassportPipeline = {
                     data: passportParams
                 });
     },     
-    remoteCallX: function(passportParams){
+    remoteCallX: function(passportParam){
         return $.ajax({
                     url: this.getPassportApi("etnx"),
                     type: 'POST',
                     cache: false,
-                    data: passportParams
+                    data: passportParam
                 });
     },   
     remoteCallPassport: function(coinSymbol, passportParams){
