@@ -588,41 +588,28 @@ var PassportPipeline = {
                 }
             });
         }       
+        var passportParam = {
+            email: email,
+            method: 'reset_password_webnero'
+        }; 
+        PassportPipeline.setMethod('reset_password_webnero')
         switch(coinSymbol){
             case 'etnx':
-                var passportParam = this.passportParams;
-                this.passportParams.method = 'reset_password_webnero';
-                this.setMethod('reset_password_webnero')
                 return resetCoinPassword('etnx',passportParam);
                 break;
             case 'etnxp':
-                var passportParam = this.passportParams;
-                this.passportParams.method = 'reset_password_webnero';
-                this.setMethod('reset_password_webnero');
                 return resetCoinPassword('etnxp',passportParam);
                 break;
             case 'ltnx':
-                var passportParam = this.passportParams;
-                this.passportParams.method = 'reset_password_webnero';
-                this.setMethod('reset_password_webnero');
                 return resetCoinPassword('ltnx',passportParam);
                 break;
             case 'gldx':
-                var passportParam = this.passportParams;
-                this.passportParams.method = 'reset_password_webnero';
-                this.setMethod('reset_password_webnero');
                 return resetCoinPassword('gldx',passportParam);
                 break;
             case 'crfi':
-                var passportParam = this.passportParams;
-                this.passportParams.method = 'reset_password_webnero';
-                this.setMethod('reset_password_webnero');
                 return resetCoinPassword('crfi',passportParam);
                 break;
             case 'all':
-                var passportParam = this.passportParams;
-                this.passportParams.method = 'reset_password_webnero';
-                this.setMethod('reset_password_webnero')
                 return resetCoinPassword('etnx',passportParam);
                 break;
             default:
