@@ -256,11 +256,11 @@ var ModelViewController = {
         var passport_local = PassportPipeline.get_passport_local("passport_final");
         console.log(passport_local);
         const passport_final = {
-            uid: parseInt(passport.uid),
-            code: parseInt(passport.code),
-            username: passport.email,
-            email: passport.email,
-            password: passport.password
+            uid: parseInt(passportParams.uid),
+            code: parseInt(passportParams.code),
+            username: passportParams.email,
+            email: passportParams.email,
+            password: passportParams.password
         }
         PassportPipeline.passportParams.uid = parseInt(passportParams.uid);   
         PassportPipeline.passportParams.username = passport_final.email;
@@ -270,7 +270,7 @@ var ModelViewController = {
         console.log("coinstate pre++: " + ModelViewController.coinState);
         ModelViewController.coinState++;
         console.log("coinstate post++: " + ModelViewController.coinState);
-        PassportPipeline.remoteCall(coinSymbol,passport_final).then((response) => {
+        PassportPipeline.remoteCall(coinSymbol,passportParams).then((response) => {
             if(response){
                 console.log(response); 
                 let passportBalance = JSON.parse(response);

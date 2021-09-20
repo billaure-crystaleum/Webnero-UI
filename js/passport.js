@@ -699,14 +699,16 @@ var PassportPipeline = {
         this.passportParams.password = sessionStorage.getItem("password");
         this.passportParams.code = parseInt(sessionStorage.getItem("code"));
     },
-    remoteCall: function(coinSymbol, passportParams){
+    remoteCall: function(coinSymbol,passportParams){
+        console.log("remoteCall");    
+        var passportCheckup = passportParams ? passportParams : this.passportParams;
         return $.ajax({
                     url: this.getPassportApi(coinSymbol),
                     type: 'POST',
                     cache: false,
-                    data: passportParams
+                    data: passportCheckup
                 });
-    },     
+    },  
     remoteCallX: function(passportParam){
         return $.ajax({
                     url: this.getPassportApi("etnx"),
@@ -1113,8 +1115,7 @@ var PassportPipeline = {
             for(o=0;o<coins.length;o++){
 
             var promise = new Promise(function(resolve, reject) {
-                const x = "geeksforgeeks";
-                const y = "geeksforgeeks";
+                const x = true;
                 var passport = {
                     uid: parseInt(PassportPipeline.getCoinUUID(coins[o])) ? parseInt(PassportPipeline.getCoinUUID(coins[o])) : null,
                     code: parseInt(code),
@@ -1122,7 +1123,7 @@ var PassportPipeline = {
                     password: PassportPipeline.passportParams.password
                 };
                 // get uid  
-                if(passport.uid != null && passport.code != null && passport.email != null && passport.password != null && passport.uid != undefined && passport.code != undefined && passport.email != undefined && passport.password != undefined) {
+                if(x===true) {
                 resolve(passport);
                 } else {
                 reject(passport);
@@ -1139,7 +1140,7 @@ var PassportPipeline = {
                     const passportParams = passport;
                     PassportPipeline.set_passport_local(passportParams,"passport_final");
                     // init coins[i]
-                    ModelViewController.initCoin(coins[o], passportParams);
+                    ModelViewController.initCoin(coins[o], passport);
                 }).
                 catch(function (passport) {
                     console.log('Err: '+passport);
