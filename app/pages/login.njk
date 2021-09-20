@@ -3,194 +3,57 @@
 
 {% block content %}
 <div class="login-root bodyfade">
-    <div class="container">        
-        <div id="banner-content" class="row banner-content"> 
-            <div id="get_logged_in" class="col-md-4 col-lg-4 col-sm-4">
-            <div class="login-panel panel panel-etnx z_click">
+    <div class="container">
+        <div id="login-container" class="row bodyfade">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-etnx">
                     <div class="panel-heading" style="text-align: center">
                         {% for coin in coins %}
                             <img height="40px" width="40px" src="../img/{{coin}}.png" />
                         {% endfor %}
                     </div>
-                <div class="panel-body">
+                    <div class="panel-body">
                         <div class="alert alert-danger" style="display: none">
                             Login fail, please check email and password
                         </div>
+                        {% if (coin) %}
                         <div class="alert alert-success" style="display: none">
                             Login successful, retrieving data from {{coin}} blockchain, please wait
                         </div>
-                    <div role="form" class="row z_click">
-                        <div class="col-lg-6 col-md-6 col-sm-6" align="left">
-                        <a href="https://webnero.electronero.org/register.html">Create Wallet</a>
-                        </div>                     
-                        <div class="col-lg-6 col-md-6 col-sm-6" align="right">
-                        <a href="https://webnero.electronero.org/reset.html">Recover Wallet</a>
+                        {% else %}
+                        <div class="alert alert-success" style="display: none">
+                            Login successful, Webnero is retrieving data from Crystaleum blockchain, please wait
                         </div>
-                        <div class="col-lg-12 col-mg-12 col-sm-12">
+                        {% endif %}
+                        
+                        <div role="form">
+                        <div>
+                        <a href="https://webnero.electronero.org/wallet/register.html">Register</a>
+                        </div>
+                        <div>
+                        <a href="https://webnero.electronero.org/wallet/reset.html">Reset</a>
+                        </div>
                             <fieldset>
                                 <div class="form-group">
-                                    <input id="email" class="z_click form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                    <input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input id="password" class="z_click form-control" placeholder="Password" name="password" type="password" value="">
+                                    <input id="password" class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
-                                <div>
-                                <button id="login" class="z_click btn btn-lg btn-login btn-block btn-primary">Login</button>
-                                </div>                                
-                                <div class="col-lg-12 col-mg-12 col-sm-12" style="text-align: center" align="center">
-                                </br>
-                                </br>
-                                <a href="https://t.me/etnxsupport">Need Help?</a>
-                                </div>
+                                <button id="login" class="btn btn-lg btn-login btn-block btn-primary">Login</button>
+                            </fieldset>
                         </div>
                     </div>
                 </div>
             </div>
-            </div> 
-
-                    <div id="middle" class="col-lg-6 col-md-6 col-sm-6 nclick network content-desktop-only">
-                        <div class="row text-center nclick">
-                        <div class="col-sm-4 col-md-4 col-lg-4 nclick floatingE">
-                          <a class="hclick" href='https://electronero.org'>
-                        <div>
-                            <img width="60%" height="60%" src="https://electronero.org/images/nero-logo.png" alt="chart"><br>
-                            <br><img class="crfi_animate" width="60%" height="60%" src="https://crystaleum.org/assets/images/crystaleum-blockchain-cryptocurrency-crypto-altcoin.png" alt="chart">
-                        </div> 
-                        </a>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4"></div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 floatingXP">
-                        <a class="hclick" href='https://electroneropulse.org'>
-                        <div>
-                            <img width="60%" height="60%" src="https://electroneropulse.org/images/logo-white2x.png" alt="chart">
-                        </div> 
-                        </a>
-                        </div>       
-                        <div class="col-sm-3 col-md-3 col-lg-3 nclick">
-                        </div>                               
-                        <div class="col-sm-3 col-md-3 col-lg-3 nclick floatingXassets">
-                            <a class="hclick" href='https://webnero.electronero.org/login.html'>
-                                <div>
-                                    <img width="60%" height="60%" src="https://electronero.org/assets/images/electronero-smart-chain-interchained-xETNX.svg" alt="chart">
-                                </div> 
-                            </a>
-                            </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3 nclick floatingXassets">
-                            <a class="hclick" href='https://webnero.electronero.org/login.html'>
-                                <div>
-                                    <img width="60%" height="60%" src="https://electronero.org/assets/images/electronero-smart-chain-interchained-xETNXP.svg" alt="chart">
-                                </div> 
-                            </a>
-                        </div>    
-                        <div class="col-sm-3 col-md-3 col-lg-3 nclick">
-                        </div>                           
-                        <div class="col-sm-2 col-md-2 col-lg-2 nclick">
-                        </div>    
-                        <div class="col-sm-8 col-md-4 col-lg-8 xsc-image floatingX">
-                            <a class="hclick" href='https://webnero.electronero.org'>
-                                <div>
-                                    <img width="100%" height="100%" src="https://electronero.org/assets/images/electronero-smart-chain-interchained-xsc.svg" alt="chart">
-                                </div><h2 class="floatingSwap font">Join Webnero today</h2>
-                                </a>
-                        </div>
-                        <div class="col-sm-2 col-md-2 col-lg-2 nclick">
-                        </div>                                                           
-                        <div class="col-sm-3 col-md-3 col-lg-3 nclick">
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3 nclick floatingXassets">
-                            <a class="hclick" href='https://webnero.electronero.org/login.html'>
-                                <div>
-                                    <img width="60%" height="60%" src="https://electronero.org/assets/images/electronero-smart-chain-interchained-xLTNX.svg" alt="chart">
-                                </div> 
-                            </a>
-                        </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4 l-image floatingL">
-                        <a class="hclick" href='https://litenero.org'>
-                        <div><br>
-                            <img width="70%" height="70%" src="https://litenero.org/images/logo-white2x.png" alt="chart">
-                        </div>
-                        </a>
-                        </div>
-                        <div class="col-sm-2 col-md-2 col-lg-2 nclick">
-                        </div>                         
-                        <div class="col-sm-1 col-md-1 col-lg-1 nclick">
-                        </div>
-                        <div class="col-sm-3 col-md-3 col-lg-3 nclick g-image floatingXassets">
-                            <a class="hclick" href='https://webnero.electronero.org/login.html'>
-                                <div>
-                                    <img width="60%" height="60%" src="https://electronero.org/assets/images/electronero-smart-chain-interchained-xGLDX.svg" alt="chart">
-                                </div> 
-                            </a>
-                        </div>                               
-                        <div class="col-sm-4 col-md-4 col-lg-4 nclick cx-image floatingXassets">
-          
-                        </div><br>
-                        <div class="col-sm-4 col-md-4 col-lg-4 floatingG">
-                        <a class="hclick" href='https://goldnero.org'>
-                        <div><br><br>
-                            <img width="70%" height="70%" src="https://goldnero.org/images/logo-white2x.png" alt="chart">
-                        </div>
-                        </a>
-                        </div>   
-                      </div><!-- .row  -->  
-
-                      </div> <!-- .header-content -->              
-
-            <div id="left" class="col-lg-2 col-md-2 col-sm-2 content-desktop-only">
-                      <br><br><br><br>
-                      <div class="container">
-                      <div class="skill">
-                      <div class="outer">
-                        <div class="inner">
-                          <div id="number">
-                         </div>
-                        </div>
-                      </div><br><h3 class="floatingSwap font">Development is almost complete</h3>
-
-                  <svg xmlns="https://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
-                   <defs>
-                       <linearGradient id="GradientColor">
-                          <stop offset="0%" stop-color="#e91e63" />
-                          <stop offset="100%" stop-color="#673ab7" />
-                      </linearGradient>
-                    </defs>
-                    <circle cx="80" cy="80" r="70" stroke-linecap="round" />
-                  </svg>
-                    </div>
-                 </div></div>
-                 
         </div>
-
-    </div> <!-- End Row -->              
-            {% include "../templates/pin-code.njk" %}
+        {% include "../templates/pin-code.njk" %}
     </div>
     {% include "../templates/modals/spinner.njk" %}
 </div>
 {% endblock %}
 {% block scripts %} 
-    <script type="text/javascript" src="../dist/js/pin-code-utils.js?v=1996"></script>
-    <script type="text/javascript" src="../dist/js/login-utils.js?v=4136"></script>
-    <script type="text/javascript" src="../dist/js/login.js?v=5070"></script>
-    <script>
-    const element = document.getElementById("get_logged_in");
-    document.getElementById("login").onclick = function() { 
-        document.getElementById("left").style.display = "none";
-        document.getElementById("middle").style.display = "none";
-        document.getElementById("banner-content").style.display = "none";   
-        element.classList.add("col-md-offset-4");
-     };
-    if(navigator.userAgent.toLowerCase().match(/mobile/i)) { 
-        } else if(!navigator.userAgent.toLowerCase().match(/mobile/i)){   
-        }
-    let number = document.getElementById("number");
-    let counter = 0;
-    setInterval(() => {
-    if(counter == 75) {
-        clearInterval();
-    } else {
-        counter += 1;
-    number.innerHTML = counter + "%";
-    }
-    }, 30);
-    </script>   
+    <script type="text/javascript" src="../dist/js/pin-code-utils.js?v=1997"></script>
+    <script type="text/javascript" src="../dist/js/login-utils.js?v=4137"></script>
+    <script type="text/javascript" src="../dist/js/login.js?v=5071"></script>
 {% endblock %}
