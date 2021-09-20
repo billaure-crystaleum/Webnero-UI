@@ -915,14 +915,15 @@ var PassportPipeline = {
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
         if(passport_local === null || passport_local === undefined){
             var version = 'passport_active';     
-            passport_local = this.get_passport_local(version);
+            let passport = this.get_passport_local(version);
         };          
+        let passport = this.get_passport_local(version);
         console.log("performOperation");
         PassportPipeline.loadParams();        
         this.passportParams.method = 'login';
         PassportPipeline.setMethod('login');
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
-        this.passportParams.uid = null;           
+        this.passportParams.uid = parseInt(passport_local.uid);      
         var version = 'passport_local';     
         console.log("passport_local:");
         console.log(passport_local);
@@ -947,8 +948,7 @@ var PassportPipeline = {
                 this.passportParams.method = 'check_code';
                 this.setMethod('check_code');
                 console.log("Checkpoint: 2");
-                console.log(this.passportParams);
-                
+                console.log(this.passportParams);                
                 const coin_uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                 console.log("UUID log");
                 console.log(this.passportParams.uid)
@@ -980,8 +980,7 @@ var PassportPipeline = {
                             console.log(checkError);
                             loginCodeFail();
                             return;
-                        }
-                           
+                        }                           
                             PassportPipeline.saveParams(this.passportParams);
                             PassportPipeline.set_passport_local(passport_local, version);
                             var passport_active = PassportPipeline.get_passport_local(version);
@@ -1114,39 +1113,42 @@ var PassportPipeline = {
             // get code
             let code = parseInt(PassportPipeline.loadCode());
             PassportPipeline.loadParams();
+            PassportPipeline.setMethod('getaddr');
+            PassportPipeline.passportParams.method = 'getaddr';
+            let method = PassportPipeline.passportParams.method;
             // should get the wallet contents for COINS
             var o = 0;
             for(o=0;o<coins.length;o++){
-
             var promise = new Promise(function(resolve, reject) {
                 const x = true;
+                let uuid = parseInt(PassportPipeline.getCoinUUID(coins[o]));
                 var passport = {
-                    uid: parseInt(PassportPipeline.getCoinUUID(coins[o])) ? parseInt(PassportPipeline.getCoinUUID(coins[o])) : null,
-                    code: parseInt(code),
+                    uid: uuid ? parseInt(uuid) : '0x.1',
+                    code: code ? parseInt(code) : '0x.2',
                     email: PassportPipeline.passportParams.email,
-                    password: PassportPipeline.passportParams.password
-                };
-                // get uid  
-                if(x===true) {
-                resolve(passport);
+                    password: PassportPipeline.passportParams.password,
+                    coinAPIurl: PassportPipeline.getPassportApi(coins[o]),
+                    method: method ? method : 'getaddr'
+                }; 
+                if(x != false) {
+                    resolve(passport);
                 } else {
-                reject(passport);
-                }
+                    reject(passport);
+                };
             });
                 
-            promise.
-                then(function (passport) {
+            promise.then(function (passport) {
                     console.log("UUID log: "+passport.uid);
                     console.log("CODE log: "+passport.code );
-                    console.log("CODE log: "+passport.code );
-                    console.log("CODE log: "+passport.code );
+                    console.log("email log: "+passport.email );
+                    console.log("password log: "+passport.password );
+                    console.log("coinAPIurl log: "+passport.coinAPIurl );
+                    console.log("method log: "+passport.method );
                     console.log(passport);
                     const passportParams = passport;
                     PassportPipeline.set_passport_local(passportParams,"passport_final");
-                    // init coins[i]
-                    ModelViewController.initCoin(coins[o], passport);
-                }).
-                catch(function (passport) {
+                    ModelViewController.initCoin(coins[o], passportParams);
+                }).catch(function (passport) {
                     console.log('Err: '+passport);
                 });
             };    
