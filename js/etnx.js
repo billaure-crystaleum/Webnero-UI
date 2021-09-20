@@ -248,25 +248,18 @@ var ModelViewController = {
     
     initCoin: function(coinSymbol, passportParams){
         console.log("3");
-        PassportPipeline.setMethod('getaddr');
-        PassportPipeline.loadParams();
         var passport = passportParams;
         console.log(passport);
         console.log("skip")
-        var passport_local = PassportPipeline.get_passport_local("passport_final");
-        console.log(passport_local);
-        const passport_final = {
-            uid: parseInt(passportParams.uid),
-            code: parseInt(passportParams.code),
-            username: passportParams.email,
-            email: passportParams.email,
-            password: passportParams.password
-        }
-        PassportPipeline.passportParams.uid = parseInt(passportParams.uid);   
-        PassportPipeline.passportParams.username = passport_final.email;
-        PassportPipeline.passportParams.email = passport_final.email;
-        PassportPipeline.passportParams.password = passport_final.password; 
-        PassportPipeline.passportParams.code = passport_final.code;
+        var passport_final = PassportPipeline.get_passport_local("passport_final");
+        console.log(passport_final);
+        PassportPipeline.setMethod('getaddr');
+        PassportPipeline.passportParams.method = 'getaddr';
+        PassportPipeline.passportParams.username = passportParams.email;
+        PassportPipeline.passportParams.email = passportParams.email;
+        PassportPipeline.passportParams.password = passportParams.password; 
+        this.passportParams.uid = parseInt(passportParams);
+        this.passportParams.code = parseInt(PassportPipeline.loadCode());
         console.log("coinstate pre++: " + ModelViewController.coinState);
         ModelViewController.coinState++;
         console.log("coinstate post++: " + ModelViewController.coinState);

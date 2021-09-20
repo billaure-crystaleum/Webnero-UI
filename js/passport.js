@@ -678,8 +678,8 @@ var PassportPipeline = {
                         resetFail();
                         return;
                     }   
-                        var secure_code = parseInt(this.passportParams.code);
                         this.passportParams.code = parseInt(passportResetCode.data);
+                        var secure_code = parseInt(this.passportParams.code);
                         this.setCode(secure_code);
                         PassportPipeline.saveParams(this.passportParams);
                         console.log(passportResetCode);
@@ -869,7 +869,7 @@ var PassportPipeline = {
         // this.passportParams.password = this.myDecipher(password);
         this.passportParams.username = email;
         this.passportParams.email = email;
-        this.passportParams.password = password;
+        this.passportParams.password = password;        
         if(save)
         {
             return PassportPipeline.saveParams(this.passportParams);
@@ -924,9 +924,11 @@ var PassportPipeline = {
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;           
         var version = 'passport_local';     
+        console.log("passport_local:");
+        console.log(passport_local);
         var passport = PassportPipeline.get_passport_local(version);
         version = 'passport_active'; 
-        console.log("passport_local:");
+        console.log("passport post:");
         console.log(passport);
         console.log("Checkpoint: 1");
         console.log(this.passportParams);
@@ -979,6 +981,8 @@ var PassportPipeline = {
                             loginCodeFail();
                             return;
                         }
+                           
+                            PassportPipeline.saveParams(this.passportParams);
                             PassportPipeline.set_passport_local(passport_local, version);
                             var passport_active = PassportPipeline.get_passport_local(version);
                             console.log("passport_active:");
