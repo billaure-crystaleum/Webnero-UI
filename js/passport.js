@@ -917,23 +917,19 @@ var PassportPipeline = {
             var version = 'passport_active';     
             let passport = this.get_passport_local(version);
         };          
-        let passport = this.get_passport_local(version);
         console.log("performOperation");
         PassportPipeline.loadParams();        
         this.passportParams.method = 'login';
         PassportPipeline.setMethod('login');
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
-        this.passportParams.uid = parseInt(passport_local.uid);      
-        var version = 'passport_local';     
-        console.log("passport_local:");
-        console.log(passport_local);
+        this.passportParams.uid = null;      
+        var version = 'passport_local';  
         var passport = PassportPipeline.get_passport_local(version);
         version = 'passport_active'; 
-        console.log("passport post:");
+        console.log("passport_local:");
         console.log(passport);
         console.log("Checkpoint: 1");
-        console.log(this.passportParams);
-        PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
+        PassportPipeline.remoteCall(coinSymbol,passport).then((response) => {
             console.log(this.passportParams);
             if(response){
                 console.log(response);
