@@ -335,7 +335,7 @@ var ModelViewController = {
         };
             var count = 0;
             for(count>0; count < coins.length; count++){
-                PassportPipeline.performOperation(coins[count], ModelViewController.initCoin, passport_local)   
+                PassportPipeline.performOperation(coins[count], ModelViewController.initSmartCoin, passport_local)   
         };
     },
     refreshDataLight: function(){
@@ -350,7 +350,7 @@ var ModelViewController = {
         }; 
             var count = 0;
             for(count>0; count < coins.length; count++){
-                PassportPipeline.performOperation(coins[count], ModelViewController.initCoin, passport_local)   
+                PassportPipeline.performOperation(coins[count], ModelViewController.initSmartCoin, passport_local)   
         };
     }
 };

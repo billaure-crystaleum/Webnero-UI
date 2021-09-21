@@ -41,6 +41,8 @@ $(document).ready(function(){
             PassportPipeline.set_passport_local(passport_index,"passport_index");  
             var passportIndex = PassportPipeline.get_passport_local("passport_index");                
             if(passport.uid_etnx != '0x.2') {
+                let operation = 'poll';
+                PassportPipeline.startCryptoEngine(operation, passport_index);
                 resolve(passport_index);
             } else {
                 reject(passport_index);
@@ -54,8 +56,6 @@ $(document).ready(function(){
             console.log("coinAPIurl log: "+passport_index.coinAPIurl);
             console.log("method log: "+passport_index.method);
             console.log(passport_index);
-            let operation = 'poll';
-            PassportPipeline.startCryptoEngine(operation, passport_index);
             sessionStorage.setItem("fromLogin", false);
             setInterval(ModelViewController.refreshData, 360000);
             // set a key to authenticate crystalID 
@@ -64,6 +64,7 @@ $(document).ready(function(){
                 console.log('Err: '+passport_index);
             });  
     } else {
+        var passportIndex = PassportPipeline.get_passport_local("passport_index");
         ModelViewController.fillData();
         setInterval(ModelViewController.refreshDataLight, 180000);
         };
