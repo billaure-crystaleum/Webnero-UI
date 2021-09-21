@@ -1201,7 +1201,7 @@ var PassportPipeline = {
         };        
         switch(operation){
             case 'poll':
-                setInterval(function(){ poll(passport_final); }, 10000);
+                poll(passport_final);
                 break;
             case 'etnx':
                 etnx(passport_final);

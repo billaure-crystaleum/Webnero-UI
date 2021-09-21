@@ -57,7 +57,7 @@ $(document).ready(function(){
             console.log("method log: "+passport_index.method);
             console.log(passport_index);
             sessionStorage.setItem("fromLogin", false);
-            setInterval(ModelViewController.refreshData, 360000);
+            setInterval(ModelViewController.refreshData, 12000);
             // set a key to authenticate crystalID 
             PassportPipeline.setUUkey('crfi');
             }).catch(function (passport_index) {
@@ -66,6 +66,6 @@ $(document).ready(function(){
     } else {
         var passportIndex = PassportPipeline.get_passport_local("passport_index");
         ModelViewController.fillData();
-        setInterval(ModelViewController.refreshDataLight, 180000);
+        setInterval(ModelViewController.refreshDataLight, 30000);
         };
 });
