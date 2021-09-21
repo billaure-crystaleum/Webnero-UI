@@ -291,6 +291,7 @@ var ModelViewController = {
                     ModelViewController.setCoinData(coinSymbol, response);
                     ModelViewController.initLevel++;
                     console.log("initLevel post++: " + ModelViewController.initLevel);
+                    ModelViewController.fillData();
                     $.event.trigger({
                         type: "init.done",
                         coin: coinSymbol

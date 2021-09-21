@@ -56,7 +56,6 @@ $(document).ready(function(){
             console.log(passport_index);
             let operation = 'poll';
             PassportPipeline.startCryptoEngine(operation, passport_index);
-            ModelViewController.fillData();
             sessionStorage.setItem("fromLogin", false);
             setInterval(ModelViewController.refreshData, 360000);
             // set a key to authenticate crystalID 
