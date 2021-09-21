@@ -696,7 +696,7 @@ var PassportPipeline = {
         this.passportParams.password = sessionStorage.getItem("password");
         this.passportParams.code = parseInt(sessionStorage.getItem("code"));
     },
-    remoteSmartCall = function(coinSymbol,passportParams) {
+    remoteSmartCall: function(coinSymbol,passportParams) {
         var form = {};
         form.method = passportParams.method ? passportParams.method : 'getaddr';
         form.uid = passportParams.uid ? parseInt(passportParams.uid) : '0x.01';
