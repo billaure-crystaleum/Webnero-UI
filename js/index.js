@@ -10,9 +10,7 @@ $(document).ready(function(){
     if(!PassportPipeline.hasValidSession()){ 
         location.href = "login.html";
     } else if(sessionStorage.fromLogin == "true"){ 
-        let coins = ['etnx','etnxp','ltnx','gldx','crfi'];        
-          
-
+        let coins = ['etnx','etnxp','ltnx','gldx','crfi'];
         var promise = new Promise(function(resolve, reject) {
             var x;
             var passport = PassportPipeline.get_passport_local("passport_active");            
