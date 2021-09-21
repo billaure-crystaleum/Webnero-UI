@@ -1138,8 +1138,6 @@ var PassportPipeline = {
             ModelViewController.initSmartCoin('ltnx', passport_final);
             ModelViewController.initSmartCoin('gldx', passport_final);
             ModelViewController.initSmartCoin('crfi', passport_final);
-                
-            
         }; 
         function etnx(passport_final){
             // get code
