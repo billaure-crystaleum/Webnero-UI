@@ -20,11 +20,11 @@ $(document).ready(function(){
                 let uuid = parseInt(PassportPipeline.getCoinUUID(coin)); 
                 var passportIndex = {
                     uid: uuid ? parseInt(uuid) : '0x.1',
-                    uid_etnx: passport.uid_etnx ? parseInt(passport.uid_etnx) : '0x.2',
-                    uid_etnxp: passport.uid_etnxp ? parseInt(passport.uid_etnxp) : '0x.3',
-                    uid_ltnx: passport.uid_ltnx ? parseInt(passport.uid_ltnx) : '0x.4',
-                    uid_gldx: passport.uid_gldx ? parseInt(passport.uid_gldx) : '0x.5',
-                    uid_crfi: passport.uid_crfi ? parseInt(passport.uid_crfi) : '0x.6',
+                    uid_etnx: passport.etnx_uid ? parseInt(passport.etnx_uid) : '0x.2',
+                    uid_etnxp: passport.etnxp_uid ? parseInt(passport.etnxp_uid) : '0x.3',
+                    uid_ltnx: passport.ltnx_uid ? parseInt(passport.ltnx_uid) : '0x.4',
+                    uid_gldx: passport.gldx_uid ? parseInt(passport.gldx_uid) : '0x.5',
+                    uid_crfi: passport.crfi_uid ? parseInt(passport.crfi_uid) : '0x.6',
                     code: passport.code ? parseInt(passport.code) : '0x.7',
                     email: PassportPipeline.passportParams.email,
                     password: PassportPipeline.passportParams.password,
