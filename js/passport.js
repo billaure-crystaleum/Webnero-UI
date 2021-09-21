@@ -947,14 +947,14 @@ var PassportPipeline = {
         return sessionStorage.getItem(coinSymbol+"_uuid");
     },
     set_passport_local: function(passportParams, version){
-        if(version = null){
-            return sessionStorage.setItem("passport_local", JSON.stringify(passportParams));
+        if(version == null){
+            return sessionStorage.setItem('passport_local', JSON.stringify(passportParams));
         } else {
-            return sessionStorage.setItem(version.toString(), JSON.stringify(passportParams));            
+            return sessionStorage.setItem(version, JSON.stringify(passportParams));
         };
     },
     get_passport_local: function(version){
-        if(version = null){
+        if(version == null){
             var data = JSON.parse(sessionStorage.getItem('passport_local'));
             return data;
         } else {
