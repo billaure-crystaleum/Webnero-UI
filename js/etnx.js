@@ -244,8 +244,7 @@ var ModelViewController = {
                             "<td>" + "<a href='"+this.blockchainExplorerLink(false, parseInt(item.height), item.txid, coin.toLowerCase())+"'>" + item.txid + "</a>" + "</td>" + 
                           "</tr>" );
         }
-    },
-    
+    },    
     initCoin: function(coinSymbol, passportParams){
         console.log("3");
         var passport = passportParams;
@@ -253,7 +252,7 @@ var ModelViewController = {
         console.log(passport);
         ModelViewController.coinState++;
         console.log("coinstate++: " + ModelViewController.coinState);
-        PassportPipeline.remoteSmartCall(coinSymbol,passport_final).then((response) => {
+        PassportPipeline.remoteSmartCall(coinSymbol,passportParams).then((response) => {
             if(response){
                 console.log(response); 
                 let passportBalance = JSON.parse(response);
