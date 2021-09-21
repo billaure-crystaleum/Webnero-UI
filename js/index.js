@@ -11,13 +11,13 @@ $(document).ready(function(){
         location.href = "login.html";
     } else if(sessionStorage.fromLogin == "true"){ 
         let coins = ['etnx','etnxp','ltnx','gldx','crfi'];
-        var promise = new Promise(function(resolve, reject) {
-            var x;
-            var passport = PassportPipeline.get_passport_local("passport_active");   
+        var passport = PassportPipeline.get_passport_local("passport_active"); 
+        var x;
+        var promise = new Promise(function(resolve, reject) {             
             console.log(passport)         
             coins.forEach(coin => {
                 let uuid = parseInt(PassportPipeline.getCoinUUID(coin)); 
-                var passportIndex = {
+                var passport_index = {
                     uid: uuid ? parseInt(uuid) : '0x.1',
                     uid_etnx: passport.uid_etnx ? parseInt(passport.uid_etnx) : '0x.2',
                     etnxp_uuid: passport.uid_etnxp ? parseInt(passport.uid_etnxp) : '0x.3',
@@ -30,8 +30,8 @@ $(document).ready(function(){
                     coinAPIurl: PassportPipeline.getPassportApi(coin),
                     method: passport.method ? passport.method : 'getaddr'
                 };
-                PassportPipeline.set_passport_local(passportIndex,"passport_index");
-                var passport_index = PassportPipeline.get_passport_local("passport_index"); 
+                PassportPipeline.set_passport_local(passport_index,"passport_index");
+                var passportIndex = PassportPipeline.get_passport_local("passport_index"); 
                     if(passport_index.crfi_uuid != '0x.6'){
                         x = true; console.log(x);
                     } else { x = false; console.log(x); }
