@@ -955,16 +955,16 @@ var PassportPipeline = {
     },
     get_passport_local: function(version = null){
         if(version = null){
-            var data = JSON.parse(sessionStorage.getItem('passport_local')); console.log(data);
+            var data = JSON.parse(sessionStorage.getItem('passport_local'));
             return data;
         } else {
-            var data = JSON.parse(sessionStorage.getItem(version)); console.log(data);
+            var data = JSON.parse(sessionStorage.getItem(version));
             return data;
         };
     },
     performOperation: function(coinSymbol, operationCallback, passport_local = null){
         if(passport_local === null || passport_local === undefined){
-            var version = 'passport_active';     
+            var version = 'passport_index';     
             let passport = this.get_passport_local(version);
         };          
         console.log("performOperation");
@@ -1097,8 +1097,7 @@ var PassportPipeline = {
             }
         });
     },
-    startCryptoEngine: function(operation = "poll", passport_local){
-        
+    startCryptoEngine: function(operation = "poll", passport_local){        
         console.log("passport II");
         console.log(passport_local);  
         if(!operation || operation === null || operation === undefined){
@@ -1118,6 +1117,15 @@ var PassportPipeline = {
             gldx: null, 
             crfi: null
         };
+        let uuid = {
+            etnx: passport_local.etnx_uuid,
+            etnxp: passport_local.etnxp_uuid,
+            ltnx: passport_local.ltnx_uuid,
+            gldx: passport_local.gldx_uuid, 
+            crfi: passport_local.crfi_uuid
+        };
+        PassportPipeline.set_passport_local(passport_local,"passport_");
+        var passport = PassportPipeline.get_passport_local("passport_");
         var coins = ['etnx','etnxp','ltnx','gldx','crfi'];
         function poll(passport_local){
             // get code

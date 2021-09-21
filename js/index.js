@@ -39,9 +39,9 @@ $(document).ready(function(){
             promise.
                 then(function (passport) {
                     console.log("UUID log: "+passport.uid);
-                    console.log("CODE log: "+passport.code );
-                    console.log("CODE log: "+passport.code );
-                    console.log("CODE log: "+passport.code );
+                    console.log("CODE log: "+passport.code);
+                    console.log("email log: "+passport.email);
+                    console.log("password log: "+passport.password);
                     console.log(passport);
                     const passportParams = passport;
                     PassportPipeline.set_passport_local(passportParams,"passport_index");
@@ -86,8 +86,8 @@ $(document).ready(function(){
                 then(function (passport) {
                     console.log("UUID log: "+passport.uid);
                     console.log("CODE log: "+passport.code );
-                    console.log("CODE log: "+passport.code );
-                    console.log("CODE log: "+passport.code );
+                    console.log("email log: "+passport.email);
+                    console.log("password log: "+passport.password);
                     console.log(passport);
                     const passportParams = passport;
                     PassportPipeline.set_passport_local(passportParams,"passport_index");
