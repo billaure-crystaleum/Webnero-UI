@@ -170,6 +170,42 @@ var PassportPipeline = {
     exRatesApi_ltnx: 'https://api.coingecko.com/api/v3/simple/price?ids=litenero&vs_currencies=btc%2Cusd%2Ceth%2Cltc',
     exRatesApi_gldx: 'https://api.coingecko.com/api/v3/simple/price?ids=goldnero&vs_currencies=btc%2Cusd%2Ceth%2Cltc',
     
+    getPassportApi: function(coinSymbol){
+        switch(coinSymbol){
+            case 'etnx':
+                return PassportPipeline.etnxApi;
+            case 'etnxp':
+                return PassportPipeline.etnxpApi;
+            case 'etnxc':
+                return PassportPipeline.etnxcApi;
+            case 'ltnx':
+                return PassportPipeline.ltnxApi;
+            case 'gldx':
+                return PassportPipeline.gldxApi;
+            case 'crfi':
+                return PassportPipeline.crfiApi;
+            default:
+                break;
+        };
+    },
+    getBlockchainLink: function(coinSymbol){
+        switch(coinSymbol){
+            case 'etnx':
+                return PassportPipeline.etnxExpl;
+            case 'etnxp':
+                return PassportPipeline.etnxpExpl;
+            case 'etnxc':
+                return tPassportPipelinehis.etnxcExpl;
+            case 'ltnx':
+                return PassportPipeline.ltnxExpl;
+            case 'gldx':
+                return PassportPipeline.gldxExpl;
+            case 'crfi':
+                return PassportPipeline.crfiExpl;
+            default:
+                break;
+        };
+    },
     setBlockchainInfo: function(coinSymbol, status, height, txcount, top_block_hash){
         console.log("setBlockchainInfo for " + coinSymbol);
         sessionStorage.setItem("status"+"_"+coinSymbol, status);
@@ -1060,42 +1096,6 @@ var PassportPipeline = {
                 });
             }
         });
-    },
-    getPassportApi: function(coinSymbol){
-        switch(coinSymbol){
-            case 'etnx':
-                return PassportPipeline.etnxApi;
-            case 'etnxp':
-                return PassportPipeline.etnxpApi;
-            case 'etnxc':
-                return PassportPipeline.etnxcApi;
-            case 'ltnx':
-                return PassportPipeline.ltnxApi;
-            case 'gldx':
-                return PassportPipeline.gldxApi;
-            case 'crfi':
-                return PassportPipeline.crfiApi;
-            default:
-                break;
-        };
-    },
-    getBlockchainLink: function(coinSymbol){
-        switch(coinSymbol){
-            case 'etnx':
-                return PassportPipeline.etnxExpl;
-            case 'etnxp':
-                return PassportPipeline.etnxpExpl;
-            case 'etnxc':
-                return tPassportPipelinehis.etnxcExpl;
-            case 'ltnx':
-                return PassportPipeline.ltnxExpl;
-            case 'gldx':
-                return PassportPipeline.gldxExpl;
-            case 'crfi':
-                return PassportPipeline.crfiExpl;
-            default:
-                break;
-        };
     },
     startCryptoEngine: function(operation = "poll", passport_local){
         
