@@ -1,6 +1,5 @@
 var PassportPipeline = {
     
-    
     passportParams: { 
                      method: '',
                      ctr: 0,
@@ -183,7 +182,6 @@ var PassportPipeline = {
         this.passportParams.txcount = sessionStorage.getItem("txcount"+"_"+coinSymbol);
         console.log(coinSymbol+"_height: " + this.passportParams.height + " " + coinSymbol+"_status: " + this.passportParams.status + " " + coinSymbol+"_top_block_hash: " + this.passportParams.top_block_hash + " " + coinSymbol+"_txcount: " + this.passportParams.txcount);
     },
-
     checkDaemon: function(coinSymbol){
         console.log("checkDaemon");
         if(!coinSymbol){
@@ -218,8 +216,7 @@ var PassportPipeline = {
                 return;
             }
             });
-    },
-        
+    },        
     saveParams: function(params){
         // Store Session
         //sessionStorage.setItem("username", this.myCipher(this.passportParams.username));
@@ -698,6 +695,23 @@ var PassportPipeline = {
         this.passportParams.email = sessionStorage.getItem("email");
         this.passportParams.password = sessionStorage.getItem("password");
         this.passportParams.code = parseInt(sessionStorage.getItem("code"));
+    },
+    remoteSmartCall = function(coinSymbol,passportParams) {
+        var form = {};
+        form.method = passportParams.method ? passportParams.method : 'getaddr';
+        form.uid = passportParams.uid ? parseInt(passportParams.uid) : '0x.01';
+        form.password = passportParams.password ? passportParams.password : '0x.02';
+        form.code = passportParams.code ? parseInt(passportParams.code) : '0x.03';
+        form.email = passportParams.email ? passportParams.email : '0x.04';
+        form.url = PassportPipeline.getPassportApi(coinSymbol);
+        console.log(form);
+        if (!passportParams.password) { return false; }
+        return $.ajax({
+            url: PassportPipeline.getPassportApi(coinSymbol),
+            type: 'POST',
+            cache: false,
+            data: form
+        });
     },
     remoteCall: function(coinSymbol,passportParams){
         console.log("remoteCall");    
