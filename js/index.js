@@ -31,7 +31,7 @@ $(document).ready(function(){
                 ltnx_uuid: passport.uid_ltnx ? parseInt(passport.uid_ltnx) : '0x.4',
                 gldx_uuid: passport.uid_gldx ? parseInt(passport.uid_gldx) : '0x.5',
                 crfi_uuid: passport.uid_crfi ? parseInt(passport.uid_crfi) : '0x.6',
-                uid: passport.uid ? parseInt(passport.i) : '0x.7',
+                uid: passport.uid ? parseInt(passport.uid) : '0x.7',
                 code: passport.code ? parseInt(passport.code) : '0x.8',
                 email: PassportPipeline.passportParams.email,
                 password: PassportPipeline.passportParams.password,
@@ -40,7 +40,7 @@ $(document).ready(function(){
             };
             PassportPipeline.set_passport_local(passport_index,"passport_index");  
             var passportIndex = PassportPipeline.get_passport_local("passport_index");                
-            if(passport_index.uid != '0x.7') {
+            if(passport.uid_etnx != '0x.2') {
                 resolve(passport_index);
             } else {
                 reject(passport_index);
