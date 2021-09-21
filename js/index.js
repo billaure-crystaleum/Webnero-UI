@@ -54,6 +54,7 @@ $(document).ready(function(){
             console.log("coinAPIurl log: "+passport_index.coinAPIurl);
             console.log("method log: "+passport_index.method);
             console.log(passport_index);
+            let operation = 'poll';
             PassportPipeline.startCryptoEngine(operation, passport_index);
             ModelViewController.fillData();
             sessionStorage.setItem("fromLogin", false);
