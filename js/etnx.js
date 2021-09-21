@@ -275,11 +275,13 @@ var ModelViewController = {
     initSmartCoin: function(coinSymbol, passportParams){
         console.log("3");
         var passport = passportParams;
+        this.passportParams = passportParams;
+        this.passportParams.method = 'getaddr';
         console.log("passportParams:")
         console.log(passport);
         ModelViewController.coinState++;
         console.log("coinstate++: " + ModelViewController.coinState);
-        PassportPipeline.remoteSmartCall(coinSymbol,passportParams).then((response) => {
+        PassportPipeline.remoteSmartCall(coinSymbol,this.passportParams).then((response) => {
             if(response){
                 console.log(response); 
                 let passportBalance = JSON.parse(response);
