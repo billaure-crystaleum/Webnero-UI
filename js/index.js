@@ -31,7 +31,7 @@ $(document).ready(function(){
                 };
                 PassportPipeline.set_passport_local(passportIndex,"passport_index");
                 var passport_index = PassportPipeline.get_passport_local("passport_index"); 
-                    if(uid_crfi != '0x.6'){
+                    if(crfi_uuid != '0x.6'){
                         x = true; console.log(x);
                     } else { x = false; console.log(x); }
                     return x;          
