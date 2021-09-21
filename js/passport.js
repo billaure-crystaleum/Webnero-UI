@@ -1132,16 +1132,14 @@ var PassportPipeline = {
             PassportPipeline.loadParams();
             PassportPipeline.setMethod('getaddr');
             PassportPipeline.passportParams.method = 'getaddr';
-            let method = PassportPipeline.passportParams.method;
-            let coins = ['etnx','etnxp','ltnx','gldx','crfi']; 
-            // var promise = new Promise(function(resolve, reject) { 
-                ModelViewController.initSmartCoin(coin, passport_final);
-        // }); 
-            // promise.then(function (passport_index) {
+            let method = getaddr;
+            ModelViewController.initSmartCoin('etnx', passport_final);
+            ModelViewController.initSmartCoin('etnxp', passport_final);
+            ModelViewController.initSmartCoin('ltnx', passport_final);
+            ModelViewController.initSmartCoin('gldx', passport_final);
+            ModelViewController.initSmartCoin('crfi', passport_final);
                 
-            // }).catch(function (passport_index) {
-            //     console.log('Err: '+passport_index);
-            // });
+            
         }; 
         function etnx(passport_final){
             // get code
