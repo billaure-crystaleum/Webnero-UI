@@ -14,28 +14,29 @@ $(document).ready(function(){
         var passport = PassportPipeline.get_passport_local("passport_active"); 
         var x;
         var promise = new Promise(function(resolve, reject) {             
-            console.log(passport)         
+            console.log(passport);
+            let etnx_api = PassportPipeline.getPassportApi('etnx');
+            let etnxp_api = PassportPipeline.getPassportApi('etnxp');
+            let ltnx_api = PassportPipeline.getPassportApi('ltnx');
+            let gldx_api = PassportPipeline.getPassportApi('gldx');
+            let crfi_api = PassportPipeline.getPassportApi('crfi');  
+            var passport_index = {
+                uid: uuid ? parseInt(uuid) : '0x.1',
+                uid_etnx: passport.uid_etnx ? parseInt(passport.uid_etnx) : '0x.2',
+                etnxp_uuid: passport.uid_etnxp ? parseInt(passport.uid_etnxp) : '0x.3',
+                ltnx_uuid: passport.uid_ltnx ? parseInt(passport.uid_ltnx) : '0x.4',
+                gldx_uuid: passport.uid_gldx ? parseInt(passport.uid_gldx) : '0x.5',
+                crfi_uuid: passport.uid_crfi ? parseInt(passport.uid_crfi) : '0x.6',
+                code: passport.code ? parseInt(passport.code) : '0x.7',
+                email: PassportPipeline.passportParams.email,
+                password: PassportPipeline.passportParams.password,
+                coinAPIurl: PassportPipeline.getPassportApi(coin),
+                method: passport.method ? passport.method : 'getaddr'
+            };
+            PassportPipeline.set_passport_local(passport_index,"passport_index");  
+            var passportIndex = PassportPipeline.get_passport_local("passport_index");  
             coins.forEach(coin => {
-                let uuid = parseInt(PassportPipeline.getCoinUUID(coin)); 
-                var passport_index = {
-                    uid: uuid ? parseInt(uuid) : '0x.1',
-                    uid_etnx: passport.uid_etnx ? parseInt(passport.uid_etnx) : '0x.2',
-                    etnxp_uuid: passport.uid_etnxp ? parseInt(passport.uid_etnxp) : '0x.3',
-                    ltnx_uuid: passport.uid_ltnx ? parseInt(passport.uid_ltnx) : '0x.4',
-                    gldx_uuid: passport.uid_gldx ? parseInt(passport.uid_gldx) : '0x.5',
-                    crfi_uuid: passport.uid_crfi ? parseInt(passport.uid_crfi) : '0x.6',
-                    code: passport.code ? parseInt(passport.code) : '0x.7',
-                    email: PassportPipeline.passportParams.email,
-                    password: PassportPipeline.passportParams.password,
-                    coinAPIurl: PassportPipeline.getPassportApi(coin),
-                    method: passport.method ? passport.method : 'getaddr'
-                };
-                PassportPipeline.set_passport_local(passport_index,"passport_index");
-                var passportIndex = PassportPipeline.get_passport_local("passport_index"); 
-                    if(passport_index.crfi_uuid != '0x.6'){
-                        x = true; console.log(x);
-                    } else { x = false; console.log(x); }
-                    return x;          
+                         
             });    
             if(x != false) {
                 resolve(passport_index);
