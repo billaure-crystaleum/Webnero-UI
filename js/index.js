@@ -29,7 +29,7 @@ $(document).ready(function(){
                     email: PassportPipeline.passportParams.email,
                     password: PassportPipeline.passportParams.password,
                     coinAPIurl: PassportPipeline.getPassportApi(coin),
-                    method: method ? method : 'getaddr'
+                    method: passport.method ? passport.method : 'getaddr'
                 };
                 PassportPipeline.set_passport_local(passportIndex,"passport_index");
                 var passport_index = PassportPipeline.get_passport_local("passport_index"); 
