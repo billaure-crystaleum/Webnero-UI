@@ -251,9 +251,6 @@ var ModelViewController = {
         var passport = passportParams;
         console.log("passportParams:")
         console.log(passport);
-        var passport_final = PassportPipeline.get_passport_local("passport_final");
-        console.log("passport_final");
-        console.log(passport_final);
         ModelViewController.coinState++;
         console.log("coinstate++: " + ModelViewController.coinState);
         PassportPipeline.remoteSmartCall(coinSymbol,passport_final).then((response) => {
