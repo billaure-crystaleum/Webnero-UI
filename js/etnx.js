@@ -244,8 +244,7 @@ var ModelViewController = {
                             "<td>" + "<a href='"+this.blockchainExplorerLink(false, parseInt(item.height), item.txid, coin.toLowerCase())+"'>" + item.txid + "</a>" + "</td>" + 
                           "</tr>" );
         }
-    },
-    
+    },    
     initCoin: function(coinSymbol, passportParams){
         console.log("3");
         var passport = passportParams;
