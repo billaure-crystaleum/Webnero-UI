@@ -1133,9 +1133,9 @@ var PassportPipeline = {
             PassportPipeline.setMethod('getaddr');
             PassportPipeline.passportParams.method = 'getaddr';
             let method = PassportPipeline.passportParams.method;
-            let coins = ['etnx','etnxp','ltnx','gldx','crfi'];
-            coins.forEach(coin => {
-                ModelViewController.initCoin(coin, passport_final);                         
+            let coins = ['etnx','etnxp','ltnx','gldx','crfi']; 
+            passport_final.coinAPIurl.forEach(url => {
+                ModelViewController.initSmartCoin(coin, passport_final, uid);               
             });  
         }; 
         function etnx(passport_final){
