@@ -272,6 +272,33 @@ var ModelViewController = {
             }
         });
     },
+    initSmartCoin: function(coinSymbol, passportParams){
+        console.log("3");
+        var passport = passportParams;
+        console.log("passportParams:")
+        console.log(passport);
+        ModelViewController.coinState++;
+        console.log("coinstate++: " + ModelViewController.coinState);
+        PassportPipeline.remoteSmartCall(coinSymbol,passportParams).then((response) => {
+            if(response){
+                console.log(response); 
+                let passportBalance = JSON.parse(response);
+                console.log(passportBalance);
+                if(passportBalance.hasOwnProperty("error")){
+                    console.log(passportBalance.hasOwnProperty("error"));
+                }
+                else if(!passportBalance.hasOwnProperty("error")) {
+                    ModelViewController.setCoinData(coinSymbol, response);
+                    ModelViewController.initLevel++;
+                    console.log("initLevel post++: " + ModelViewController.initLevel);
+                    $.event.trigger({
+                        type: "init.done",
+                        coin: coinSymbol
+                    });
+                }
+            }
+        });
+    },
     initVerification: function(coinSymbol){
             console.log(ModelViewController.coinState);
             let coin_state = ModelViewController.coinState;
