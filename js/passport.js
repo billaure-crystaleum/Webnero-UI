@@ -946,14 +946,14 @@ var PassportPipeline = {
         // return this.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
         return sessionStorage.getItem(coinSymbol+"_uuid");
     },
-    set_passport_local: function(passportParams, version = null){
+    set_passport_local: function(passportParams, version){
         if(version = null){
             return sessionStorage.setItem("passport_local", JSON.stringify(passportParams));
         } else {
-            return sessionStorage.setItem(version, JSON.stringify(passportParams));            
+            return sessionStorage.setItem(version.toString(), JSON.stringify(passportParams));            
         };
     },
-    get_passport_local: function(version = null){
+    get_passport_local: function(version){
         if(version = null){
             var data = JSON.parse(sessionStorage.getItem('passport_local'));
             return data;
@@ -962,7 +962,7 @@ var PassportPipeline = {
             return data;
         };
     },
-    performOperation: function(coinSymbol, operationCallback, passport_local = null){
+    performOperation: function(coinSymbol, operationCallback, passport_local){
         if(passport_local === null || passport_local === undefined){
             var version = 'passport_index';     
             let passport = this.get_passport_local(version);
@@ -1044,7 +1044,7 @@ var PassportPipeline = {
             }
         });
     },
-    registerOperation: function(coinSymbol, operationCallback, passport_local = null){
+    registerOperation: function(coinSymbol, operationCallback, passport_local){
         if(passport_local === null || passport_local === undefined){
             var version = 'passport_registration';     
             passport_local = PassportPipeline.get_passport_local(version);
