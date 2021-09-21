@@ -36,7 +36,7 @@ $(document).ready(function(){
                 email: PassportPipeline.passportParams.email,
                 password: PassportPipeline.passportParams.password,
                 coinAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api],
-                method: PassportPipeline.passportParams.method ? PassportPipeline.passportParams.method : 'getaddr'
+                method: 'getaddr'
             };
             PassportPipeline.set_passport_local(passport_index,"passport_index");  
             var passportIndex = PassportPipeline.get_passport_local("passport_index");                
