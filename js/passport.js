@@ -1126,7 +1126,6 @@ var PassportPipeline = {
         };
         PassportPipeline.set_passport_local(passport_local,"passport_final");
         var passport_final = PassportPipeline.get_passport_local("passport_final");
-        var coins = ['etnx','etnxp','ltnx','gldx','crfi'];
         function poll(passport_final){
             // get code
             let code = parseInt(PassportPipeline.loadCode());
@@ -1134,41 +1133,70 @@ var PassportPipeline = {
             PassportPipeline.setMethod('getaddr');
             PassportPipeline.passportParams.method = 'getaddr';
             let method = PassportPipeline.passportParams.method;
-
-            var promise = new Promise(function(resolve, reject) {
-                const x = true;
-                let uuid = parseInt(PassportPipeline.getCoinUUID(coins[o]));
-                var passport_final = {
-                    uid: uuid ? parseInt(uuid) : '0x.1',
-                    code: code ? parseInt(code) : '0x.2',
-                    email: PassportPipeline.passportParams.email,
-                    password: PassportPipeline.passportParams.password,
-                    coinAPIurl: PassportPipeline.getPassportApi(coins[o]),
-                    method: method ? method : 'getaddr'
-                }; 
-                if(x != false) {
-                    resolve(passport_final);
-                } else {
-                    reject(passport_final);
-                };
-            });                
-            promise.then(function (passport_final) {
-                console.log("UUID log: "+passport_final.uid);
-                console.log("CODE log: "+passport_final.code);
-                console.log("email log: "+passport_final.email);
-                console.log("password log: "+passport_final.password);
-                console.log("coinAPIurl log: "+passport_final.coinAPIurl);
-                console.log("method log: "+passport_final.method);
-                console.log(passport_final);
-                const passport_oracle = passport_final;
-                PassportPipeline.set_passport_local(passport_oracle,"passport_oracle");
-                const passportParams = PassportPipeline.get_passport_local("passport_oracle");
-                console.log("passportParams");
-                console.log(passportParams);
-                ModelViewController.initCoin(coin[o], passportParams);
-                }).catch(function (passport_final) {
-                    console.log('Err: '+passport_final);
-                });
+            let coins = ['etnx','etnxp','ltnx','gldx','crfi'];
+            coins.forEach(coin => {
+                ModelViewController.initCoin(coin, passport_final);                         
+            });  
+        }; 
+        function etnx(passport_final){
+            // get code
+            let code = parseInt(PassportPipeline.loadCode());
+            PassportPipeline.loadParams();
+            PassportPipeline.setMethod('getaddr');
+            PassportPipeline.passportParams.method = 'getaddr';
+            let method = PassportPipeline.passportParams.method;
+            let coins = ['etnx'];
+            coins.forEach(coin => {
+                ModelViewController.initCoin(coin, passport_final);                         
+            });  
+        };  
+        function etnxp(passport_final){
+            // get code
+            let code = parseInt(PassportPipeline.loadCode());
+            PassportPipeline.loadParams();
+            PassportPipeline.setMethod('getaddr');
+            PassportPipeline.passportParams.method = 'getaddr';
+            let method = PassportPipeline.passportParams.method;
+            let coins = ['etnxp'];
+            coins.forEach(coin => {
+                ModelViewController.initCoin(coin, passport_final);                         
+            });  
+        }; 
+        function ltnx(passport_final){
+            // get code
+            let code = parseInt(PassportPipeline.loadCode());
+            PassportPipeline.loadParams();
+            PassportPipeline.setMethod('getaddr');
+            PassportPipeline.passportParams.method = 'getaddr';
+            let method = PassportPipeline.passportParams.method;
+            let coins = ['ltnx'];
+            coins.forEach(coin => {
+                ModelViewController.initCoin(coin, passport_final);                         
+            });  
+        }; 
+        function gldx(passport_final){
+            // get code
+            let code = parseInt(PassportPipeline.loadCode());
+            PassportPipeline.loadParams();
+            PassportPipeline.setMethod('getaddr');
+            PassportPipeline.passportParams.method = 'getaddr';
+            let method = PassportPipeline.passportParams.method;
+            let coins = ['gldx'];
+            coins.forEach(coin => {
+                ModelViewController.initCoin(coin, passport_final);                         
+            });  
+        }; 
+        function crfi(passport_final){
+            // get code
+            let code = parseInt(PassportPipeline.loadCode());
+            PassportPipeline.loadParams();
+            PassportPipeline.setMethod('getaddr');
+            PassportPipeline.passportParams.method = 'getaddr';
+            let method = PassportPipeline.passportParams.method;
+            let coins = ['crfi'];
+            coins.forEach(coin => {
+                ModelViewController.initCoin(coin, passport_final);                         
+            });  
         };        
         switch(operation){
             case 'poll':
