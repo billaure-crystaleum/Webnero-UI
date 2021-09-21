@@ -1001,19 +1001,19 @@ var PassportPipeline = {
                 switch(coinSymbol){
                     case 'etnx':
                         PassportPipeline.ctr++;
-                        PassportPipeline.uid_etnx = coin_uid;
+                        this.passportParams.uid_etnx = coin_uid;
                     case 'etnxp':
                         PassportPipeline.ctr++;
-                        PassportPipeline.uid_etnxp = coin_uid;
+                        this.passportParams.uid_etnxp = coin_uid;
                     case 'ltnx':
                         PassportPipeline.ctr++;
-                        PassportPipeline.uid_ltnx = coin_uid;
+                        this.passportParams.uid_ltnx = coin_uid;
                     case 'gldx':
                         PassportPipeline.ctr++;
-                        PassportPipeline.uid_gldx = coin_uid;
+                        this.passportParams.uid_gldx = coin_uid;
                     case 'crfi':
                         PassportPipeline.ctr++;
-                        PassportPipeline.uid_crfi = coin_uid;
+                        this.passportParams.uid_crfi = coin_uid;
                     default:
                         break;
                 }
@@ -1028,13 +1028,13 @@ var PassportPipeline = {
                             return;
                         }                           
                             PassportPipeline.saveParams(this.passportParams);
-                            PassportPipeline.set_passport_local(passport_local, version);
+                            PassportPipeline.set_passport_local(this.passportParams,"passport_active");
                             var passport_active = PassportPipeline.get_passport_local(version);
                             console.log("passport_active:");
                             console.log(passport_active);
                             if(ModelViewController.coinState){
-                               console.log("MVC.coinState:")
-                               console.log(ModelViewController.coinState)
+                               console.log("MVC.coinState:");
+                               console.log(ModelViewController.coinState);
                             }
                         console.log("Checkpoint: 3");
                         console.log(this.passportParams);
@@ -1118,15 +1118,16 @@ var PassportPipeline = {
             crfi: null
         };
         let uuid = {
-            etnx: passport_local.etnx_uuid,
-            etnxp: passport_local.etnxp_uuid,
-            ltnx: passport_local.ltnx_uuid,
-            gldx: passport_local.gldx_uuid, 
-            crfi: passport_local.crfi_uuid
+            etnx: parseInt(this.passportParams.etnx_uuid),
+            etnxp: parseInt(this.passportParams.etnxp_uuid),
+            ltnx: parseInt(this.passportParams.ltnx_uuid),
+            gldx: parseInt(this.passportParams.gldx_uuid), 
+            crfi: parseInt(this.passportParams.crfi_uuid)
         };
         PassportPipeline.set_passport_local(passport_local,"passport_");
         var passport = PassportPipeline.get_passport_local("passport_");
         var coins = ['etnx','etnxp','ltnx','gldx','crfi'];
+        for (let o = 0; o < coins.length; o++) {
         function poll(passport_local){
             // get code
             let code = parseInt(PassportPipeline.loadCode());
@@ -1136,7 +1137,6 @@ var PassportPipeline = {
             let method = PassportPipeline.passportParams.method;
             // should get the wallet contents for COINS
             var o = 0;
-            for(o=0;o<coins.length;o++){
             var promise = new Promise(function(resolve, reject) {
                 const x = true;
                 let uuid = parseInt(PassportPipeline.getCoinUUID(coins[o]));
@@ -1171,8 +1171,8 @@ var PassportPipeline = {
                     ModelViewController.initCoin(coins[o], passportParams);
                 }).catch(function (passport) {
                     console.log('Err: '+passport);
-                });
-            };    
+                }); 
+            }; 
         };
         function etnx(passport_local){
             PassportPipeline.setMethod('getaddr');
