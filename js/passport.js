@@ -1132,7 +1132,7 @@ var PassportPipeline = {
             PassportPipeline.loadParams();
             PassportPipeline.setMethod('getaddr');
             PassportPipeline.passportParams.method = 'getaddr';
-            let method = getaddr;
+            let method = 'getaddr';
             ModelViewController.initSmartCoin('etnx', passport_final);
             ModelViewController.initSmartCoin('etnxp', passport_final);
             ModelViewController.initSmartCoin('ltnx', passport_final);
