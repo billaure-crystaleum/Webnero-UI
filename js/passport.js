@@ -1149,14 +1149,17 @@ var PassportPipeline = {
                 
             promise.then(function (passport) {
                     console.log("UUID log: "+passport.uid);
-                    console.log("CODE log: "+passport.code );
-                    console.log("email log: "+passport.email );
-                    console.log("password log: "+passport.password );
-                    console.log("coinAPIurl log: "+passport.coinAPIurl );
-                    console.log("method log: "+passport.method );
+                    console.log("CODE log: "+passport.code);
+                    console.log("email log: "+passport.email);
+                    console.log("password log: "+passport.password);
+                    console.log("coinAPIurl log: "+passport.coinAPIurl);
+                    console.log("method log: "+passport.method);
                     console.log(passport);
-                    const passportParams = passport;
-                    PassportPipeline.set_passport_local(passportParams,"passport_final");
+                    const passport_final = passport;
+                    PassportPipeline.set_passport_local(passport_final,"passport_final");
+                    const passportParams = PassportPipeline.get_passport_local("passport_final");
+                    console.log("passportParams");
+                    console.log(passportParams);
                     ModelViewController.initCoin(coins[o], passportParams);
                 }).catch(function (passport) {
                     console.log('Err: '+passport);
