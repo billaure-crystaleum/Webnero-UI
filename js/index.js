@@ -13,14 +13,15 @@ $(document).ready(function(){
         let coins = ['etnx','etnxp','ltnx','gldx','crfi'];
         var promise = new Promise(function(resolve, reject) {
             var x;
-            var passport = PassportPipeline.get_passport_local("passport_active");            
+            var passport = PassportPipeline.get_passport_local("passport_active");   
+            console.log(passport)         
             coins.forEach(coin => {
                 let uuid = parseInt(PassportPipeline.getCoinUUID(coin)); 
                 var passportIndex = {
                     uid: uuid ? parseInt(uuid) : '0x.1',
                     uid_etnx: passport.etnx_uid ? parseInt(passport.etnx_uid) : '0x.2',
                     etnxp_uuid: passport.etnxp_uuid ? parseInt(passport.etnxp_uuid) : '0x.3',
-                    ltnx_ltnx_uuiduid: passport.ltnx_uuid ? parseInt(passport.ltnx_uuid) : '0x.4',
+                    ltnx_uuid: passport.ltnx_uuid ? parseInt(passport.ltnx_uuid) : '0x.4',
                     gldx_uuid: passport.gldx_uuid ? parseInt(passport.gldx_uuid) : '0x.5',
                     crfi_uuid: passport.crfi_uuid ? parseInt(passport.crfi_uuid) : '0x.6',
                     code: passport.code ? parseInt(passport.code) : '0x.7',
