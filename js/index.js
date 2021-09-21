@@ -19,5 +19,4 @@ $(document).ready(function(){
         ModelViewController.fillData();
         setInterval(ModelViewController.refreshDataLight, 180000);
         };
-    }; 
 });
