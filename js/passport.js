@@ -1014,6 +1014,24 @@ var PassportPipeline = {
             var version = 'passport_index';     
             let passport = this.get_passport_local(version);
         };          
+        if(coinSymbol === 'etnx'){
+            PassportPipeline.ctrSet(1);
+        };        
+        if(coinSymbol === 'etnxp'){
+            PassportPipeline.ctrSet(2);
+        };         
+        if(coinSymbol === 'ltnx'){
+            PassportPipeline.ctrSet(3);
+        };         
+        if(coinSymbol === 'gldx'){
+            PassportPipeline.ctrSet(4);
+        };         
+        if(coinSymbol === 'crfi'){
+            PassportPipeline.ctrSet(5);
+        };       
+        if(coinSymbol === 'all'){
+            PassportPipeline.ctrSet(6);
+        };
         PassportPipeline.ctrSet(0);
         console.log("performOperation");
         PassportPipeline.loadParams();        
@@ -1033,15 +1051,14 @@ var PassportPipeline = {
                 console.log(response);
                 let passportLogin = JSON.parse(response);
                 if(passportLogin.hasOwnProperty("error")){
-                    loginFail();
-                    return;
+                    return loginFail();
                 };
                 console.log("Checkpoint: 2");
                 console.log(this.passportParams);                
                 const coin_uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                 console.log("UUID log");
                 console.log(this.passportParams.uid)
-                if(PassportPipeline.ctr >= 5){
+                if(parseInt(ModelViewController.ctr) === 6){
                     this.passportParams.method = 'check_code';
                     this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                     this.passportParams.code = parseInt(PassportPipeline.loadCode());
@@ -1075,7 +1092,9 @@ var PassportPipeline = {
     },        
     myPromises: function(coinSymbol,passportLogin,passportParams){     
     var promise = new Promise(function(resolve, reject) { 
-        this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
+        if(coinSymbol != 'all'){
+            this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
+        };
         this.passportParams.code = parseInt(PassportPipeline.loadCode());
         console.log("Electronero Passport registration checkpoint: 2");
         console.log(this.passportParams);  
@@ -1114,17 +1133,6 @@ var PassportPipeline = {
         };
     });                
     promise.then(function (passport_active) {
-        console.log("ETNX UUID log: "+passport_active.etnx_uid);
-        console.log("ETNXP UUID log: "+passport_active.etnxp_uid);
-        console.log("LTNX UUID log: "+passport_active.ltnx_uid);
-        console.log("GLDX UUID log: "+passport_active.gldx_uid);
-        console.log("CRFI UUID log: "+passport_active.crfi_uid);
-        PassportPipeline.loadCode();
-        console.log("CODE log: "+passport_active.code);
-        console.log("email log: "+passport_active.email);
-        console.log("password log: "+passport_active.password);
-        console.log("coinAPIurl log: "+passport_active.coinAPIurl);
-        console.log("method log: "+passport_active.method);
         console.log(passport_active);
         sessionStorage.setItem("fromLogin", false);
         version = 'passport_active';   
@@ -1155,7 +1163,7 @@ var PassportPipeline = {
         console.log(this.passportParams);
         PassportPipeline.remoteRegCall(coinSymbol,this.passportParams).then((response) => {
             if(response){
-                ModelViewController.coinState++
+                ModelViewController.coinState++;
                 console.log("coinState: "+ModelViewController.coinState);
                 const passportLogin = JSON.parse(response);
                 PassportPipeline.ctrSet(0);
