@@ -52,21 +52,18 @@ $(document).on("click", "#pin-code", function(){
         PassportPipeline.setCode(pin_code);
         PassportPipeline.setCredentials($("#email").val(), $("#password").val(), true);
         ModelViewController.returnState();
-        let passport_registration = {
+        const passport_registration = {
             api: PassportPipeline.passportParams.coinAPIurl ? PassportPipeline.passportParams.coinAPIurl : null,
             uid: PassportPipeline.passportParams.uid ? parseInt(PassportPipeline.passportParams.uid) : null,
             email: $("#email").val(),
             password: $("#password").val(),
-            code: pin_code ? parseInt(pin_code) : null,
-            pin: pin_code ? parseInt(pin_code) : null,
+            code: parseInt(pin_code),
+            pin: parseInt(pin_code),
             method: 'register_webnero'
         };        
         PassportPipeline.set_passport_local(passport_registration,"passport_registration");
-        var passport = PassportPipeline.get_passport_local(passport_registration);
-        console.log("passport_registration:");
-        console.log(passport);  
         // register all coins simultaneously
-        PassportPipeline.registerOperation("all", ModelViewController.initVerification, passport);
+        PassportPipeline.registerOperation("all", ModelViewController.initVerification, passport_registration);
       
 
     }
