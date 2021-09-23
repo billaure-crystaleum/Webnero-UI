@@ -31,7 +31,6 @@ $(document).ready(function(){
                     const crfi_api = PassportPipeline.getPassportApi('crfi');
                     const passport_api = PassportPipeline.getPassportApi('all');
                     const passport_index = {
-                        uid: parseInt(passport.uid),
                         uid_etnx: parseInt(passport.uid_etnx),
                         etnxp_uuid: parseInt(passport.uid_etnxp),
                         ltnx_uuid: parseInt(passport.uid_ltnx),
@@ -56,7 +55,6 @@ $(document).ready(function(){
                     };
                 });                
                 promise.then(function (passport_index) {
-                    console.log("UUID log: "+passport_index.uid);
                     console.log("X UUID log: "+passport_index.etnx_uid);
                     console.log("XP UUID log: "+passport_index.etnxp_uid);
                     console.log("LTNX UUID log: "+passport_index.ltnx_uid);
@@ -102,12 +100,11 @@ $(document).ready(function(){
                 const crfi_api = PassportPipeline.getPassportApi('crfi');
                 const passport_api = PassportPipeline.getPassportApi('all');
                 const passport_index = {
-                    uid: parseInt(passport.uid),
-                    uid_etnx: parseInt(passport.uid_etnx),
-                    etnxp_uuid: parseInt(passport.uid_etnxp),
-                    ltnx_uuid: parseInt(passport.uid_ltnx),
-                    gldx_uuid: parseInt(passport.uid_gldx),
-                    crfi_uuid: parseInt(passport.uid_crfi),
+                    etnx_uid: parseInt(passport.etnx_uid),
+                    etnxp_uuid: parseInt(passport.etnxp_uid),
+                    ltnx_uuid: parseInt(passport.ltnx_uid),
+                    gldx_uuid: parseInt(passport.gldx_uid),
+                    crfi_uuid: parseInt(passport.crfi_uid),
                     email: PassportPipeline.passportParams.email,
                     password: PassportPipeline.passportParams.password,
                     code: parseInt(passport.code),
@@ -127,7 +124,6 @@ $(document).ready(function(){
                 };
             });                
             promise.then(function (passport_index) {
-                console.log("UUID log: "+passport_index.uid);
                 console.log("X UUID log: "+passport_index.etnx_uid);
                 console.log("XP UUID log: "+passport_index.etnxp_uid);
                 console.log("LTNX UUID log: "+passport_index.ltnx_uid);
