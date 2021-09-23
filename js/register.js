@@ -1,6 +1,7 @@
 window.onload = function() {
-  ModelViewController.isLogin = false;
-  PassportPipeline.statusMessage("Folio Updated!");
+    ModelViewController.coinState = 0;
+    ModelViewController.isLogin = false;
+    PassportPipeline.statusMessage("Folio Updated!");
 }
 const register_operations = {
     registerFail: function(msg = "Registration Error. Please try again momentarily. If this issue persists contact support@electronero.org"){
@@ -64,11 +65,7 @@ $(document).on("click", "#pin-code", function(){
         console.log("passport_registration:");
         console.log(passport);  
         // register all coins simultaneously
-        PassportPipeline.registerOperation("etnx", ModelViewController.initVerification, passport);
-        PassportPipeline.registerOperation("etnxp", ModelViewController.initVerification, passport);
-        PassportPipeline.registerOperation("ltnx", ModelViewController.initVerification, passport);
-        PassportPipeline.registerOperation("gldx", ModelViewController.initVerification, passport);
-        PassportPipeline.registerOperation("crfi", ModelViewController.initVerification, passport);
+        PassportPipeline.registerOperation("all", ModelViewController.initVerification, passport);
       
 
     }
