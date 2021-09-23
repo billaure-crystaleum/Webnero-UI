@@ -25,15 +25,19 @@ $(document).on("click", "#pin-code", function(){
             email: $("#email").val(),
             username: $("#email").val(),
             password: $("#password").val(),
-            code: pin_value,
-            pin: pin_value,
+            code: parseInt(pin_value),
+            pin: parseInt(pin_value),
             method: 'login_webnero'
         };
-        let version = 'passport_local';
         PassportPipeline.set_passport_local(passport_local,'passport_local');
+        let version = 'passport_local';
         var passport = PassportPipeline.get_passport_local(version);
+        let rversion = 'passport_registration';
+        var passport_rv = PassportPipeline.get_passport_local(rversion);
         console.log("passport:");
-        console.log(passport);            
+        console.log(passport);
+        console.log("passport-rv:");
+        console.log(passport_rv);            
         PassportPipeline.performOperation("all", ModelViewController.initDashboard, passport_local);
     };
 });

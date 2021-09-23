@@ -1114,55 +1114,41 @@ var PassportPipeline = {
         this.passportParams.method = 'login_webnero';
         PassportPipeline.setMethod('login_webnero');
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
-        this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));     
+        this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));   
+        this.passportParams.code = parseInt(PassportPipeline.loadCode());  
         var version = 'passport_local';  
         var passport = PassportPipeline.get_passport_local(version);
-        version = 'passport_active'; 
         console.log("passport_local:");
         console.log(passport);
-        console.log("Checkpoint: 1");
-            console.log(this.passportParams);
-            if(response){
-                console.log(response);
-                let passportLogin = JSON.parse(response);
-                if(passportLogin.hasOwnProperty("error")){
-                    return loginFail();
+        console.log("Checkpoint: 1");        
+        if(parseInt(ModelViewController.ctr) >= 6){
+            version = 'passport_active'; 
+            PassportPipeline.myPromises(coinSymbol, passportLogin, this.passportParams);
+            PassportPipeline.setMethod('check_code');
+            PassportPipeline.remoteCall(coinSymbol, this.passportParams).then((response) => {
+                if(response){
+                console.log(response); 
+                let passportCheckCode = JSON.parse(response);
+                    if(passportCheckCode.hasOwnProperty("error")){
+                        let checkError = passportCheckCode.hasOwnProperty("error");
+                        console.log(checkError);
+                        return loginCodeFail();
+                    };  
+                    PassportPipeline.saveParams(this.passportParams);
+                    PassportPipeline.set_passport_local(this.passportParams,"passport_active");
+                    var passport_active = PassportPipeline.get_passport_local(version);
+                    console.log("passport_active:");
+                    console.log(passport_active);
+                    if(ModelViewController.coinState){
+                        console.log("MVC.coinState:");
+                        console.log(ModelViewController.coinState);
+                    };
+                    console.log("Checkpoint: 3");
+                    console.log(this.passportParams);
+                    operationCallback(coinSymbol);
                 };
-                console.log("Checkpoint: 2");
-                console.log(this.passportParams);                
-                const coin_uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
-                console.log("UUID log");
-                console.log(this.passportParams.uid)
-                if(parseInt(ModelViewController.ctr) >= 6){
-                    this.passportParams.method = 'check_code';
-                    this.passportParams.code = parseInt(PassportPipeline.loadCode());
-                    PassportPipeline.myPromises(coinSymbol, passportLogin, this.passportParams);
-                    PassportPipeline.setMethod('check_code');
-                    PassportPipeline.remoteCall(coinSymbol, this.passportParams).then((response) => {
-                        if(response){
-                        console.log(response); 
-                        let passportCheckCode = JSON.parse(response);
-                            if(passportCheckCode.hasOwnProperty("error")){
-                                let checkError = passportCheckCode.hasOwnProperty("error");
-                                console.log(checkError);
-                                return loginCodeFail();
-                            };  
-                            PassportPipeline.saveParams(this.passportParams);
-                            PassportPipeline.set_passport_local(this.passportParams,"passport_active");
-                            var passport_active = PassportPipeline.get_passport_local(version);
-                            console.log("passport_active:");
-                            console.log(passport_active);
-                            if(ModelViewController.coinState){
-                                console.log("MVC.coinState:");
-                                console.log(ModelViewController.coinState);
-                            };
-                            console.log("Checkpoint: 3");
-                            console.log(this.passportParams);
-                            operationCallback(coinSymbol);
-                        };
-                    });
-                };
-            };
+            });
+        };
     },
     registerOperation: function(coinSymbol, operationCallback, passport_local){
         if(passport_local === null || passport_local === undefined || ModelViewController.coinState === 1){
