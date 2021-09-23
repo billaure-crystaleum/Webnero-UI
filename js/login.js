@@ -48,10 +48,10 @@ $(document).on("click", "#pin-code", function(){
         PassportPipeline.set_passport_local(passport_local,'passport_local');
         let version = 'passport_local';
         var passport = PassportPipeline.get_passport_local(version);
-        let rversion = 'passport_registration';
-        var passport_rv = PassportPipeline.get_passport_local(rversion);
         console.log("passport:");
         console.log(passport);
+        let rversion = 'passport_active';
+        var passport_rv = PassportPipeline.get_passport_local(rversion);
         console.log("passport-rv:");
         console.log(passport_rv);            
         PassportPipeline.performOperation("all", ModelViewController.initDashboard, passport_local);
