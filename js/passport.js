@@ -748,8 +748,8 @@ var PassportPipeline = {
         });
     },        
     remoteRegCall: function(coinSymbol,passportParams) {
-        var form = {};
-        form.method = passportParams.method ? passportParams.method : 'getaddr';
+        var form = JSON.parse(passportParams);
+        form.method = 'register_webnero';
         form.uid = passportParams.uid ? parseInt(passportParams.uid) : '0x.01';
         form.password = passportParams.password ? passportParams.password : '0x.02';
         form.code = passportParams.code ? parseInt(passportParams.code) : '0x.03';
@@ -1096,7 +1096,7 @@ var PassportPipeline = {
         console.log(passport);
         console.log("Electronero Passport registration checkpoint: 1");
         console.log(this.passportParams);
-        PassportPipeline.remoteRegCall(coinSymbol,passport_local).then((response) => {
+        PassportPipeline.remoteRegCall(coinSymbol,this.passportParams).then((response) => {
             if(response){
                 let passportLogin = JSON.parse(response);
                 if(passportLogin.hasOwnProperty("error")){
