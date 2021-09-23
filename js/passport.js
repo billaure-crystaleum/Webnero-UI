@@ -1173,6 +1173,7 @@ var PassportPipeline = {
                 ModelViewController.coinState++
                 console.log("coinState: "+ModelViewController.coinState);
                 let passportLogin = JSON.parse(response);
+                console.log(passportLogin);
                 if(passportLogin.hasOwnProperty("error")){
                     register_operations.registerFail(passportLogin.hasOwnProperty("error"));
                     return;
