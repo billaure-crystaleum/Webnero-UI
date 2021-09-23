@@ -26,6 +26,7 @@ $(document).ready(function(){
                     let ltnx_api = PassportPipeline.getPassportApi('ltnx');
                     let gldx_api = PassportPipeline.getPassportApi('gldx');
                     let crfi_api = PassportPipeline.getPassportApi('crfi');  
+                    let passport_api = PassportPipeline.getPassportApi('all');
                     var passport_index = {
                         uid_etnx: passport.uid_etnx ? parseInt(passport.uid_etnx) : '0x.2',
                         etnxp_uuid: passport.uid_etnxp ? parseInt(passport.uid_etnxp) : '0x.3',
