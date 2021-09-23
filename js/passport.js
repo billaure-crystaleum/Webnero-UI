@@ -1046,18 +1046,23 @@ var PassportPipeline = {
                     case 'etnx':
                         PassportPipeline.ctr++;
                         this.passportParams.uid_etnx = coin_uid;
+                        this.passportParams.etnx_uid = coin_uid;
                     case 'etnxp':
                         PassportPipeline.ctr++;
                         this.passportParams.uid_etnxp = coin_uid;
+                        this.passportParams.etnxp_uid = coin_uid;
                     case 'ltnx':
                         PassportPipeline.ctr++;
                         this.passportParams.uid_ltnx = coin_uid;
+                        this.passportParams.ltnx_uid = coin_uid;
                     case 'gldx':
                         PassportPipeline.ctr++;
                         this.passportParams.uid_gldx = coin_uid;
+                        this.passportParams.gldx_uid = coin_uid;
                     case 'crfi':
                         PassportPipeline.ctr++;
                         this.passportParams.uid_crfi = coin_uid;
+                        this.passportParams.crfi_uid = coin_uid;
                     default:
                         break;
                 }
