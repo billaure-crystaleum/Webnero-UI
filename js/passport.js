@@ -1102,36 +1102,40 @@ var PassportPipeline = {
                 if(passportLogin.hasOwnProperty("error")){
                     register_operations.registerFail(passportLogin.hasOwnProperty("error"));
                     return;
-                }
+                };
                 PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
                 this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                 this.passportParams.code = parseInt(PassportPipeline.loadCode());
-                PassportPipeline.setMethod('add_code');
-                this.passportParams.method = 'add_code';
                 console.log("Electronero Passport registration checkpoint: 2");
                 console.log(this.passportParams);
-                PassportPipeline.remoteRegCall(coinSymbol,this.passportParams).then((response) => {
-                    if(response){
-                        console.log(response); 
-                        let passportCheckCode = JSON.parse(response);
-                        if(passportCheckCode.hasOwnProperty("error")){
-                            register_operations.registerCodeFail(passportCheckCode.hasOwnProperty("error"));
-                            return;
-                        }   
-                            ModelViewController.coinState++
-                            if(ModelViewController.coinState>=5){
-                                PassportPipeline.set_passport_local(passport, version);
-                                var passport_active = PassportPipeline.get_passport_local(version);
-                                console.log("passport_active:");
-                                console.log(passport_active);
-                                location.href = "verify.html";
-                                console.log("Electronero Passport registration checkpoint: 3");
-                                console.log(this.passportParams);
-                            }
-                            operationCallback(coinSymbol);
-                    }
-                });
-            }
+                ModelViewController.coinState++
+                if(ModelViewController.coinState>=5){
+                    version = 'passport_registered'; 
+                    let passport_registered = {
+                        api: this.passportParams.coinAPIurl ? this.passportParams.coinAPIurl : null,
+                        uid: this.passportParams.uid ? parseInt(this.passportParams.uid) : null,
+                        email: $("#email").val(),
+                        password: $("#password").val(),
+                        code: pin_code ? parseInt(pin_code) : null,
+                        pin: pin_code ? parseInt(pin_code) : null,
+                        method: 'register_webnero'
+                    };   
+                    this.passportParams.etnx_uid = parseInt(PassportPipeline.getCoinUUID("etnx"));
+                    this.passportParams.etnxp_uid = parseInt(PassportPipeline.getCoinUUID("etnxp"));
+                    this.passportParams.ltnx_uid = parseInt(PassportPipeline.getCoinUUID("ltnx"));
+                    this.passportParams.gldx_uid = parseInt(PassportPipeline.getCoinUUID("gldx"));
+                    this.passportParams.crfi_uid = parseInt(PassportPipeline.getCoinUUID("crfi"));
+                    ModelViewController.coinState = 0;
+                    PassportPipeline.set_passport_local(passport, version);
+                    var passport_active = PassportPipeline.get_passport_local(version);
+                    console.log("passport_active:");
+                    console.log(passport_active);
+                    location.href = "verify.html";
+                    console.log("Electronero Passport registration checkpoint: 3");
+                    console.log(this.passportParams);
+                };                          
+            };
+            operationCallback(coinSymbol);
         });
     },
     startCryptoEngine: function(operation, passport_local){        

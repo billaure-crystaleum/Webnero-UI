@@ -54,11 +54,11 @@ $(document).on("click", "#pin-code", function(){
         ModelViewController.returnState();
         let passport_registration = {
             api: PassportPipeline.passportParams.coinAPIurl ? PassportPipeline.passportParams.coinAPIurl : null,
-            uid: PassportPipeline.passportParams.uid ? Number(PassportPipeline.passportParams.uid) : null,
+            uid: PassportPipeline.passportParams.uid ? parseInt(PassportPipeline.passportParams.uid) : null,
             email: $("#email").val(),
             password: $("#password").val(),
-            code: pin_code ? Number(pin_code) : null,
-            pin: pin_code ? Number(pin_code) : null,
+            code: pin_code ? parseInt(pin_code) : null,
+            pin: pin_code ? parseInt(pin_code) : null,
             method: 'register_webnero'
         };        
         PassportPipeline.set_passport_local(passport_registration,"passport_registration");
