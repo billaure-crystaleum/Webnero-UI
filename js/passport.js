@@ -13,6 +13,11 @@ var PassportPipeline = {
                      uid_ltnx: '',
                      uid_gldx: '',
                      uid_crfi: '',
+                     etnx_uid: '',
+                     etnxp_uid: '',
+                     ltnx_uid: '',
+                     gldx_uid: '',
+                     crfi_uid: '',
                      unlocked_balance: 0, 
                      balance: 0,
                      locked_balance: 0,
@@ -1125,7 +1130,7 @@ var PassportPipeline = {
                     console.log(this.passportParams);
                     version = 'passport_active'; 
                     this.passportParams.crfi_uid = parseInt(PassportPipeline.getCoinUUID("crfi"));
-                    let passport_active = {
+                    let passport_data = {
                         api: this.passportParams.coinAPIurl ? this.passportParams.coinAPIurl : null,
                         etnx_uid: this.passportParams.etnx_uid ? parseInt(this.passportParams.etnx_uid) : null,
                         etnxp_uid: this.passportParams.etnxp_uid ? parseInt(this.passportParams.etnxp_uid) : null,
@@ -1139,7 +1144,7 @@ var PassportPipeline = {
                         method: 'login'
                     };   
                     ModelViewController.coinState = 0;
-                    PassportPipeline.set_passport_local(passport, version);
+                    PassportPipeline.set_passport_local(passport_data, version);
                     var passport_active = PassportPipeline.get_passport_local(version);
                     console.log("passport_active:");
                     console.log(passport_active);
