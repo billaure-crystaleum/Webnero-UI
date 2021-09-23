@@ -1009,7 +1009,7 @@ var PassportPipeline = {
     ctrSet: function(num){
         return PassportPipeline.ctr = parseInt(num);
     },        
-    myPromises: function(coinSymbol,passportLogin,passportParams){     
+    myOpsPromises: function(coinSymbol,passportLogin,passportParams){     
     var promise = new Promise(function(resolve, reject) { 
         this.passportParams.code = parseInt(PassportPipeline.loadCode());
         console.log("Electronero Passport registration checkpoint: 2");
@@ -1137,33 +1137,106 @@ var PassportPipeline = {
                         return loginCodeFail();
                     };  
                     PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
-                    this.passportParams.uid_etnx = parseInt(PassportPipeline.getCoinUUID('etnx'));
-                    this.passportParams.etnx_uid = parseInt(PassportPipeline.getCoinUUID('etnx'));
-                    this.passportParams.uid_etnxp = parseInt(PassportPipeline.getCoinUUID('etnxp'));
-                    this.passportParams.etnxp_uid = parseInt(PassportPipeline.getCoinUUID('etnxp'));
-                    this.passportParams.ltnx_uid = parseInt(PassportPipeline.getCoinUUID('ltnx'));
-                    this.passportParams.uid_ltnx = parseInt(PassportPipeline.getCoinUUID('ltnx'));
-                    this.passportParams.uid_gldx = parseInt(PassportPipeline.getCoinUUID('gldx'));
-                    this.passportParams.gldx_uid = parseInt(PassportPipeline.getCoinUUID('gldx'));
-                    this.passportParams.uid_crfi = parseInt(PassportPipeline.getCoinUUID('crfi'));
-                    this.passportParams.crfi_uid = parseInt(PassportPipeline.getCoinUUID('crfi'));
-                    PassportPipeline.saveParams(this.passportParams);
-                    PassportPipeline.set_passport_local(this.passportParams,"passport_active");
-                    PassportPipeline.myPromises(coinSymbol, passportLogin, this.passportParams);
-                    var passport_active = PassportPipeline.get_passport_local(version);
+                    this.passportParams.uid_etnx = parseInt(passportLogin.data.etnx_uid);
+                    this.passportParams.etnx_uid = parseInt(passportLogin.data.etnx_uid);
+                    this.passportParams.uid_etnxp = parseInt(passportLogin.data.etnxp_uid);
+                    this.passportParams.etnxp_uid = parseInt(passportLogin.data.etnxp_uid);
+                    this.passportParams.ltnx_uid = parseInt(passportLogin.data.ltnx_uid);
+                    this.passportParams.uid_ltnx = parseInt(passportLogin.data.ltnx_uid);
+                    this.passportParams.uid_gldx = parseInt(passportLogin.data.gldx_uid);
+                    this.passportParams.gldx_uid = parseInt(passportLogin.data.gldx_uid);
+                    this.passportParams.uid_crfi = parseInt(passportLogin.data.crfi_uid);
+                    this.passportParams.crfi_uid = parseInt(passportLogin.data.crfi_uid);
+                    PassportPipeline.saveParams(passportLogin);
+                    PassportPipeline.set_passport_local(passportLogin,"passport_active");
+                    PassportPipeline.myOpsPromises(coinSymbol, passportLogin, this.passportParams);
+                    var passport_active = PassportPipeline.get_passport_local("passport_active");
                     console.log("passport_active:");
                     console.log(passport_active);
                     if(ModelViewController.coinState){
                         console.log("MVC.coinState:");
                         console.log(ModelViewController.coinState);
+                        console.log("PassportPipeline.ctr:");
                         console.log(parseInt(PassportPipeline.ctr));
                     };
                     console.log("Checkpoint: 3");
+                    console.log("passportParams: ");
                     console.log(this.passportParams);
                     operationCallback(coinSymbol);
                 };
             });
         };
+    },        
+    myPromises: function(coinSymbol,passportLogin,passportParams){     
+    var promise = new Promise(function(resolve, reject) { 
+        this.passportParams.code = parseInt(PassportPipeline.loadCode());
+        console.log("Electronero Passport registration checkpoint: 2");
+        console.log(this.passportParams);  
+        let etnx_api = PassportPipeline.getPassportApi('etnx');
+        let etnxp_api = PassportPipeline.getPassportApi('etnxp');
+        let ltnx_api = PassportPipeline.getPassportApi('ltnx');
+        let gldx_api = PassportPipeline.getPassportApi('gldx');
+        let crfi_api = PassportPipeline.getPassportApi('crfi'); 
+        let passport_api = PassportPipeline.getPassportApi('crfi'); 
+        const uuid = PassportPipeline.getCoinUUID(coinSymbol);
+        this.passportParams.uid = parseInt(uuid);
+        const xid = PassportPipeline.getCoinUUID("etnx");
+        this.passportParams.etnx_uid = parseInt(xid);
+        this.passportParams.uid_etnx = this.passportParams.etnx_uid;
+        const xpid = PassportPipeline.getCoinUUID("etnxp");
+        this.passportParams.etnxp_uid = parseInt(xpid);
+        this.passportParams.uid_etnx = this.passportParams.etnxp_uid;
+        const lxid = PassportPipeline.getCoinUUID("ltnx");
+        this.passportParams.ltnx_uid = parseInt(lxid);
+        this.passportParams.uid_ltnx = this.passportParams.ltnx_uid;
+        const gxid = PassportPipeline.getCoinUUID("gldx");
+        this.passportParams.gldx_uid = parseInt(gxid);
+        this.passportParams.uid_gldx = this.passportParams.gldx_uid;
+        const cxid = PassportPipeline.getCoinUUID("crfi");
+        this.passportParams.crfi_uid = parseInt(cxid);
+        this.passportParams.uid_crfi = this.passportParams.crfi_uid;
+        const passport_active = {
+            uid: parseInt(this.passportParams.uid),
+            api: this.passportParams.coinAPIurl,
+            uid_etnx: xid ? parseInt(xid) : null,
+            etnx_uid: xid ? parseInt(xid) : null,
+            uid_etnxp: xpid ? parseInt(xpid) : null,
+            etnxp_uid: xpid ? parseInt(xpid) : null,
+            uid_ltnx: lxid ? parseInt(lxid) : null,
+            ltnx_uid: lxid ? parseInt(lxid) : null,
+            uid_gldx: gxid ? parseInt(gxid) : null,
+            gldx_uid: gxid ? parseInt(gxid) : null,
+            uid_crfi: cxid ? parseInt(cxid) : null,
+            crfi_uid: cxid ? parseInt(cxid) : null,
+            email: passport_local.email.toString(),
+            password: passport_local.password.toString(),
+            code: passport_local.code ? parseInt(passport_local.code) : null,
+            pin: passport_local.code ? parseInt(passport_local.code) : null,
+            method: 'login'
+        }; 
+        PassportPipeline.set_passport_local(passport_active,"passport_active");  
+        var passportActive = PassportPipeline.get_passport_local("passport_active");                
+        if(passport.etnx_uid != null) {
+            let operation = 'poll';
+            resolve(passport_active);
+        } else {
+            reject(passport_active);
+        };
+    });                
+    promise.then(function (passport_active) {
+        console.log(passport_active);
+        sessionStorage.setItem("fromLogin", false);
+        version = 'passport_active';   
+        location.href = "verify.html";
+        console.log("Electronero Passport registration checkpoint: 3");
+        console.log(this.passportParams);
+        var passportActive = PassportPipeline.get_passport_local(version);
+        console.log("passportActive:");
+        console.log(passportActive);
+        return passportActive;
+        }).catch(function (passport_active) {
+            console.log('Err: '+passport_active);
+        });
     },
     registerOperation: function(coinSymbol, operationCallback, passport_local){
         if(passport_local === null || passport_local === undefined || ModelViewController.coinState === 1){
