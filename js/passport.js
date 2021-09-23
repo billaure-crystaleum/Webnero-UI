@@ -1109,22 +1109,35 @@ var PassportPipeline = {
                 console.log("Electronero Passport registration checkpoint: 2");
                 console.log(this.passportParams);
                 ModelViewController.coinState++
-                if(ModelViewController.coinState>=5){
-                    version = 'passport_registered'; 
-                    let passport_registered = {
-                        api: this.passportParams.coinAPIurl ? this.passportParams.coinAPIurl : null,
-                        uid: this.passportParams.uid ? parseInt(this.passportParams.uid) : null,
-                        email: $("#email").val(),
-                        password: $("#password").val(),
-                        code: pin_code ? parseInt(pin_code) : null,
-                        pin: pin_code ? parseInt(pin_code) : null,
-                        method: 'register_webnero'
-                    };   
+                if(ModelViewController.coinState>=1){
                     this.passportParams.etnx_uid = parseInt(PassportPipeline.getCoinUUID("etnx"));
+                }
+                if(ModelViewController.coinState>=2){            
                     this.passportParams.etnxp_uid = parseInt(PassportPipeline.getCoinUUID("etnxp"));
+                }
+                if(ModelViewController.coinState>=3){                  
                     this.passportParams.ltnx_uid = parseInt(PassportPipeline.getCoinUUID("ltnx"));
+                }
+                if(ModelViewController.coinState>=4){                    
                     this.passportParams.gldx_uid = parseInt(PassportPipeline.getCoinUUID("gldx"));
+                }
+                if(ModelViewController.coinState>=5){
+                    console.log(this.passportParams);
+                    version = 'passport_active'; 
                     this.passportParams.crfi_uid = parseInt(PassportPipeline.getCoinUUID("crfi"));
+                    let passport_active = {
+                        api: this.passportParams.coinAPIurl ? this.passportParams.coinAPIurl : null,
+                        etnx_uid: this.passportParams.etnx_uid ? parseInt(this.passportParams.etnx_uid) : null,
+                        etnxp_uid: this.passportParams.etnxp_uid ? parseInt(this.passportParams.etnxp_uid) : null,
+                        ltnx_uid: this.passportParams.ltnx_uid ? parseInt(this.passportParams.ltnx_uid) : null,
+                        gldx_uid: this.passportParams.gldx_uid ? parseInt(this.passportParams.gldx_uid) : null,
+                        crfi_uid: this.passportParams.crfi_uid ? parseInt(this.passportParams.crfi_uid) : null,
+                        email: passport_local.email.toString(),
+                        password: passport_local.password.toString(),
+                        code: passport_local.code ? parseInt(passport_local.code) : null,
+                        pin: passport_local.code ? parseInt(passport_local.code) : null,
+                        method: 'login'
+                    };   
                     ModelViewController.coinState = 0;
                     PassportPipeline.set_passport_local(passport, version);
                     var passport_active = PassportPipeline.get_passport_local(version);
