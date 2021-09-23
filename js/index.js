@@ -19,10 +19,8 @@ $(document).ready(function(){
         var x;
         ModelViewController.fillData();
             const myPromises = function(passport = PassportPipeline.get_passport_local("passport_active")){
-                const promise = new Promise(function(resolve, reject) {   
-                    if(!passport){ 
-                        passport = PassportPipeline.get_passport_local("passport_active");
-                    }          
+                const promise = new Promise(function(resolve, reject) {
+                    let passport = PassportPipeline.get_passport_local("passport_active");        
                     console.log(passport);
                     const etnx_api = PassportPipeline.getPassportApi('etnx');
                     const etnxp_api = PassportPipeline.getPassportApi('etnxp');
@@ -41,8 +39,8 @@ $(document).ready(function(){
                         ltnx_uid: parseInt(passport.ltnx_uid),
                         gldx_uid: parseInt(passport.gldx_uid),
                         crfi_uid: parseInt(passport.crfi_uid),
-                        email: PassportPipeline.passportParams.email,
-                        password: PassportPipeline.passportParams.password,
+                        email: passport.email,
+                        password: passport.password,
                         code: parseInt(passport.code),
                         coinAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
                         operation: 'poll',
@@ -93,10 +91,8 @@ $(document).ready(function(){
         var x;
         ModelViewController.fillData();
         const myPromises = function(passport = PassportPipeline.get_passport_local("passport_active")){
-            const promise = new Promise(function(resolve, reject) {   
-                if(!passport){ 
-                    passport = PassportPipeline.get_passport_local("passport_active");
-                }          
+            const promise = new Promise(function(resolve, reject) { 
+                let passport = PassportPipeline.get_passport_local("passport_active");        
                 console.log(passport);
                 const etnx_api = PassportPipeline.getPassportApi('etnx');
                 const etnxp_api = PassportPipeline.getPassportApi('etnxp');
@@ -115,8 +111,8 @@ $(document).ready(function(){
                     ltnx_uid: parseInt(passport.ltnx_uid),
                     gldx_uid: parseInt(passport.gldx_uid),
                     crfi_uid: parseInt(passport.crfi_uid),
-                    email: PassportPipeline.passportParams.email,
-                    password: PassportPipeline.passportParams.password,
+                    email: passport.email,
+                    password: passport.password,
                     code: parseInt(passport.code),
                     coinAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
                     operation: 'poll',
