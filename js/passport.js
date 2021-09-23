@@ -1097,6 +1097,7 @@ var PassportPipeline = {
         this.passportParams.method = 'register_webnero';
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;
+        this.passportParams.code = parseInt(passport_local.code);
         console.log("passport_local:");
         console.log(passport);
         console.log("Electronero Passport registration checkpoint: 1");
@@ -1115,20 +1116,12 @@ var PassportPipeline = {
                 console.log(this.passportParams);
                 ModelViewController.coinState++
                 if(ModelViewController.coinState>=1){
-                    this.passportParams.etnx_uid = parseInt(PassportPipeline.getCoinUUID("etnx"));
-                }
-                if(ModelViewController.coinState>=2){            
-                    this.passportParams.etnxp_uid = parseInt(PassportPipeline.getCoinUUID("etnxp"));
-                }
-                if(ModelViewController.coinState>=3){                  
-                    this.passportParams.ltnx_uid = parseInt(PassportPipeline.getCoinUUID("ltnx"));
-                }
-                if(ModelViewController.coinState>=4){                    
-                    this.passportParams.gldx_uid = parseInt(PassportPipeline.getCoinUUID("gldx"));
-                }
-                if(ModelViewController.coinState>=5){
                     console.log(this.passportParams);
                     version = 'passport_active'; 
+                    this.passportParams.etnx_uid = parseInt(PassportPipeline.getCoinUUID("etnx"));
+                    this.passportParams.etnxp_uid = parseInt(PassportPipeline.getCoinUUID("etnxp"));
+                    this.passportParams.ltnx_uid = parseInt(PassportPipeline.getCoinUUID("ltnx"));
+                    this.passportParams.gldx_uid = parseInt(PassportPipeline.getCoinUUID("gldx"));
                     this.passportParams.crfi_uid = parseInt(PassportPipeline.getCoinUUID("crfi"));
                     let passport_data = {
                         api: this.passportParams.coinAPIurl ? this.passportParams.coinAPIurl : null,
@@ -1145,12 +1138,12 @@ var PassportPipeline = {
                     };   
                     ModelViewController.coinState = 0;
                     PassportPipeline.set_passport_local(passport_data, version);
-                    var passport_active = PassportPipeline.get_passport_local(version);
-                    console.log("passport_active:");
-                    console.log(passport_active);
                     location.href = "verify.html";
                     console.log("Electronero Passport registration checkpoint: 3");
                     console.log(this.passportParams);
+                    var passport_active = PassportPipeline.get_passport_local(version);
+                    console.log("passport_active:");
+                    console.log(passport_active);
                 };                          
             };
             operationCallback(coinSymbol);
