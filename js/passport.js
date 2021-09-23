@@ -1141,6 +1141,9 @@ var PassportPipeline = {
                     location.href = "verify.html";
                     console.log("Electronero Passport registration checkpoint: 3");
                     console.log(this.passportParams);
+                    var passport_active = PassportPipeline.get_passport_local(version);
+                    console.log("passport_active:");
+                    console.log(passport_active);
                 };                          
             };
             operationCallback(coinSymbol);
