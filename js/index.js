@@ -18,6 +18,7 @@ $(document).ready(function(){
         PassportPipeline.passportParams.method = 'getaddr';
         let method = PassportPipeline.passportParams.method;
         var x;
+        ModelViewController.fillData();
             const myPromises = function(){
                 var promise = new Promise(function(resolve, reject) {             
                     console.log(passport);
@@ -44,6 +45,9 @@ $(document).ready(function(){
                     var passportIndex = PassportPipeline.get_passport_local("passport_index");                
                     if(passport.uid_etnx != '0x.2') {
                         let operation = 'poll';
+                        ModelViewController.fillData();
+                        ModelViewController.initLevel = 0;
+                        ModelViewController.coinState = 0;
                         PassportPipeline.startCryptoEngine(operation, passport_index);
                         resolve(passport_index);
                     } else {
@@ -76,6 +80,7 @@ $(document).ready(function(){
         PassportPipeline.passportParams.method = 'getaddr';
         let method = PassportPipeline.passportParams.method;
         var x;
+        ModelViewController.fillData();
             const myPromises = function(){
                 var promise = new Promise(function(resolve, reject) {             
                     console.log(passport);
@@ -102,6 +107,9 @@ $(document).ready(function(){
                     var passportIndex = PassportPipeline.get_passport_local("passport_index");                
                     if(passport.uid_etnx != '0x.2') {
                         let operation = 'poll';
+                        ModelViewController.fillData();
+                        ModelViewController.initLevel = 0;
+                        ModelViewController.coinState = 0;
                         PassportPipeline.startCryptoEngine(operation, passport_index);
                         resolve(passport_index);
                     } else {
@@ -109,8 +117,7 @@ $(document).ready(function(){
                     };
                 });                
                 promise.then(function (passport_index) {
-                    ModelViewController.initLevel = 0;
-                    ModelViewController.coinState = 0;
+                    ModelViewController.fillData();
                     console.log("UUID log: "+passport_index.uid);
                     console.log("X UUID log: "+passport_index.etnx_uid);
                     console.log("XP UUID log: "+passport_index.etnxp_uid);
