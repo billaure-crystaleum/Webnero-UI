@@ -64,7 +64,6 @@ $(document).on("click", "#pin-code", function(){
         console.log("passport_registration:");
         console.log(passport);  
         // register all coins simultaneously
-        let coins = ModelViewController.coins.coin; 
         PassportPipeline.registerOperation("etnx", ModelViewController.initVerification, passport);
         PassportPipeline.registerOperation("etnxp", ModelViewController.initVerification, passport);
         PassportPipeline.registerOperation("ltnx", ModelViewController.initVerification, passport);

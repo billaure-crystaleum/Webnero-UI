@@ -107,6 +107,8 @@ $(document).ready(function(){
                     };
                 });                
                 promise.then(function (passport_index) {
+                    ModelViewController.initLevel = 0;
+                    ModelViewController.coinState = 0;
                     console.log("UUID log: "+passport_index.uid);
                     console.log("CODE log: "+passport_index.code);
                     console.log("email log: "+passport_index.email);

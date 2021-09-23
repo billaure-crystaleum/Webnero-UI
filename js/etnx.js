@@ -74,6 +74,7 @@ $(document).on("click", "blockquote", function(){
 var ModelViewController = {
     initLevel: 0,
     coinState: 0,
+    iClean: false,
     returnState: function(which){
         if(!which){
             which = 0;
@@ -374,8 +375,10 @@ $(document).on("init.done", function(e){
 });
 
 $(document).on("click", "#logout", function(){
-    sessionStorage.clear();
+    if(ModelViewController.iClean != false){
+        sessionStorage.clear();
     localStorage.clear();
+    };
     location.href = "login.html";
 });
 
