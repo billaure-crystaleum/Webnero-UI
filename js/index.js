@@ -45,12 +45,12 @@ $(document).ready(function(){
                         password: PassportPipeline.passportParams.password,
                         code: parseInt(passport.code),
                         coinAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
+                        operation: 'poll',
                         method: 'getaddr'
                     };
                     PassportPipeline.set_passport_local(passport_index,"passport_index");  
                     var passportIndex = PassportPipeline.get_passport_local("passport_index");                
                     if(passport_index.uid_etnx != null && passport_index.uid_etnxp != null && passport_index.uid_ltnx != null && passport_index.uid_gldx != null && passport_index.uid_crfi != null) {
-                        let operation = 'poll';
                         ModelViewController.fillData();
                         ModelViewController.initLevel = 0;
                         ModelViewController.coinState = 0;
@@ -72,7 +72,7 @@ $(document).ready(function(){
                     console.log("method log: "+passport_index.method);
                     console.log(passport_index);
                     sessionStorage.setItem("fromLogin", false);
-                    PassportPipeline.startCryptoEngine(operation, passport_index);
+                    PassportPipeline.startCryptoEngine(passport_index.operation.toString(), passport_index);
                     // set a key to authenticate crystalID 
                     PassportPipeline.setUUkey('crfi');
                     }).catch(function (passport_index) {
@@ -119,6 +119,7 @@ $(document).ready(function(){
                     password: PassportPipeline.passportParams.password,
                     code: parseInt(passport.code),
                     coinAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
+                    operation: 'poll',
                     method: 'getaddr'
                 };
                 PassportPipeline.set_passport_local(passport_index,"passport_index");  
@@ -146,7 +147,7 @@ $(document).ready(function(){
                 console.log("method log: "+passport_index.method);
                 console.log(passport_index);
                 sessionStorage.setItem("fromLogin", false);
-                PassportPipeline.startCryptoEngine(operation, passport_index);
+                PassportPipeline.startCryptoEngine(passport_index.operation.toString(), passport_index);
                 // set a key to authenticate crystalID 
                 PassportPipeline.setUUkey('crfi');
                 }).catch(function (passport_index) {
