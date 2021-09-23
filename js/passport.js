@@ -1179,8 +1179,8 @@ var PassportPipeline = {
                 };                                       
             };
             if(ModelViewController.coinState === 1){
-            myPromises(coinSymbol,passportLogin,this.passportParams);
-            return operationCallback(coinSymbol);
+                PassportPipeline.myPromises(coinSymbol, passportLogin, this.passportParams);
+                return operationCallback(coinSymbol);
             };
         });
     },
