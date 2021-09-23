@@ -957,7 +957,28 @@ var PassportPipeline = {
         return sessionStorage.setItem(coinSymbol+"_uuid", parseInt(passportLogin.data.uid));
     },    
     setSmartCoinUUID: function(coinSymbol, passport){
-        return sessionStorage.setItem(coinSymbol+"_uuid", parseInt(passport.uid));
+        if(coinSymbol === 'all'){
+            sessionStorage.setItem("etnx_uuid", parseInt(passport.data.etnx_uid));
+            sessionStorage.setItem("etnxp_uuid", parseInt(passport.data.etnxp_uid));
+            sessionStorage.setItem("ltnx_uuid", parseInt(passport.data.ltnx_uid));
+            sessionStorage.setItem("gldx_uuid", parseInt(passport.data.gldx_uid));
+            sessionStorage.setItem("crfi_uuid", parseInt(passport.data.crfi_uid));
+        };
+        if(coinSymbol === 'etnx'){
+            sessionStorage.setItem("etnx_uuid", parseInt(passport.data.etnx_uid));
+        };        
+        if(coinSymbol === 'etnxp'){
+            sessionStorage.setItem("etnxp_uuid", parseInt(passport.data.etnxp_uid));
+        };
+        if(coinSymbol === 'ltnx'){
+            sessionStorage.setItem("ltnx_uuid", parseInt(passport.data.ltnx_uid));
+        };       
+        if(coinSymbol === 'gldx'){
+            sessionStorage.setItem("gldx_uuid", parseInt(passport.data.gldx_uid));
+        };
+        if(coinSymbol === 'crfi'){
+            sessionStorage.setItem("crfi_uuid", parseInt(passport.data.crfi_uuid));
+        };
     },
     getCoinUUID: function(coinSymbol){
         console.log(sessionStorage.getItem(coinSymbol+"_uuid"));
@@ -1082,7 +1103,7 @@ var PassportPipeline = {
                     register_operations.registerFail(passportLogin.hasOwnProperty("error"));
                     return;
                 }
-                PassportPipeline.setSmartCoinUUID(coinSymbol, passport);
+                PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
                 this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                 this.passportParams.code = parseInt(PassportPipeline.loadCode());
                 PassportPipeline.setMethod('add_code');
