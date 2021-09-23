@@ -1032,11 +1032,10 @@ var PassportPipeline = {
         if(coinSymbol === 'all'){
             PassportPipeline.ctrSet(6);
         };
-        PassportPipeline.ctrSet(0);
         console.log("performOperation");
         PassportPipeline.loadParams();        
-        this.passportParams.method = 'login';
-        PassportPipeline.setMethod('login');
+        this.passportParams.method = 'login_webnero';
+        PassportPipeline.setMethod('login_webnero');
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;      
         var version = 'passport_local';  
@@ -1045,7 +1044,6 @@ var PassportPipeline = {
         console.log("passport_local:");
         console.log(passport);
         console.log("Checkpoint: 1");
-        PassportPipeline.remoteCall(coinSymbol,passport).then((response) => {
             console.log(this.passportParams);
             if(response){
                 console.log(response);
@@ -1058,7 +1056,7 @@ var PassportPipeline = {
                 const coin_uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                 console.log("UUID log");
                 console.log(this.passportParams.uid)
-                if(parseInt(ModelViewController.ctr) === 6){
+                if(parseInt(ModelViewController.ctr) >= 6){
                     this.passportParams.method = 'check_code';
                     this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                     this.passportParams.code = parseInt(PassportPipeline.loadCode());
@@ -1088,7 +1086,6 @@ var PassportPipeline = {
                     });
                 };
             };
-        });
     },        
     myPromises: function(coinSymbol,passportLogin,passportParams){     
     var promise = new Promise(function(resolve, reject) { 
