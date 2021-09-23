@@ -19,8 +19,24 @@ $(document).on("click", "#pin-code", function(){
         sessionStorage.setItem("fromLogin", true);
         ModelViewController.returnState();
         let coins = ModelViewController.coins.coin; 
+        const passport_api = PassportPipeline.getPassportApi('all');
+        const xid = PassportPipeline.getCoinUUID("etnx");
+        const xpid = PassportPipeline.getCoinUUID("etnxp");
+        const lxid = PassportPipeline.getCoinUUID("ltnx");
+        const gxid = PassportPipeline.getCoinUUID("gldx");
+        const cxid = PassportPipeline.getCoinUUID("crfi");
         let passport_local = {
-            api: PassportPipeline.passportParams.coinAPIurl ? PassportPipeline.passportParams.coinAPIurl : null,
+            api: passport_api.toString(),
+            uid_etnx: xid ? parseInt(xid) : null,
+            etnx_uid: xid ? parseInt(xid) : null,
+            uid_etnxp: xpid ? parseInt(xpid) : null,
+            etnxp_uid: xpid ? parseInt(xpid) : null,
+            uid_ltnx: lxid ? parseInt(lxid) : null,
+            ltnx_uid: lxid ? parseInt(lxid) : null,
+            uid_gldx: gxid ? parseInt(gxid) : null,
+            gldx_uid: gxid ? parseInt(gxid) : null,
+            uid_crfi: cxid ? parseInt(cxid) : null,
+            crfi_uid: cxid ? parseInt(cxid) : null,
             uid: PassportPipeline.passportParams.uid ? parseInt(PassportPipeline.passportParams.uid) : null,
             email: $("#email").val(),
             username: $("#email").val(),

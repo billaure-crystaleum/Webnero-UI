@@ -1022,20 +1022,37 @@ var PassportPipeline = {
         let ltnx_api = PassportPipeline.getPassportApi('ltnx');
         let gldx_api = PassportPipeline.getPassportApi('gldx');
         let crfi_api = PassportPipeline.getPassportApi('crfi'); 
-        this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
-        this.passportParams.etnx_uid = parseInt(PassportPipeline.getCoinUUID("etnx"));
-        this.passportParams.etnxp_uid = parseInt(PassportPipeline.getCoinUUID("etnxp"));
-        this.passportParams.ltnx_uid = parseInt(PassportPipeline.getCoinUUID("ltnx"));
-        this.passportParams.gldx_uid = parseInt(PassportPipeline.getCoinUUID("gldx"));
-        this.passportParams.crfi_uid = parseInt(PassportPipeline.getCoinUUID("crfi"));
+        let passport_api = PassportPipeline.getPassportApi('crfi'); 
+        const uuid = PassportPipeline.getCoinUUID(coinSymbol);
+        this.passportParams.uid = parseInt(uuid);
+        const xid = PassportPipeline.getCoinUUID("etnx");
+        this.passportParams.etnx_uid = parseInt(xid);
+        this.passportParams.uid_etnx = this.passportParams.etnx_uid;
+        const xpid = PassportPipeline.getCoinUUID("etnxp");
+        this.passportParams.etnxp_uid = parseInt(xpid);
+        this.passportParams.uid_etnx = this.passportParams.etnxp_uid;
+        const lxid = PassportPipeline.getCoinUUID("ltnx");
+        this.passportParams.ltnx_uid = parseInt(lxid);
+        this.passportParams.uid_ltnx = this.passportParams.ltnx_uid;
+        const gxid = PassportPipeline.getCoinUUID("gldx");
+        this.passportParams.gldx_uid = parseInt(gxid);
+        this.passportParams.uid_gldx = this.passportParams.gldx_uid;
+        const cxid = PassportPipeline.getCoinUUID("crfi");
+        this.passportParams.crfi_uid = parseInt(cxid);
+        this.passportParams.uid_crfi = this.passportParams.crfi_uid;
         const passport_active = {
-            uid: parseInt(this.passportParam.uid),
+            uid: parseInt(this.passportParams.uid),
             api: this.passportParams.coinAPIurl,
-            etnx_uid:parseInt(this.passportParams.etnx_uid),
-            etnxp_uid: parseInt(this.passportParams.etnxp_uid),
-            ltnx_uid: parseInt(this.passportParams.ltnx_uid),
-            gldx_uid: parseInt(this.passportParams.gldx_uid),
-            crfi_uid: parseInt(this.passportParams.crfi_uid),
+            uid_etnx: xid ? parseInt(xid) : null,
+            etnx_uid: xid ? parseInt(xid) : null,
+            uid_etnxp: xpid ? parseInt(xpid) : null,
+            etnxp_uid: xpid ? parseInt(xpid) : null,
+            uid_ltnx: lxid ? parseInt(lxid) : null,
+            ltnx_uid: lxid ? parseInt(lxid) : null,
+            uid_gldx: gxid ? parseInt(gxid) : null,
+            gldx_uid: gxid ? parseInt(gxid) : null,
+            uid_crfi: cxid ? parseInt(cxid) : null,
+            crfi_uid: cxid ? parseInt(cxid) : null,
             email: passport_local.email.toString(),
             password: passport_local.password.toString(),
             code: passport_local.code ? parseInt(passport_local.code) : null,
