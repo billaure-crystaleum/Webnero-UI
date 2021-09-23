@@ -1157,6 +1157,7 @@ var PassportPipeline = {
                     console.log("LTNX UUID log: "+passport_active.ltnx_uid);
                     console.log("GLDX UUID log: "+passport_active.gldx_uid);
                     console.log("CRFI UUID log: "+passport_active.crfi_uid);
+                    PassportPipeline.loadCode();
                     console.log("CODE log: "+passport_active.code);
                     console.log("email log: "+passport_active.email);
                     console.log("password log: "+passport_active.password);
