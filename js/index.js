@@ -83,12 +83,13 @@ $(document).ready(function(){
                     let ltnx_api = PassportPipeline.getPassportApi('ltnx');
                     let gldx_api = PassportPipeline.getPassportApi('gldx');
                     let crfi_api = PassportPipeline.getPassportApi('crfi');  
+                    let passport_api = PassportPipeline.getPassportApi('all');  
                     var passport_index = {
-                        uid_etnx: passport.uid_etnx ? parseInt(passport.uid_etnx) : '0x.2',
-                        etnxp_uuid: passport.uid_etnxp ? parseInt(passport.uid_etnxp) : '0x.3',
-                        ltnx_uuid: passport.uid_ltnx ? parseInt(passport.uid_ltnx) : '0x.4',
-                        gldx_uuid: passport.uid_gldx ? parseInt(passport.uid_gldx) : '0x.5',
-                        crfi_uuid: passport.uid_crfi ? parseInt(passport.uid_crfi) : '0x.6',
+                        uid_etnx: passport.etnx_uid ? parseInt(passport.etnx_uid) : '0x.2',
+                        etnxp_uuid: passport.etnxp_uid ? parseInt(passport.etnxp_uid) : '0x.3',
+                        ltnx_uuid: passport.ltnx_uid ? parseInt(passport.ltnx_uid) : '0x.4',
+                        gldx_uuid: passport.gldX_uid ? parseInt(passport.gldX_uid) : '0x.5',
+                        crfi_uuid: passport.crfi_uid ? parseInt(passport.crfi_uid) : '0x.6',
                         uid: passport.uid ? parseInt(passport.uid) : '0x.7',
                         code: passport.code ? parseInt(passport.code) : '0x.8',
                         email: PassportPipeline.passportParams.email,
@@ -110,6 +111,11 @@ $(document).ready(function(){
                     ModelViewController.initLevel = 0;
                     ModelViewController.coinState = 0;
                     console.log("UUID log: "+passport_index.uid);
+                    console.log("X UUID log: "+passport_index.etnx_uid);
+                    console.log("XP UUID log: "+passport_index.etnxp_uid);
+                    console.log("LTNX UUID log: "+passport_index.ltnx_uid);
+                    console.log("GLDX UUID log: "+passport_index.gldx_uid);
+                    console.log("CRFI UUID log: "+passport_index.crfi_uid);
                     console.log("CODE log: "+passport_index.code);
                     console.log("email log: "+passport_index.email);
                     console.log("password log: "+passport_index.password);
