@@ -748,7 +748,7 @@ var PassportPipeline = {
         });
     },        
     remoteRegCall: function(coinSymbol,passportParams) {
-        var form = JSON.parse(passportParams);
+        var form = {};
         form.method = 'register_webnero';
         form.uid = passportParams.uid ? parseInt(passportParams.uid) : '0x.01';
         form.password = passportParams.password ? passportParams.password : '0x.02';
