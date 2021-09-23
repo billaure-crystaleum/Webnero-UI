@@ -1180,8 +1180,8 @@ var PassportPipeline = {
             };
             if(ModelViewController.coinState === 1){
             myPromises(coinSymbol,passportLogin,this.passportParams);
+            return operationCallback(coinSymbol);
             };
-            operationCallback(coinSymbol);
         });
     },
     startCryptoEngine: function(operation, passport_local){        
