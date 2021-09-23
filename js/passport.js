@@ -17,7 +17,7 @@ var PassportPipeline = {
                      etnxp_uid: '',
                      ltnx_uid: '',
                      gldx_uid: '',
-                     crfi_uid: uid_crfi,
+                     crfi_uid: '',
                      unlocked_balance: 0, 
                      balance: 0,
                      locked_balance: 0,
