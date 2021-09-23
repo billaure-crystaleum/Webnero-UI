@@ -32,10 +32,15 @@ $(document).ready(function(){
                     const passport_api = PassportPipeline.getPassportApi('all');
                     const passport_index = {
                         uid_etnx: parseInt(passport.uid_etnx),
-                        etnxp_uuid: parseInt(passport.uid_etnxp),
-                        ltnx_uuid: parseInt(passport.uid_ltnx),
-                        gldx_uuid: parseInt(passport.uid_gldx),
-                        crfi_uuid: parseInt(passport.uid_crfi),
+                        uid_etnxp: parseInt(passport.uid_etnxp),
+                        uid_ltnx: parseInt(passport.uid_ltnx),
+                        uid_gldx: parseInt(passport.uid_gldx),
+                        uid_crfi: parseInt(passport.uid_crfi),
+                        etnx_uid: parseInt(passport.etnx_uid),
+                        etnxp_uid: parseInt(passport.etnxp_uid),
+                        ltnx_uid: parseInt(passport.ltnx_uid),
+                        gldx_uid: parseInt(passport.gldx_uid),
+                        crfi_uid: parseInt(passport.crfi_uid),
                         email: PassportPipeline.passportParams.email,
                         password: PassportPipeline.passportParams.password,
                         code: parseInt(passport.code),
@@ -44,7 +49,7 @@ $(document).ready(function(){
                     };
                     PassportPipeline.set_passport_local(passport_index,"passport_index");  
                     var passportIndex = PassportPipeline.get_passport_local("passport_index");                
-                    if(passport.uid_etnx != null && passport.uid_etnxp != null && passport.uid_ltnx != null && passport.uid_gldx != null && passport.uid_crfi != null) {
+                    if(passport_index.uid_etnx != null && passport_index.uid_etnxp != null && passport_index.uid_ltnx != null && passport_index.uid_gldx != null && passport_index.uid_crfi != null) {
                         let operation = 'poll';
                         ModelViewController.fillData();
                         ModelViewController.initLevel = 0;
@@ -100,11 +105,16 @@ $(document).ready(function(){
                 const crfi_api = PassportPipeline.getPassportApi('crfi');
                 const passport_api = PassportPipeline.getPassportApi('all');
                 const passport_index = {
+                    uid_etnx: parseInt(passport.uid_etnx),
+                    uid_etnxp: parseInt(passport.uid_etnxp),
+                    uid_ltnx: parseInt(passport.uid_ltnx),
+                    uid_gldx: parseInt(passport.uid_gldx),
+                    uid_crfi: parseInt(passport.uid_crfi),
                     etnx_uid: parseInt(passport.etnx_uid),
-                    etnxp_uuid: parseInt(passport.etnxp_uid),
-                    ltnx_uuid: parseInt(passport.ltnx_uid),
-                    gldx_uuid: parseInt(passport.gldx_uid),
-                    crfi_uuid: parseInt(passport.crfi_uid),
+                    etnxp_uid: parseInt(passport.etnxp_uid),
+                    ltnx_uid: parseInt(passport.ltnx_uid),
+                    gldx_uid: parseInt(passport.gldx_uid),
+                    crfi_uid: parseInt(passport.crfi_uid),
                     email: PassportPipeline.passportParams.email,
                     password: PassportPipeline.passportParams.password,
                     code: parseInt(passport.code),
