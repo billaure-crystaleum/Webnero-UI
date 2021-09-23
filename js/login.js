@@ -13,8 +13,7 @@ $(document).on("click", "#pin-code", function(){
     }
     else {
         $(".alert").css("display", "none");
-        $("#spinner-modal").modal('show');
-        
+        $("#spinner-modal").modal('show');        
         PassportPipeline.setCode(pin_value);
         PassportPipeline.setCredentials($("#email").val(), $("#password").val(), true);
         sessionStorage.setItem("fromLogin", true);
@@ -28,20 +27,15 @@ $(document).on("click", "#pin-code", function(){
             password: $("#password").val(),
             code: pin_value,
             pin: pin_value,
-            method: 'login'
+            method: 'login_webnero'
         };
         let version = 'passport_local';
-        PassportPipeline.set_passport_local(passport_local,version);
-        var passport = PassportPipeline.get_passport_local('passport_local');
-        console.log("passport");
+        PassportPipeline.set_passport_local(passport_local,'passport_local');
+        var passport = PassportPipeline.get_passport_local(version);
+        console.log("passport:");
         console.log(passport);            
-        PassportPipeline.performOperation("etnx", ModelViewController.initDashboard, passport_local)
-        PassportPipeline.performOperation("etnxp", ModelViewController.initDashboard, passport_local)
-        PassportPipeline.performOperation("ltnx", ModelViewController.initDashboard, passport_local)
-        PassportPipeline.performOperation("gldx", ModelViewController.initDashboard, passport_local)
-        PassportPipeline.performOperation("crfi", ModelViewController.initDashboard, passport_local)
-
-    }
+        PassportPipeline.performOperation("all", ModelViewController.initDashboard, passport_local);
+    };
 });
 
 
