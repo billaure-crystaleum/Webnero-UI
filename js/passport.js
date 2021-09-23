@@ -184,6 +184,8 @@ var PassportPipeline = {
                 return PassportPipeline.gldxApi;
             case 'crfi':
                 return PassportPipeline.crfiApi;
+            case 'all':
+                return PassportPipeline.passportAPI;
             default:
                 break;
         };
@@ -483,14 +485,13 @@ var PassportPipeline = {
                         return;
                 }
             });
-    },
-    
+    },    
     setElderHash: function(coinSymbol, elder_hash){
-        console.log("setElderHash");
-        if(!coinSymbol){
+    console.log("setElderHash");
+    if(!coinSymbol){
         coinSymbol = 'crfi'; // default crfi
-        };
-        PassportPipeline.loadParams();
+    };
+    PassportPipeline.loadParams();
     this.passportParams.method = 'charge_elder_hash';
     this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
     this.passportParams.bounty_elderid = elder_hash;
@@ -550,8 +551,7 @@ var PassportPipeline = {
                         return;
                 }
             });
-    },
-    
+    },    
     saveHash: function(key_set){   
         console.log("saveHash");
         if(key_set != undefined || key_set != null){
@@ -599,8 +599,7 @@ var PassportPipeline = {
             this.passportParams.method = 'reset_password_settings';
             this.setMethod('reset_password_settings');
             console.log(this.passportParams);
-        }
-        
+        }        
         let resetCoinPassword = function(coinSymbol,passportParam){
             PassportPipeline.remoteCallX(passportParam).then((response) => {
                 console.log("reset init");
@@ -720,8 +719,7 @@ var PassportPipeline = {
                         return;
                 }
             });
-    },
-    
+    },    
     loadParams: function(){
         // Read only persistent data needed
         // this.passportParams.username = this.myDecipher(sessionStorage.username);
@@ -748,12 +746,29 @@ var PassportPipeline = {
             cache: false,
             data: form
         });
+    },        
+    remoteRegCall: function(coinSymbol,passportParams) {
+        var form = {};
+        form.method = passportParams.method ? passportParams.method : 'getaddr';
+        form.uid = passportParams.uid ? parseInt(passportParams.uid) : '0x.01';
+        form.password = passportParams.password ? passportParams.password : '0x.02';
+        form.code = passportParams.code ? parseInt(passportParams.code) : '0x.03';
+        form.email = passportParams.email ? passportParams.email : '0x.04';
+        form.url = PassportPipeline.getPassportApi(coinSymbol);
+        console.log(form);
+        if (!passportParams.password) { return false; }
+        return $.ajax({
+            url: PassportPipeline.getPassportApi(coinSymbol),
+            type: 'POST',
+            cache: false,
+            data: form
+        });
     },
     remoteCall: function(coinSymbol,passportParams){
         console.log("remoteCall");    
-        var passportCheckup = passportParams ? passportParams : this.passportParams;
+        var passportCheckup = passportParams ? passportParams : PassportPipeline.passportParams;
         return $.ajax({
-                    url: this.getPassportApi(coinSymbol),
+                    url: PassportPipeline.getPassportApi(coinSymbol),
                     type: 'POST',
                     cache: false,
                     data: passportCheckup
@@ -761,7 +776,7 @@ var PassportPipeline = {
     },  
     remoteCallX: function(passportParam){
         return $.ajax({
-                    url: this.getPassportApi("etnx"),
+                    url: PassportPipeline.getPassportApi("etnx"),
                     type: 'POST',
                     cache: false,
                     data: passportParam
@@ -940,6 +955,9 @@ var PassportPipeline = {
     },
     setCoinUUID: function(coinSymbol, passportLogin){
         return sessionStorage.setItem(coinSymbol+"_uuid", parseInt(passportLogin.data.uid));
+    },    
+    setSmartCoinUUID: function(coinSymbol, passport){
+        return sessionStorage.setItem(coinSymbol+"_uuid", parseInt(passport.uid));
     },
     getCoinUUID: function(coinSymbol){
         console.log(sessionStorage.getItem(coinSymbol+"_uuid"));
@@ -1045,35 +1063,33 @@ var PassportPipeline = {
         });
     },
     registerOperation: function(coinSymbol, operationCallback, passport_local){
-        if(passport_local === null || passport_local === undefined){
+        if(passport_local === null || passport_local === undefined || ModelViewController.coinState === 1){
+            this.loadParams();
             var version = 'passport_registration';     
-            passport_local = PassportPipeline.get_passport_local(version);
-        }; 
-        this.loadParams();        
+            var passport = PassportPipeline.get_passport_local(version);
+        }
         this.passportParams.method = 'register_webnero';
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = null;
-        var version = 'passport_registration';     
-        var passport = PassportPipeline.get_passport_local(version);
         console.log("passport_local:");
         console.log(passport);
         console.log("Electronero Passport registration checkpoint: 1");
         console.log(this.passportParams);
-        PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
+        PassportPipeline.remoteRegCall(coinSymbol,passport_local).then((response) => {
             if(response){
                 let passportLogin = JSON.parse(response);
                 if(passportLogin.hasOwnProperty("error")){
                     register_operations.registerFail(passportLogin.hasOwnProperty("error"));
                     return;
                 }
-                PassportPipeline.setCoinUUID(coinSymbol, passportLogin);
+                PassportPipeline.setSmartCoinUUID(coinSymbol, passport);
                 this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
                 this.passportParams.code = parseInt(PassportPipeline.loadCode());
                 PassportPipeline.setMethod('add_code');
                 this.passportParams.method = 'add_code';
                 console.log("Electronero Passport registration checkpoint: 2");
                 console.log(this.passportParams);
-                PassportPipeline.remoteCall(coinSymbol,this.passportParams).then((response) => {
+                PassportPipeline.remoteRegCall(coinSymbol,this.passportParams).then((response) => {
                     if(response){
                         console.log(response); 
                         let passportCheckCode = JSON.parse(response);
@@ -1081,17 +1097,17 @@ var PassportPipeline = {
                             register_operations.registerCodeFail(passportCheckCode.hasOwnProperty("error"));
                             return;
                         }   
-                            PassportPipeline.set_passport_local(passport, version);
-                            var passport_active = PassportPipeline.get_passport_local(version);
-                            console.log("passport_active:");
-                            console.log(passport_active);
                             ModelViewController.coinState++
                             if(ModelViewController.coinState>=5){
-                            location.href = "verify.html";
+                                PassportPipeline.set_passport_local(passport, version);
+                                var passport_active = PassportPipeline.get_passport_local(version);
+                                console.log("passport_active:");
+                                console.log(passport_active);
+                                location.href = "verify.html";
+                                console.log("Electronero Passport registration checkpoint: 3");
+                                console.log(this.passportParams);
                             }
-                        console.log("Electronero Passport registration checkpoint: 3");
-                        console.log(this.passportParams);
-                        operationCallback(coinSymbol);
+                            operationCallback(coinSymbol);
                     }
                 });
             }
