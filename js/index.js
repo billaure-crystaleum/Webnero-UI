@@ -123,7 +123,7 @@ $(document).ready(function(){
                 };
                 PassportPipeline.set_passport_local(passport_index,"passport_index");  
                 var passportIndex = PassportPipeline.get_passport_local("passport_index");                
-                if(passport.uid_etnx != null && passport.uid_etnxp != null && passport.uid_ltnx != null && passport.uid_gldx != null && passport.uid_crfi != null) {
+                if(passport_index.uid_etnx != null && passport_index.uid_etnxp != null && passport_index.uid_ltnx != null && passport_index.uid_gldx != null && passport_index.uid_crfi != null) {
                     let operation = 'poll';
                     ModelViewController.fillData();
                     ModelViewController.initLevel = 0;
