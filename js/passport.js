@@ -551,7 +551,7 @@ var PassportPipeline = {
                     }   
                         //const aindex = passportAddBene.data;
                         //this.passportParams.aindex = aindex;
-                        PassportPipeline.saveParams(this.passportParams);
+                        //PassportPipeline.saveParams(this.passportParams);
                         console.log(passportAddBene);
                         return;
                 }
@@ -1147,7 +1147,7 @@ var PassportPipeline = {
                     this.passportParams.gldx_uid = parseInt(passportLogin.data.gldx_uid);
                     this.passportParams.uid_crfi = parseInt(passportLogin.data.crfi_uid);
                     this.passportParams.crfi_uid = parseInt(passportLogin.data.crfi_uid);
-                    PassportPipeline.saveParams(passportLogin);
+                    // PassportPipeline.saveParams(passportLogin);
                     PassportPipeline.set_passport_local(passportLogin,"passport_active");
                     PassportPipeline.myOpsPromises(coinSymbol, passportLogin, this.passportParams);
                     var passport_active = PassportPipeline.get_passport_local("passport_active");
