@@ -135,8 +135,9 @@ gulp.task('njk', function() {
     .pipe(nunjucksRender({
         path: ['app/templates']
       }))
-    // output files in app folder
+    // output files in wallet (production) && dev (development) dirs
     .pipe(gulp.dest('wallet'))
+    .pipe(gulp.dest('dev'))
   });
   
 // Run everything
