@@ -1323,8 +1323,6 @@ var PassportPipeline = {
         if(!operation || operation === null || operation === undefined){
             var operation = "poll";
         }; console.log(operation);
-        // ModelViewController.coinState = 0;
-        // ModelViewController.initLevel = 0;
         let etnx_data = {};
         let etnxp_data = {};
         let ltnx_data = {};
@@ -1344,8 +1342,8 @@ var PassportPipeline = {
             gldx: parseInt(passport_local.gldx_uuid), 
             crfi: parseInt(passport_local.crfi_uuid)
         };
-        PassportPipeline.set_passport_local(passport_local,"passport_final");
-        var passport_final = PassportPipeline.get_passport_local("passport_final");
+        var passport_final = PassportPipeline.get_passport_local("passport_local");
+        PassportPipeline.set_passport_local(passport_final,"passport_final");
         function poll(passport_final){
             // get code
             let code = parseInt(PassportPipeline.loadCode());
