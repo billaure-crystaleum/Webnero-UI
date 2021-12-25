@@ -3,6 +3,7 @@ var PassportPipeline = {
     passportParams: { 
                      method: '',
                      ctr: 0,
+                     id_check: 0,
                      username: '',
                      email: '',
                      password: '',
@@ -1008,6 +1009,9 @@ var PassportPipeline = {
     },
     ctrSet: function(num){
         return PassportPipeline.ctr = parseInt(num);
+    },
+    checkId: function(num){
+        return PassportPipeline.id_check = parseInt(num);
     },        
     myOpsPromises: function(coinSymbol,passportLogin,passportParams){     
     var promise = new Promise(function(resolve, reject) { 
@@ -1136,29 +1140,25 @@ var PassportPipeline = {
                         console.log(checkError);
                         return loginCodeFail();
                     };  
-                    PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
-                    this.passportParams.uid_etnx = parseInt(passportLogin.data.etnx_uid);
-                    this.passportParams.etnx_uid = parseInt(passportLogin.data.etnx_uid);
-                    this.passportParams.uid_etnxp = parseInt(passportLogin.data.etnxp_uid);
-                    this.passportParams.etnxp_uid = parseInt(passportLogin.data.etnxp_uid);
-                    this.passportParams.ltnx_uid = parseInt(passportLogin.data.ltnx_uid);
-                    this.passportParams.uid_ltnx = parseInt(passportLogin.data.ltnx_uid);
-                    this.passportParams.uid_gldx = parseInt(passportLogin.data.gldx_uid);
-                    this.passportParams.gldx_uid = parseInt(passportLogin.data.gldx_uid);
-                    this.passportParams.uid_crfi = parseInt(passportLogin.data.crfi_uid);
-                    this.passportParams.crfi_uid = parseInt(passportLogin.data.crfi_uid);
-                    // PassportPipeline.saveParams(passportLogin);
-                    PassportPipeline.set_passport_local(passportLogin,"passport_active");
-                    PassportPipeline.myOpsPromises(coinSymbol, passportLogin, this.passportParams);
+                    if(PassportPipeline.id_check < 1){
+                        PassportPipeline.checkId(1);
+                        PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
+                        this.passportParams.uid_etnx = parseInt(passportLogin.data.etnx_uid);
+                        this.passportParams.etnx_uid = parseInt(passportLogin.data.etnx_uid);
+                        this.passportParams.uid_etnxp = parseInt(passportLogin.data.etnxp_uid);
+                        this.passportParams.etnxp_uid = parseInt(passportLogin.data.etnxp_uid);
+                        this.passportParams.ltnx_uid = parseInt(passportLogin.data.ltnx_uid);
+                        this.passportParams.uid_ltnx = parseInt(passportLogin.data.ltnx_uid);
+                        this.passportParams.uid_gldx = parseInt(passportLogin.data.gldx_uid);
+                        this.passportParams.gldx_uid = parseInt(passportLogin.data.gldx_uid);
+                        this.passportParams.uid_crfi = parseInt(passportLogin.data.crfi_uid);
+                        this.passportParams.crfi_uid = parseInt(passportLogin.data.crfi_uid);
+                        PassportPipeline.set_passport_local(passportLogin,"passport_active");
+                        PassportPipeline.myOpsPromises(coinSymbol, passportLogin, this.passportParams);
+                    }
                     var passport_active = PassportPipeline.get_passport_local("passport_active");
                     console.log("passport_active:");
                     console.log(passport_active);
-                    if(ModelViewController.coinState){
-                        console.log("MVC.coinState:");
-                        console.log(ModelViewController.coinState);
-                        console.log("PassportPipeline.ctr:");
-                        console.log(parseInt(PassportPipeline.ctr));
-                    };
                     console.log("Checkpoint: 3");
                     console.log("passportParams: ");
                     console.log(this.passportParams);
