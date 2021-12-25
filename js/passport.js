@@ -1320,6 +1320,9 @@ var PassportPipeline = {
     startCryptoEngine: function(operation, passport_local){        
         console.log("passport II");
         console.log(passport_local);  
+        var passport_final = PassportPipeline.get_passport_local("passport_local");  
+        console.log("passport III");
+        console.log(passport_final);  
         if(!operation || operation === null || operation === undefined){
             var operation = "poll";
         }; console.log(operation);
@@ -1342,7 +1345,6 @@ var PassportPipeline = {
             gldx: parseInt(passport_local.gldx_uuid), 
             crfi: parseInt(passport_local.crfi_uuid)
         };
-        var passport_final = PassportPipeline.get_passport_local("passport_local");
         PassportPipeline.set_passport_local(passport_final,"passport_final");
         function poll(passport_final){
             // get code
