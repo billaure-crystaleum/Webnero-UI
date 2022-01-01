@@ -148,6 +148,8 @@ document.getElementById('send-all').addEventListener("click", function() {
 
 $(document).on("click", "#send-modal", function(){
     $('.form-group').removeClass("has-error");
+	cleanPinCode();
+	cleanPinCodes();
     if(checkMandatoryField("amount") && checkMandatoryField("receiver")) {
         $("#send-code-modal").modal('show');
     } else { console.log("EMITTER 404 user input error, or incomplete input error"); }
