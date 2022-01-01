@@ -51,10 +51,7 @@ $(document).on("click", "#pin-code", function(){
         console.log("passport:");
         console.log(passport);
         let rversion = 'passport_active';
-        var passport_rv = PassportPipeline.get_passport_local(rversion);
-        console.log("passport-rv:");
-        console.log(passport_rv);  
-        if(passport_rv === null || passport_rv == undefined){console.log('null check failed');return loginFail();}
+        if(passport === null || passport == undefined){console.log('null check failed');return loginFail();}
         PassportPipeline.performOperation("all", ModelViewController.initDashboard, passport_local);
     };
 });
