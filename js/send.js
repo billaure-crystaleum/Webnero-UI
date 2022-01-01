@@ -345,7 +345,8 @@ function send_Success(message){
     $(".alert-success").html(message);
     $(".webnero_tx_id").html(message.tx_hash);
     $(".webnero_tx_amount").html(message.amount);
-    $(".webnero_tx_key").html(message.key);
+    $(".webnero_tx_key").html(message.tx_key);
+    $(".webnero_tx_fee").html(message.fee);
     $(".alert-success").css("display", "block");
     $("#success_tic").modal('show');
     function clearAlert(){$("#success_tic").modal('hide')};
