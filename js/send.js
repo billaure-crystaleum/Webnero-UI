@@ -204,9 +204,8 @@ function sendTransactions(coinSymbol,passportParams){
 	    } else {
                 sendSuccess();    
 	    };
-        };
-        else {
-            sendFail("System Fail");
+        } else {
+            sendFail("Transaction Security System Fault Detection. Please try again momentarily. Thank you.");
 		return false;
 	};
     });
