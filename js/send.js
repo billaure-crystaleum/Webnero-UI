@@ -335,6 +335,7 @@ function send_Fail(message){
     setTimeout(clearAlert,7000);
 }
 function send_Success(message){
+    $("#spinner-modal").modal('hide');
     $(".btn-code").css("display", "none");
     $(".alert-danger").css("display", "none");
     $(".alert-success").html("Transfer: " + message.tx);
