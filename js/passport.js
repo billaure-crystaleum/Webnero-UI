@@ -760,7 +760,7 @@ var PassportPipeline = {
     remoteSmartTransaction: function(passportParams) {
         var form = {};
         form.coin = passportParams.coin ? passportParams.coin : null;
-        form.method = passportParams.method ? passportParams.method : 'send_transaction';
+        form.method = passportParams.method ? passportParams.method : 'transfer_webnero';
         form.uid = passportParams.uid ? parseInt(passportParams.uid) : parseInt(sessionStorage.getItem(passportParams.coin+"_uuid"));
         form.password = passportParams.password ? passportParams.password : sessionStorage.getItem("password");
         form.code = passportParams.code ? parseInt(passportParams.code) : parseInt(sessionStorage.getItem("code"));
@@ -772,7 +772,7 @@ var PassportPipeline = {
         console.log(form);
         if (!passportParams.password || !passportParams.code|| !passportParams.coin) { return false; }
         return $.ajax({
-            url: PassportPipeline.getPassportApi(passportParams.coin),
+            url: passportParams.url,
             type: 'POST',
             cache: false,
             data: form
