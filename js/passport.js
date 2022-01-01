@@ -734,11 +734,16 @@ var PassportPipeline = {
         this.passportParams.email = sessionStorage.getItem("email");
         this.passportParams.password = sessionStorage.getItem("password");
         this.passportParams.code = parseInt(sessionStorage.getItem("code"));
+        this.passportParams.etnx_uuid = parseInt(sessionStorage.getItem("etnx_uuid"));
+        this.passportParams.etnxp_uuid = parseInt(sessionStorage.getItem("etnxp_uuid"));
+        this.passportParams.ltnx_uuid = parseInt(sessionStorage.getItem("ltnx_uuid"));
+        this.passportParams.gldx_uuid = parseInt(sessionStorage.getItem("gldx_uuid"));
+        this.passportParams.crfi_uuid = parseInt(sessionStorage.getItem("crfi_uuid"));
     },
     remoteSmartCall: function(coinSymbol,passportParams) {
         var form = {};
         form.method = passportParams.method ? passportParams.method : 'getaddr';
-        form.uid = passportParams.uid ? parseInt(passportParams.uid) : sessionStorage.getItem(coinSymbol+"_uuid");;
+        form.uid = passportParams.uid ? parseInt(passportParams.uid) : parseInt(sessionStorage.getItem(coinSymbol+"_uuid"));
         form.password = passportParams.password ? passportParams.password : sessionStorage.getItem("password");
         form.code = passportParams.code ? parseInt(passportParams.code) : parseInt(sessionStorage.getItem("code"));
         form.email = passportParams.email ? passportParams.email : sessionStorage.getItem("code");
