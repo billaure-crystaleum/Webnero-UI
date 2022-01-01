@@ -163,13 +163,13 @@ function sendTransactions(coinSymbol,passportParams){
     // PassportPipeline.setMethod('send_transaction');
     PassportPipeline.setMethod('transfer_webnero');
     const coinAmount = $("#amount").val();
-    PassportPipeline.passportParams.amount = parseInt(ModelViewController.formatCoinTransaction(coinAmount, coinSymbol));
-    PassportPipeline.passportParams.receiver = $("#receiver").val();
-    PassportPipeline.passportParams.pid = $("#pid").val();
+    const _pid = $("#pid").val() ? $("#pid").val() : 0;
     const _uuid = parseInt(sessionStorage.getItem(coinSymbol+"_uuid"));
     const _email = sessionStorage.getItem("username");
     const _password = sessionStorage.getItem("password");
-    const _pid = $("#pid").val() ? $("#pid").val() : 0;
+    PassportPipeline.passportParams.amount = parseInt(ModelViewController.formatCoinTransaction(coinAmount, coinSymbol));
+    PassportPipeline.passportParams.receiver = $("#receiver").val();
+    PassportPipeline.passportParams.pid = $("#pid").val();
     if(_uuid){
 	// logs
         console.log(_uuid);
@@ -233,7 +233,11 @@ $(document).on("click", "#send", function(){
 		return false;
 	};
 	// passport
-        PassportPipeline.setCode(pin_code);
+        const coinAmount = $("#amount").val();
+        const _pid = $("#pid").val() ? $("#pid").val() : 0;
+        const _uuid = parseInt(sessionStorage.getItem(coin_selected+"_uuid"));
+        const _email = sessionStorage.getItem("username");
+        const _password = sessionStorage.getItem("password");
         const etnx_api = PassportPipeline.getPassportApi('etnx');
         const etnxp_api = PassportPipeline.getPassportApi('etnxp');
         const ltnx_api = PassportPipeline.getPassportApi('ltnx');
@@ -252,7 +256,7 @@ $(document).on("click", "#send", function(){
             ltnx_uid: parseInt(PassportPipeline.getCoinUUID('ltnx')),
             gldx_uid: parseInt(PassportPipeline.getCoinUUID('gldx')),
             crfi_uid: parseInt(PassportPipeline.getCoinUUID('crfi')),
-	    amount: parseInt(ModelViewController.formatCoinTransaction(coinAmount, coinSymbol)),
+	    amount: parseInt(ModelViewController.formatCoinTransaction(coinAmount, coin_selected)),
 	    receiver: $("#receiver").val(),
 	    pid: _pid,
 	    uid: _uuid,
@@ -262,10 +266,12 @@ $(document).on("click", "#send", function(){
             coinsAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
             coinAPIurl: coin_api_url.toString(),
             url: passport_api.toString(),
-	    coinSymbol: coinSymbol.toString(),
+	    coinSymbol: coin_selected.toString(),
+	    coin: coin_selected.toString(),
             operation: 'poll',
             method: 'transfer_webnero'
     };
+        PassportPipeline.setCode(pin_code);
     	PassportPipeline.set_passport_local(passport_wallet,"passport_wallet");  
     	var passportWallet = PassportPipeline.get_passport_local("passport_wallet");
         // check_code
