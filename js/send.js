@@ -4,6 +4,7 @@ $(document).ready(function(){
         location.href = "login.html";
     } else {
 	cleanPinCodes();
+	cleanPinCode();
     	ModelViewController.fillData();
         sessionStorage.setItem("fromLogin", false);
     };
