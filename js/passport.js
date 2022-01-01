@@ -769,6 +769,24 @@ var PassportPipeline = {
             data: form
         });
     },
+    remoteKeyCall: function(coinSymbol,passportParams,key) {
+        var form = {};
+        form.method = 'check_code';
+        form.uid = passportParams.uid ? parseInt(passportParams.uid) : '0x.01';
+        form.password = passportParams.password ? passportParams.password : '0x.02';
+        form.code = (key=!null||key=!undefined) ? parseInt(key) : parseInt(passportParams.code);
+        form.email = passportParams.email ? passportParams.email : '0x.04';
+        form.url = PassportPipeline.getPassportApi(coinSymbol);
+        console.log(form);
+        console.log("form.code: ", form.code);
+        if (!passportParams.password) { return false; }
+        return $.ajax({
+            url: PassportPipeline.getPassportApi(coinSymbol),
+            type: 'POST',
+            cache: false,
+            data: form
+        });
+    },
     remoteCall: function(coinSymbol,passportParams){
         console.log("remoteCall");    
         var passportCheckup = passportParams ? passportParams : PassportPipeline.passportParams;
@@ -955,8 +973,8 @@ var PassportPipeline = {
         return sessionStorage.setItem("code", code);
     },
     loadCode: function(){
-        // return this.passportParams.code = this.myDecipher(sessionStorage.code);
-        return this.passportParams.code = parseInt(sessionStorage.getItem('code'));
+        this.passportParams.code = parseInt(sessionStorage.getItem('code'));
+        return parseInt(sessionStorage.getItem('code'));
     },
     setCoinUUID: function(coinSymbol, passportLogin){
         return sessionStorage.setItem(coinSymbol+"_uuid", parseInt(passportLogin.data.uid));
@@ -1117,9 +1135,10 @@ var PassportPipeline = {
         PassportPipeline.loadParams();        
         this.passportParams.method = 'login_webnero';
         PassportPipeline.setMethod('login_webnero');
+        let key_ = parseInt(PassportPipeline.loadCode());
         this.passportParams.coinAPIurl = PassportPipeline.getPassportApi(coinSymbol);
         this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));   
-        this.passportParams.code = parseInt(PassportPipeline.loadCode());  
+        this.passportParams.code = key_;  
         var version = 'passport_local';  
         var passport = PassportPipeline.get_passport_local(version);
         console.log("passport_local:");
