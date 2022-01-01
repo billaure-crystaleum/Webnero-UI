@@ -1,14 +1,11 @@
 $(document).ready(function(){
-    ModelViewController.fillData();
     if(!PassportPipeline.hasValidSession()){ 
         location.href = "login.html";
     } else {
+    	ModelViewController.fillData();
         sessionStorage.setItem("fromLogin", false);
-        ModelViewController.fillHistory();
     };
-});
-
-
+}); 
 var coin_checked = {
 	coin: null
 };
@@ -44,6 +41,7 @@ document.getElementById('etnx-send').addEventListener("click", function() {
 	etnx_checked = true;
 	coin_checked.coin = 'etnx';
 	etnx.balance = etnxBalance;
+	sessionStorage.setItem("coin_checked", 'etnx');
 	console.log(coin_checked);
 });
 
@@ -54,6 +52,7 @@ document.getElementById('etnxp-send').addEventListener("click", function() {
 	etnxp_checked = true;
 	coin_checked.coin = 'etnxp';
 	etnxp.balance = etnxpBalance;
+	sessionStorage.setItem("coin_checked", 'etnxp');
 	console.log(coin_checked);
 });
 
@@ -64,6 +63,7 @@ document.getElementById('ltnx-send').addEventListener("click", function() {
 	ltnx_checked = true;
 	coin_checked.coin = 'ltnx';
 	ltnx.balance = ltnxBalance;
+	sessionStorage.setItem("coin_checked", 'ltnx');
 	console.log(coin_checked);
 });
 
@@ -73,6 +73,7 @@ document.getElementById('gldx-send').addEventListener("click", function() {
 	console.log(gldxBalance);
 	gldx_checked = true;
 	coin_checked.coin = 'gldx';
+	sessionStorage.setItem("coin_checked", 'gldx');
 	gldx.balance = gldxBalance;
 	console.log(coin_checked);
 });
@@ -83,7 +84,9 @@ document.getElementById('crfi-send').addEventListener("click", function() {
 	console.log(crfiBalance);
 	crfi_checked = true;
 	coin_checked.coin = 'crfi';
+	sessionStorage.setItem("coin_checked", 'crfi');
 	crfi.balance = crfiBalance;
+	sessionStorage.getItem("code")
 	console.log(coin_checked);
 });
 document.getElementById('send-all').addEventListener("click", function() {
@@ -93,22 +96,25 @@ document.getElementById('send-all').addEventListener("click", function() {
 	} else {
 		sendAll = true;
 	}
-	if(coin_checked.coin === 'etnx'){
+    	const coin_to_transact = sessionStorage.getItem('coin_checked').toString();
+	if(coin_checked.coin === 'etnx' && coin_to_transact == coin_checked.coin){
 		console.log("ETNX");
 	}
-	else if(coin_checked.coin === 'etnxp'){
+	else if(coin_checked.coin === 'etnxp' && coin_to_transact == coin_checked.coin){
 		console.log("ETNXP");
 	}
-	else if(coin_checked.coin === 'ltnx'){
+	else if(coin_checked.coin === 'ltnx' && coin_to_transact == coin_checked.coin){
 		console.log("LTNX");
 	}
-	else if(coin_checked.coin === 'gldx'){
+	else if(coin_checked.coin === 'gldx' && coin_to_transact == coin_checked.coin){
 		console.log("GLDX");
 	} 
-	else if(coin_checked.coin === 'crfi'){
+	else if(coin_checked.coin === 'crfi' && coin_to_transact == coin_checked.coin){
 		console.log("CRFI");
 	} else {
+		sendFail("No coin / token has been selected for transfer. Please make your coin / token selection and then kindly try again. Thank you.");
 		console.log("ERROR");
+		return false;
 	}
 	
 	console.log(Object.values(coin_checked)[0]);
@@ -139,8 +145,9 @@ document.getElementById('send-all').addEventListener("click", function() {
 
 $(document).on("click", "#send-modal", function(){
     $('.form-group').removeClass("has-error");
-    if(checkMandatoryField("amount") && checkMandatoryField("receiver"))
+    if(checkMandatoryField("amount") && checkMandatoryField("receiver")) {
         $("#send-code-modal").modal('show');
+    } else { console.log("EMITTER 404 user input error, or incomplete input error"); }
 });
 
 function checkMandatoryField(id){
@@ -152,39 +159,56 @@ function checkMandatoryField(id){
     return true;
 }
 
-function sendCallback(coinSymbol){
-
-    PassportPipeline.setMethod('send_transaction');
+function sendTransactions(coinSymbol,passportParams){
+    // PassportPipeline.setMethod('send_transaction');
+    PassportPipeline.setMethod('transfer_webnero');
     const coinAmount = $("#amount").val();
     PassportPipeline.passportParams.amount = parseInt(ModelViewController.formatCoinTransaction(coinAmount, coinSymbol));
     PassportPipeline.passportParams.receiver = $("#receiver").val();
     PassportPipeline.passportParams.pid = $("#pid").val();
-   
-//     const _uuid = PassportPipeline.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
-//     const _email = PassportPipeline.myDecipher(sessionStorage.getItem("username"));
-//     const _password = PassportPipeline.myDecipher(sessionStorage.getItem("password"));
-	const _uuid = sessionStorage.getItem(coinSymbol+"_uuid");
-    	const _email = sessionStorage.getItem("username");
-    	const _password = sessionStorage.getItem("password");
-	if(_uuid){
-        // logs
+    const _uuid = parseInt(sessionStorage.getItem(coinSymbol+"_uuid"));
+    const _email = sessionStorage.getItem("username");
+    const _password = sessionStorage.getItem("password");
+    const _pid = $("#pid").val() ? $("#pid").val() : 0;
+    if(_uuid){
+	// logs
         console.log(_uuid);
         console.log(_email);
         console.log(_password);
+        console.log('_pid',_pid);
+    }
+	// check coin
+    const coin_to_transact = sessionStorage.getItem('coin_checked').toString();
+    console.log("EXPIRED: EMITTER 501 =//\\//\\= ||--:{ "+coin_to_transact+"}:--|| =//\\//\\= ");
+	if(coin_checked.coin.toString() != coin_to_transact){
+		console.log("EXPIRED: EMITTER 501 =//\\//\\= ||--:{ "+coin_to_transact+"}:--|| =//\\//\\= ");
+		sendFail("Transaction Fail");
+		return false;
 	}
-    console.log(PassportPipeline.passportParams)
-    
-    PassportPipeline.remoteCall(coinSymbol).then((response) => {
+	// passport
+    console.log(PassportPipeline.passportParams);
+    const passport_wallet = passportParams;
+	console.log(passport_wallet);
+	console.log('p_w');
+    const passportWallet = PassportPipeline.get_passport_local("passport_wallet");
+	console.log('pW');
+	console.log(passportWallet);
+	// transfer 
+    PassportPipeline.remoteSmartTransaction(passport_wallet).then((response) => {
         if(response){
             console.log(response); 
             var sendResult = JSON.parse(response);
-            if(sendResult.hasOwnProperty("error"))
+            if(sendResult.hasOwnProperty("error")) {
                 sendFail("Transaction Fail");
-            else
+		return false;
+	    } else {
                 sendSuccess();    
-        }
-        else
+	    };
+        };
+        else {
             sendFail("System Fail");
+		return false;
+	};
     });
 }
 
@@ -194,43 +218,101 @@ $(document).on("click", "#send", function(){
     $(".btn-code").css("display", "none");
     if(pin_code.length < 5){
         sendFail("Provide 5 digits code");
+		return false;
     }
     else {
         $("#spinner-modal").modal('show');
         $("#send-code-modal").modal('hide');
-
         sessionStorage.setItem("code", pin_code);
         console.log(pin_code);
-        // check_code
-
-        //var coin_selected = $(".btn-selected").attr("id");
-	var coin_selected = coin_checked.coin;
+	// check coin
+	var coin_selected = coin_checked.coin.toString();
+	console.log('coin_selected',coin_selected);
+        const coin_to_transact = sessionStorage.getItem('coin_checked').toString();  console.log('coin_to_transact',coin_to_transact);
+	if(coin_to_transact == null || coin_to_transact == undefined || coin_selected == null || coin_selected == undefined){
+		console.log("EXPIRED: EMITTER 502M | Error, perhaps this is a mistake. Although our systems indicate the coin selected, and coin stored in session are improperly matched! ");
+		return false;
+	};
+	// passport
         PassportPipeline.setCode(pin_code);
-	    switch(coin_selected){
-		    case 'etnx':
-			    return PassportPipeline.performOperation("etnx", sendCallback);
-			    break;
-		    case 'etnxp':
-			    return PassportPipeline.performOperation("etnxp", sendCallback);
-			    break;
-		    case 'ltnx':
-			    return PassportPipeline.performOperation("ltnx", sendCallback); 
-			    break;
-		    case 'gldx':
-			    return PassportPipeline.performOperation("gldx", sendCallback);
-			    break;
-		    case 'crfi':
-			    return PassportPipeline.performOperation("crfi", sendCallback);
-			    break; 
-		    default:
-			    break;
-	    }
-    }     
+        const etnx_api = PassportPipeline.getPassportApi('etnx');
+        const etnxp_api = PassportPipeline.getPassportApi('etnxp');
+        const ltnx_api = PassportPipeline.getPassportApi('ltnx');
+        const gldx_api = PassportPipeline.getPassportApi('gldx');
+        const crfi_api = PassportPipeline.getPassportApi('crfi');
+        const passport_api = PassportPipeline.getPassportApi('all');
+        const coin_api_url = PassportPipeline.getPassportApi(coin_selected);
+        const passport_wallet = {
+	    uid_etnx: parseInt(PassportPipeline.getCoinUUID('etnx')),
+            uid_etnxp: parseInt(PassportPipeline.getCoinUUID('etnxp')),
+            uid_ltnx: parseInt(PassportPipeline.getCoinUUID('ltnx')),
+            uid_gldx: parseInt(PassportPipeline.getCoinUUID('gldx')),
+            uid_crfi: parseInt(PassportPipeline.getCoinUUID('crfi')),
+            etnx_uid: parseInt(PassportPipeline.getCoinUUID('etnx')),
+            etnxp_uid: parseInt(PassportPipeline.getCoinUUID('etnxp')),
+            ltnx_uid: parseInt(PassportPipeline.getCoinUUID('ltnx')),
+            gldx_uid: parseInt(PassportPipeline.getCoinUUID('gldx')),
+            crfi_uid: parseInt(PassportPipeline.getCoinUUID('crfi')),
+	    amount: parseInt(ModelViewController.formatCoinTransaction(coinAmount, coinSymbol)),
+	    receiver: $("#receiver").val(),
+	    pid: _pid,
+	    uid: _uuid,
+            email: sessionStorage.getItem('email').toString(),
+            password: sessionStorage.getItem('password').toString(),
+            code: parseInt(sessionStorage.getItem('code')),
+            coinsAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
+            coinAPIurl: coin_api_url.toString(),
+            url: passport_api.toString(),
+	    coinSymbol: coinSymbol.toString(),
+            operation: 'poll',
+            method: 'transfer_webnero'
+    };
+    	PassportPipeline.set_passport_local(passport_wallet,"passport_wallet");  
+    	var passportWallet = PassportPipeline.get_passport_local("passport_wallet");
+        // check_code
+	PassportPipeline.remoteKeyCall(coin_selected,passport_wallet,passport_wallet.code).then((response) => {
+		if(response){
+		    console.log(response); 
+		    var sendResult = JSON.parse(response);
+		    if(sendResult.hasOwnProperty("error")) {
+			sendFail("Please try again momentarily. Security Code Error.");
+			return false;
+		    } else {
+			    // call transfers, if not error on code check
+			    switch(coin_selected){
+				    case 'etnx':
+					    return sendTransactions('etnx',passport_wallet);
+					    break;
+				    case 'etnxp':
+					    return sendTransactions('etnxp',passport_wallet);
+					    break;
+				    case 'ltnx':
+					    return sendTransactions('ltnx',passport_wallet);
+					    break;
+				    case 'gldx':
+					    return sendTransactions('gldx',passport_wallet);
+					    break;
+				    case 'crfi':
+					    return sendTransactions('crfi',passport_wallet);
+					    break; 
+				    default:
+					    break;
+			    };
+		} else {
+		    sendFail("Please try again momentarily.");
+			return false;
+		};
+	    });  
+	  
+	    
+    };  
 });
 
 function sendSuccess(){
     $(".alert-success").css("display", "block");
     $("#spinner-modal").modal('hide');
+    function clearAlert(){$(".alert-success").modal('hide')};
+    setTimeout(clearAlert,7000);
 }
 
 function sendFail(message){
@@ -238,4 +320,6 @@ function sendFail(message){
     $(".alert-danger").css("display", "block");
     $(".btn-code").css("display", "block");
     $("#spinner-modal").modal('hide');
+    function clearAlert(){$(".alert-success").modal('hide')};
+    setTimeout(clearAlert,5000);
 }
