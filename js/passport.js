@@ -738,10 +738,10 @@ var PassportPipeline = {
     remoteSmartCall: function(coinSymbol,passportParams) {
         var form = {};
         form.method = passportParams.method ? passportParams.method : 'getaddr';
-        form.uid = passportParams.uid ? parseInt(passportParams.uid) : '0x.01';
-        form.password = passportParams.password ? passportParams.password : '0x.02';
-        form.code = passportParams.code ? parseInt(passportParams.code) : '0x.03';
-        form.email = passportParams.email ? passportParams.email : '0x.04';
+        form.uid = passportParams.uid ? parseInt(passportParams.uid) : sessionStorage.getItem(coinSymbol+"_uuid");;
+        form.password = passportParams.password ? passportParams.password : sessionStorage.getItem("password");
+        form.code = passportParams.code ? parseInt(passportParams.code) : parseInt(sessionStorage.getItem("code"));
+        form.email = passportParams.email ? passportParams.email : sessionStorage.getItem("code");
         form.url = PassportPipeline.getPassportApi(coinSymbol);
         console.log(form);
         if (!passportParams.password) { return false; }
@@ -774,7 +774,7 @@ var PassportPipeline = {
         form.method = 'check_code';
         form.uid = passportParams.uid ? parseInt(passportParams.uid) : '0x.01';
         form.password = passportParams.password ? passportParams.password : '0x.02';
-        form.code = (key=!null||key=!undefined) ? parseInt(key) : parseInt(passportParams.code);
+        form.code = parseInt(key);
         form.email = passportParams.email ? passportParams.email : '0x.04';
         form.url = PassportPipeline.getPassportApi(coinSymbol);
         console.log(form);
