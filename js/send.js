@@ -3,6 +3,7 @@ $(document).ready(function(){
     if(!PassportPipeline.hasValidSession()){ 
         location.href = "login.html";
     } else {
+	cleanPinCodes();
     	ModelViewController.fillData();
         sessionStorage.setItem("fromLogin", false);
     };
