@@ -53,7 +53,8 @@ $(document).on("click", "#pin-code", function(){
         let rversion = 'passport_active';
         var passport_rv = PassportPipeline.get_passport_local(rversion);
         console.log("passport-rv:");
-        console.log(passport_rv);            
+        console.log(passport_rv);  
+        if(passport_rv === null || passport_rv == undefined){console.log('null check failed');}
         PassportPipeline.performOperation("all", ModelViewController.initDashboard, passport_local);
     };
 });
