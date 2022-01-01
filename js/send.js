@@ -205,6 +205,7 @@ function sendTransactions(coinSymbol,passportParams){
 		}
 		catch (e) {
 			console.log(e);
+			return send_Fail("Transaction Fail");
 		}
             
             if(sendResult.hasOwnProperty("error") || sendResult === null) {
