@@ -342,7 +342,10 @@ function send_Success(message){
     $("#spinner-modal").modal('hide');
     $(".btn-code").css("display", "none");
     $(".alert-danger").css("display", "none");
-    $(".alert-success").html("Transfer: " + message.tx);
+    $(".alert-success").html(message);
+    $(".webnero_tx_id").html(message.tx_hash);
+    $(".webnero_tx_amount").html(message.amount);
+    $(".webnero_tx_key").html(message.key);
     $(".alert-success").css("display", "block");
     $("#success_tic").modal('show');
     function clearAlert(){$("#success_tic").modal('hide')};
