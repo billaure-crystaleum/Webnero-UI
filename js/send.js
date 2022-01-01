@@ -296,12 +296,10 @@ $(document).on("click", "#send", function(){
 					    break; 
 				    default:
 					    break;
-			    }
-			} else {
-		    sendFail("Please try again momentarily.");
-			return false;
-		}
-	    });  
+			    };
+		    };
+		};
+	});  
     };  
 });
 
