@@ -6,6 +6,12 @@ function cleanPinCode(){
     $(".alert").css("display", "none");
 }
 
+function cleanPinCodes(){
+    pin_code="";
+    $(".inputDigits").val("");
+    $(".alert").css("display", "none");
+}
+
 $(document).on("click", "#del", function(){
     $("#digit-" + pin_code.length).val("");
     pin_code = pin_code.substring(0, pin_code.length - 1);
