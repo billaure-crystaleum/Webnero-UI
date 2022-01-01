@@ -759,19 +759,20 @@ var PassportPipeline = {
     },    
     remoteSmartTransaction: function(passportParams) {
         var form = {};
-        form.method = passportParams.method ? passportParams.method.toString() : 'send_transaction';
-        form.uid = passportParams.uid ? parseInt(passportParams.uid) : parseInt(sessionStorage.getItem(passportParams.coinSymbol+"_uuid"));
-        form.password = passportParams.password ? passportParams.password.toString() : sessionStorage.getItem("password");
+        form.coin = passportParams.coin ? passportParams.coin : null;
+        form.method = passportParams.method ? passportParams.method : 'send_transaction';
+        form.uid = passportParams.uid ? parseInt(passportParams.uid) : parseInt(sessionStorage.getItem(passportParams.coin+"_uuid"));
+        form.password = passportParams.password ? passportParams.password : sessionStorage.getItem("password");
         form.code = passportParams.code ? parseInt(passportParams.code) : parseInt(sessionStorage.getItem("code"));
-        form.email = passportParams.email ? passportParams.email.toString() : sessionStorage.getItem("email");
+        form.email = passportParams.email ? passportParams.email : sessionStorage.getItem("email");
         form.amount = passportParams.amount ? parseInt(passportParams.amount) : null;
-        form.receiver = passportParams.receiver ? passportParams.receiver.toString() : null;
-        form.pid = passportParams.pid ? passportParams.pid.toString() : null;
-        form.url = passportParams.url ? passportParams.url.toString() : PassportPipeline.getPassportApi(passportParams.coinSymbol);
+        form.receiver = passportParams.receiver ? passportParams.receiver : null;
+        form.pid = passportParams.pid ? passportParams.pid : null;
+        form.url = passportParams.url ? passportParams.url : PassportPipeline.getPassportApi(passportParams.coin);
         console.log(form);
-        if (!passportParams.password || !passportParams.code) { return false; }
+        if (!passportParams.password || !passportParams.code|| !passportParams.coin) { return false; }
         return $.ajax({
-            url: PassportPipeline.getPassportApi(coinSymbol),
+            url: PassportPipeline.getPassportApi(passportParams.coin),
             type: 'POST',
             cache: false,
             data: form
@@ -797,14 +798,15 @@ var PassportPipeline = {
     remoteKeyCall: function(coinSymbol,passportParams,key) {
         var form = {};
         form.method = 'check_code';
-        form.uid = passportParams.uid ? parseInt(passportParams.uid) : parseInt(sessionStorage.getItem(passportParams.coinSymbol+"_uuid"));
+        form.coin = passportParams.coin ? passportParams.coin : null;
+        form.uid = passportParams.uid ? parseInt(passportParams.uid) : parseInt(sessionStorage.getItem(coinSymbol+"_uuid"));
         form.password = passportParams.password ? passportParams.password : sessionStorage.getItem("password");
         form.code = key ? parseInt(key) : sessionStorage.getItem("code");
         form.email = passportParams.email ? passportParams.email : sessionStorage.getItem("email");
         form.url = PassportPipeline.getPassportApi(coinSymbol);
         console.log(form);
         console.log("form.code: ", form.code);
-        if (!passportParams.password) { return false; }
+        if (!passportParams.password || !passportParams.coin) { return false; }
         return $.ajax({
             url: PassportPipeline.getPassportApi(coinSymbol),
             type: 'POST',
