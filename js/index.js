@@ -29,20 +29,21 @@ $(document).ready(function(){
                     const crfi_api = PassportPipeline.getPassportApi('crfi');
                     const passport_api = PassportPipeline.getPassportApi('all');
                     const passport_index = {
-                        uid_etnx: parseInt(passport.uid_etnx),
-                        uid_etnxp: parseInt(passport.uid_etnxp),
-                        uid_ltnx: parseInt(passport.uid_ltnx),
-                        uid_gldx: parseInt(passport.uid_gldx),
-                        uid_crfi: parseInt(passport.uid_crfi),
-                        etnx_uid: parseInt(passport.etnx_uid),
-                        etnxp_uid: parseInt(passport.etnxp_uid),
-                        ltnx_uid: parseInt(passport.ltnx_uid),
-                        gldx_uid: parseInt(passport.gldx_uid),
-                        crfi_uid: parseInt(passport.crfi_uid),
-                        email: passport.email,
-                        password: passport.password,
-                        code: parseInt(passport.code),
-                        coinAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
+                        uid_etnx: parseInt(PassportPipeline.getCoinUUID('etnx')),
+                        uid_etnxp: parseInt(PassportPipeline.getCoinUUID('etnxp')),
+                        uid_ltnx: parseInt(PassportPipeline.getCoinUUID('ltnx')),
+                        uid_gldx: parseInt(PassportPipeline.getCoinUUID('gldx')),
+                        uid_crfi: parseInt(PassportPipeline.getCoinUUID('crfi')),
+                        etnx_uid: parseInt(PassportPipeline.getCoinUUID('etnx')),
+                        etnxp_uid: parseInt(PassportPipeline.getCoinUUID('etnxp')),
+                        ltnx_uid: parseInt(PassportPipeline.getCoinUUID('ltnx')),
+                        gldx_uid: parseInt(PassportPipeline.getCoinUUID('gldx')),
+                        crfi_uid: parseInt(PassportPipeline.getCoinUUID('crfi')),
+                        email: sessionStorage.getItem('email').toString(),
+                        password: sessionStorage.getItem('password').toString(),
+                        code: parseInt(sessionStorage.getItem('code')),
+                        coinsAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
+                        coinAPIurl: passport_api.toString(),
                         operation: 'poll',
                         method: 'getaddr'
                     };
@@ -77,7 +78,8 @@ $(document).ready(function(){
                         console.log('Err: '+passport_index);
                     });
             };
-            setInterval(myPromises, 15000);
+            // setInterval(myPromises, 15000);
+        myPromises(PassportPipeline.get_passport_local("passport_local"));
     } else {
         var passportIndex = PassportPipeline.get_passport_local("passport_index");
         const coins = ['etnx','etnxp','ltnx','gldx','crfi'];
@@ -101,23 +103,24 @@ $(document).ready(function(){
                 const crfi_api = PassportPipeline.getPassportApi('crfi');
                 const passport_api = PassportPipeline.getPassportApi('all');
                 const passport_index = {
-                    uid_etnx: parseInt(passport.uid_etnx),
-                    uid_etnxp: parseInt(passport.uid_etnxp),
-                    uid_ltnx: parseInt(passport.uid_ltnx),
-                    uid_gldx: parseInt(passport.uid_gldx),
-                    uid_crfi: parseInt(passport.uid_crfi),
-                    etnx_uid: parseInt(passport.etnx_uid),
-                    etnxp_uid: parseInt(passport.etnxp_uid),
-                    ltnx_uid: parseInt(passport.ltnx_uid),
-                    gldx_uid: parseInt(passport.gldx_uid),
-                    crfi_uid: parseInt(passport.crfi_uid),
-                    email: passport.email,
-                    password: passport.password,
-                    code: parseInt(passport.code),
-                    coinAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
-                    operation: 'poll',
-                    method: 'getaddr'
-                };
+                        uid_etnx: parseInt(PassportPipeline.getCoinUUID('etnx')),
+                        uid_etnxp: parseInt(PassportPipeline.getCoinUUID('etnxp')),
+                        uid_ltnx: parseInt(PassportPipeline.getCoinUUID('ltnx')),
+                        uid_gldx: parseInt(PassportPipeline.getCoinUUID('gldx')),
+                        uid_crfi: parseInt(PassportPipeline.getCoinUUID('crfi')),
+                        etnx_uid: parseInt(PassportPipeline.getCoinUUID('etnx')),
+                        etnxp_uid: parseInt(PassportPipeline.getCoinUUID('etnxp')),
+                        ltnx_uid: parseInt(PassportPipeline.getCoinUUID('ltnx')),
+                        gldx_uid: parseInt(PassportPipeline.getCoinUUID('gldx')),
+                        crfi_uid: parseInt(PassportPipeline.getCoinUUID('crfi')),
+                        email: sessionStorage.getItem('email').toString(),
+                        password: sessionStorage.getItem('password').toString(),
+                        code: parseInt(sessionStorage.getItem('code')),
+                        coinsAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
+                        coinAPIurl: passport_api.toString(),
+                        operation: 'poll',
+                        method: 'getaddr'
+                    };
                 PassportPipeline.set_passport_local(passport_index,"passport_index");  
                 var passportIndex = PassportPipeline.get_passport_local("passport_index");                
                 if(passport_index.uid_etnx != null && passport_index.uid_etnxp != null && passport_index.uid_ltnx != null && passport_index.uid_gldx != null && passport_index.uid_crfi != null) {
@@ -150,6 +153,7 @@ $(document).ready(function(){
                     console.log('Err: '+passport_index);
                 });
         };
-        setInterval(myPromises, 10000);
+        // setInterval(myPromises, 10000);
+        myPromises(PassportPipeline.get_passport_local("passport_local"));
         };
 });
