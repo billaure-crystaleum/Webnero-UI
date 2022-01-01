@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $("#success_tic").modal('hide');
     if(!PassportPipeline.hasValidSession()){ 
         location.href = "login.html";
     } else {
@@ -194,19 +195,24 @@ function sendTransactions(coinSymbol,passportParams){
 	console.log('pW');
 	console.log(passportWallet);
 	// transfer 
-    PassportPipeline.remoteSmartTransaction(passport_wallet).then((response) => {
+	PassportPipeline.remoteSmartTransaction(passport_wallet).then((response) => {
         if(response){
             console.log(response); 
-            var sendResult = JSON.parse(response);
-            if(sendResult.hasOwnProperty("error")) {
-                sendFail("Transaction Fail");
-		return false;
+		var sendResult = null;
+		try {
+		    sendResult = JSON.parse(response);
+		}
+		catch (e) {
+			console.log(e);
+		}
+            
+            if(sendResult.hasOwnProperty("error") || sendResult === null) {
+                return send_Fail("Transaction Fail");
 	    } else {
-                sendSuccess();    
+                return send_Success(sendResult);    
 	    };
         } else {
-            sendFail("Transaction Security System Fault Detection. Please try again momentarily. Thank you.");
-		return false;
+            return sendFail("Transaction Security System Fault Detection. Please try again momentarily. Thank you.");
 	};
     });
 }
@@ -310,9 +316,30 @@ $(document).on("click", "#send", function(){
 });
 
 function sendSuccess(){
+    $(".btn-code").css("display", "none");
+    $(".alert-danger").css("display", "none");
     $(".alert-success").css("display", "block");
-    $("#spinner-modal").modal('hide');
-    function clearAlert(){$(".alert-success").modal('hide')};
+    $("#spinner-modal").modal('show');
+    function clearAlert(){$("#spinner-modal").modal('hide')};
+    setTimeout(clearAlert,7000);
+}
+
+function send_Fail(message){
+    $(".btn-code").css("display", "block");
+    $(".alert-danger").css("display", "block");
+    $(".alert-success").html("Transfer: " + message.tx);
+    $(".alert-success").css("display", "none");
+    $("#success_tic").modal('show');
+    function clearAlert(){$("#success_tic").modal('hide')};
+    setTimeout(clearAlert,7000);
+}
+function send_Success(message){
+    $(".btn-code").css("display", "none");
+    $(".alert-danger").css("display", "none");
+    $(".alert-success").html("Transfer: " + message.tx);
+    $(".alert-success").css("display", "block");
+    $("#success_tic").modal('show');
+    function clearAlert(){$("#success_tic").modal('hide')};
     setTimeout(clearAlert,7000);
 }
 
@@ -320,7 +347,8 @@ function sendFail(message){
     $(".alert-danger").html("Transfer error: " + message);
     $(".alert-danger").css("display", "block");
     $(".btn-code").css("display", "block");
-    $("#spinner-modal").modal('hide');
-    function clearAlert(){$(".alert-success").modal('hide')};
+    $("#spinner-modal").modal('show');
+    $("#success_tic").modal('hide');
+    function clearAlert(){$("#spinner-modal").modal('hide')};
     setTimeout(clearAlert,5000);
 }
