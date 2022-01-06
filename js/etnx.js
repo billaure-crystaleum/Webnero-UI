@@ -152,8 +152,8 @@ var ModelViewController = {
         
         var crfiData = this.getCoinData("crfi");
         if(crfiData != null){
-            const crfiLockedBalance = parseFloat(this.formatCoinUnits(crfiData.balances.balance, "crfi")).toFixed(4)
-            const crfiBalance = this.formatCoinUnits(crfiData.balances.unlocked_balance, "crfi")
+            const crfiLockedBalance = parseFloat(this.formatCoinUnits(crfiData.balances.balance, "crfi")).toFixed(4);
+            const crfiBalance = this.formatCoinUnits(crfiData.balances.unlocked_balance, "crfi");
             $("#crfi-wallet").html(crfiData.address);
             console.log(crfiData);
             $("#crfi-balance").html(crfiLockedBalance);
@@ -162,8 +162,8 @@ var ModelViewController = {
                 
         var ltnxData = this.getCoinData("ltnx");
         if(ltnxData != null){
-            const ltnxLockedBalance = parseFloat(this.formatCoinUnits(ltnxData.balances.balance, "ltnx")).toFixed(4)
-            const ltnxBalance = this.formatCoinUnits(ltnxData.balances.unlocked_balance, "ltnx")
+            const ltnxLockedBalance = parseFloat(this.formatCoinUnits(ltnxData.balances.balance, "ltnx")).toFixed(4);
+            const ltnxBalance = this.formatCoinUnits(ltnxData.balances.unlocked_balance, "ltnx");
             $("#ltnx-wallet").html(ltnxData.address);
             console.log(ltnxData);
             $("#ltnx-balance").html(ltnxLockedBalance);
@@ -175,8 +175,8 @@ var ModelViewController = {
             $("#gldx-wallet").html(gldxData.address);
             console.log(gldxData);
             const est_Loading = "Loading";
-            const gldxLockedBalance = parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4) : est_Loading;
-            const gldxBalance = this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx") : est_Loading;
+            const gldxLockedBalance = gldxData.balances.balance ? parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4) : est_Loading;
+            const gldxBalance = gldxData.balances.unlocked_balance ? this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx") : est_Loading;
                 $("#gldx-balance").html(gldxLockedBalance);
                 $("#gldx-unlocked-balance").html(gldxBalance);
         }
