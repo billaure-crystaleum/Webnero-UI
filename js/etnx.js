@@ -175,21 +175,10 @@ var ModelViewController = {
             $("#gldx-wallet").html(gldxData.address);
             console.log(gldxData);
             const est_Loading = "Loading";
-            const dataIsNull = Object.values(gldxData.balances.balance)(value => {
-              if (value === null || value === undefined || value === '') {
-                return true;
-              }
-              return false;
-            });
-            if(dataIsNull != true){
-            const gldxLockedBalance = parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4)
-            const gldxBalance = this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx")
+            const gldxLockedBalance = parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4) : est_Loading;
+            const gldxBalance = this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx") : est_Loading;
                 $("#gldx-balance").html(gldxLockedBalance);
                 $("#gldx-unlocked-balance").html(gldxBalance);
-            } else {
-                $("#gldx-balance").html(est_Loading);
-                $("#gldx-unlocked-balance").html(est_Loading);
-            }
         }
     },
 
