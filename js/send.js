@@ -208,7 +208,11 @@ function sendTransactions(coinSymbol,passportParams){
 		}
 		catch (e) {
 			console.log(e);
-			return send_Fail("Transaction Fail");
+			if(response.error){
+				return send_Fail("Transaction Fail: "+response.error);
+			} else {
+				return send_Fail("Transaction Fail: "+e);				
+			}
 		}
             
             if(sendResult.hasOwnProperty("error") || sendResult === null) {
@@ -217,7 +221,7 @@ function sendTransactions(coinSymbol,passportParams){
                 return send_Success(sendResult);    
 	    };
         } else {
-            return sendFail("Transaction Security System Fault Detection. Please try again momentarily. Thank you.");
+            return send_Fail("Transaction Security System Fault Detection. Please try again momentarily. Thank you.");
 	};
     });
 }
@@ -236,16 +240,16 @@ $(document).on("click", "#send", function(){
         sessionStorage.setItem("code", pin_code);
         console.log(pin_code);
 	// check coin
-	var coin_selected = coin_checked.coin ? coin_checked.coin.toString() : "NONE";
+	var coin_selected = coin_checked.coin ? coin_checked.coin.toString() : null;
 	console.log('coin_selected',coin_selected);
 	if(coin_selected === "NONE"){
 		console.log("EXPIRED: EMITTER 501M | Error, perhaps this is a mistake. Although our systems indicate no coin selected, and coin selection stored in transaction session may be improperly matched! ");
-		return sendFail("EXPIRED: No coin selected. Please select a coin. Try again momentarily.");
+		return send_Fail("EXPIRED: No coin selected. Please select a coin. Try again momentarily.");
 	}
         const coin_to_transact = sessionStorage.getItem('coin_checked').toString();  console.log('coin_to_transact',coin_to_transact);
 	if(coin_to_transact == null || coin_to_transact == undefined || coin_selected == null || coin_selected == undefined){
 		console.log("EXPIRED: EMITTER 502M | Error, perhaps this is a mistake. Although our systems indicate the coin selected, and coin selection stored in transaction session may be improperly matched! ");
-		return sendFail("EXPIRED: No coin selected. Please select a coin. Try again momentarily.");
+		return send_Fail("EXPIRED: No coin selected. Please select a coin. Try again momentarily.");
 	};
 	// passport
         const coinAmount = $("#amount").val();
@@ -337,7 +341,7 @@ function send_Fail(message){
     $("#spinner-modal").modal('hide');
     $(".btn-code").css("display", "none");
     $(".alert-danger").css("display", "block");
-    $(".alert-danger").html("Transfer error: " + message);
+    $(".alert-danger").html(message);
     $(".webnero_tx_error").html(message.error);
     $(".alert-success").css("display", "none");
     $("#fail_tic").modal('show');
@@ -361,7 +365,7 @@ function send_Success(message){
 }
 
 function sendFail(message){
-    $(".alert-danger").html("Transfer error: " + message);
+    $(".alert-danger").html(message);
     $(".alert-danger").css("display", "block");
     $(".btn-code").css("display", "block");
     $("#spinner-modal").modal('show');
