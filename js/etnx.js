@@ -172,12 +172,18 @@ var ModelViewController = {
 
         var gldxData = this.getCoinData("gldx");
         if(gldxData != null){
-            const gldxLockedBalance = parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4)
-            const gldxBalance = this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx")
             $("#gldx-wallet").html(gldxData.address);
             console.log(gldxData);
-            $("#gldx-balance").html(gldxLockedBalance);
-            $("#gldx-unlocked-balance").html(gldxBalance);
+            const est_Loading = "Loading";
+            if(gldxData.balances.balance != null){
+            const gldxLockedBalance = parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4)
+            const gldxBalance = this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx")
+                $("#gldx-balance").html(gldxLockedBalance);
+                $("#gldx-unlocked-balance").html(gldxBalance);
+            } else {
+                $("#gldx-balance").html(est_Loading);
+                $("#gldx-unlocked-balance").html(est_Loading);
+            }
         }
     },
 
