@@ -74,7 +74,7 @@ $(document).on("click", "blockquote", function(){
 var ModelViewController = {
     initLevel: 0,
     coinState: 0,
-    iClean: false,
+    iClean: true,
     returnState: function(which){
         if(!which){
             which = 0;
