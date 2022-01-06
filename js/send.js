@@ -341,8 +341,13 @@ function send_Fail(message){
     $("#spinner-modal").modal('hide');
     $(".btn-code").css("display", "none");
     $(".alert-danger").css("display", "block");
-    $(".alert-danger").html(message);
-    $(".webnero_tx_error").html(message.error);
+	if(message.error){
+		$(".webnero_tx_error").html(message.error);
+    		$(".alert-danger").html(message.error);
+	} else{
+		$(".webnero_tx_error").html(message);
+    		$(".alert-danger").html(message);
+	};
     $(".alert-success").css("display", "none");
     $("#fail_tic").modal('show');
     function clearAlert(){$("#fail_tic").modal('hide')};
