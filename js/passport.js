@@ -180,10 +180,10 @@ var PassportPipeline = {
     },
     
     myCipher: function(encrypt, pass) {
-        return CryptoJS.AES.encrypt(encrypt, pass);
+        // return CryptoJS.AES.encrypt(encrypt, pass);
     },
     myDecipher: function(encrypted, pass) {
-        return CryptoJS.AES.decrypt(encrypted, pass);
+        // return CryptoJS.AES.decrypt(encrypted, pass);
     },
 
     etnxApi: 'https://passport.electronero.org/api-etnx/api.php',
