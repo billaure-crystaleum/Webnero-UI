@@ -311,15 +311,20 @@ $(document).on("click", "#send", function(){
         const coin_api_url = PassportPipeline.getPassportApi(coin_selected);
         const passport_wallet = {
 	    uid_etnx: parseInt(PassportPipeline.getCoinUUID('etnx')),
-            uid_etnxp: parseInt(PassportPipeline.getCoinUUID('etnxp')),
-            uid_ltnx: parseInt(PassportPipeline.getCoinUUID('ltnx')),
-            uid_gldx: parseInt(PassportPipeline.getCoinUUID('gldx')),
-            uid_crfi: parseInt(PassportPipeline.getCoinUUID('crfi')),
             etnx_uid: parseInt(PassportPipeline.getCoinUUID('etnx')),
+            uid_etnxp: parseInt(PassportPipeline.getCoinUUID('etnxp')),
             etnxp_uid: parseInt(PassportPipeline.getCoinUUID('etnxp')),
+            uid_ltnx: parseInt(PassportPipeline.getCoinUUID('ltnx')),
             ltnx_uid: parseInt(PassportPipeline.getCoinUUID('ltnx')),
+            uid_gldx: parseInt(PassportPipeline.getCoinUUID('gldx')),
             gldx_uid: parseInt(PassportPipeline.getCoinUUID('gldx')),
+            uid_crfi: parseInt(PassportPipeline.getCoinUUID('crfi')),
             crfi_uid: parseInt(PassportPipeline.getCoinUUID('crfi')),
+            etnx_aindex: parseInt(PassportPipeline.getCoinAINDEX('etnx')),
+            etnxp_aindex: parseInt(PassportPipeline.getCoinAINDEX('etnxp')),
+            ltnx_aindex: parseInt(PassportPipeline.getCoinAINDEX('ltnx')),
+            gldx_aindex: parseInt(PassportPipeline.getCoinAINDEX('gldx')),
+            crfi_aindex: parseInt(PassportPipeline.getCoinAINDEX('crfi')),
 	    amount: parseInt(ModelViewController.formatCoinTransaction(coinAmount, coin_selected)),
 	    receiver: $("#receiver").val(),
 	    pid: _pid,
@@ -334,7 +339,7 @@ $(document).on("click", "#send", function(){
 	    coin: coin_selected.toString(),
             operation: 'poll',
             method: 'transfer_webnero'
-    };
+	};
         PassportPipeline.setCode(pin_code);
     	PassportPipeline.set_passport_local(passport_wallet,"passport_wallet");  
     	var passportWallet = PassportPipeline.get_passport_local("passport_wallet");
