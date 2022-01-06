@@ -175,8 +175,8 @@ var ModelViewController = {
             $("#gldx-wallet").html(gldxData.address);
             console.log(gldxData);
             const est_Loading = "Loading";
-            const gldxLockedBalance = gldxData.balances.balance ? parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4) : est_Loading;
-            const gldxBalance = gldxData.balances.unlocked_balance ? this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx") : est_Loading;
+            const gldxLockedBalance = gldxData.balances ? parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4) : est_Loading;
+            const gldxBalance = gldxData.balances ? this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx") : est_Loading;
                 $("#gldx-balance").html(gldxLockedBalance);
                 $("#gldx-unlocked-balance").html(gldxBalance);
         }
