@@ -65,6 +65,7 @@ gulp.task('js', function(done) {
     gulp.src(['js/swap.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['js/passport.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['js/settings.js']).pipe(gulp.dest('dist/js'));
+    gulp.src(['js/toastr.js']).pipe(gulp.dest('dist/js'));
 
     done();
 })
