@@ -175,7 +175,13 @@ var ModelViewController = {
             $("#gldx-wallet").html(gldxData.address);
             console.log(gldxData);
             const est_Loading = "Loading";
-            if(gldxData.balances.balance != null){
+            const dataIsNull = Object.values(gldxData.balances.balance)(value => {
+              if (value === null || value === undefined || value === '') {
+                return true;
+              }
+              return false;
+            });
+            if(dataIsNull != true){
             const gldxLockedBalance = parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4)
             const gldxBalance = this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx")
                 $("#gldx-balance").html(gldxLockedBalance);
