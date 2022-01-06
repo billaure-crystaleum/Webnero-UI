@@ -46,6 +46,15 @@ document.getElementById('etnx-send').addEventListener("click", function() {
 	etnx.balance = etnxBalance;
 	sessionStorage.setItem("coin_checked", 'etnx');
 	console.log(coin_checked);
+	toastr.options = {
+                closeButton: true,
+                progressBar: true,
+		timeOut: 5000,
+		extendedTimeOut: 500
+            };
+
+	// Override global options
+	return toastr.success('ETNX Selected')
 });
 
 document.getElementById('etnxp-send').addEventListener("click", function() {
@@ -57,6 +66,15 @@ document.getElementById('etnxp-send').addEventListener("click", function() {
 	etnxp.balance = etnxpBalance;
 	sessionStorage.setItem("coin_checked", 'etnxp');
 	console.log(coin_checked);
+	toastr.options = {
+                closeButton: true,
+                progressBar: true,
+		timeOut: 5000,
+		extendedTimeOut: 500
+            };
+
+	// Override global options
+	return toastr.success('ETNXP Selected')
 });
 
 document.getElementById('ltnx-send').addEventListener("click", function() {
@@ -68,6 +86,15 @@ document.getElementById('ltnx-send').addEventListener("click", function() {
 	ltnx.balance = ltnxBalance;
 	sessionStorage.setItem("coin_checked", 'ltnx');
 	console.log(coin_checked);
+	toastr.options = {
+                closeButton: true,
+                progressBar: true,
+		timeOut: 5000,
+		extendedTimeOut: 500
+            };
+
+	// Override global options
+	return toastr.success('LTNX Selected')
 });
 
 document.getElementById('gldx-send').addEventListener("click", function() {
@@ -79,6 +106,15 @@ document.getElementById('gldx-send').addEventListener("click", function() {
 	sessionStorage.setItem("coin_checked", 'gldx');
 	gldx.balance = gldxBalance;
 	console.log(coin_checked);
+	toastr.options = {
+                closeButton: true,
+                progressBar: true,
+		timeOut: 5000,
+		extendedTimeOut: 500
+            };
+
+	// Override global options
+	return toastr.success('GLDX Selected')
 });
 
 document.getElementById('crfi-send').addEventListener("click", function() {
@@ -91,6 +127,15 @@ document.getElementById('crfi-send').addEventListener("click", function() {
 	crfi.balance = crfiBalance;
 	sessionStorage.getItem("code")
 	console.log(coin_checked);
+	toastr.options = {
+                closeButton: true,
+                progressBar: true,
+		timeOut: 5000,
+		extendedTimeOut: 500
+            };
+
+	// Override global options
+	return toastr.success('CRFI Selected')
 });
 document.getElementById('send-all').addEventListener("click", function() {
 	var sendAll = false;
