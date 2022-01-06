@@ -117,8 +117,8 @@ var ModelViewController = {
         };
     };
     },
-    formatCoinTransaction: function(coins, coinSymbol, units){
-    const coinUnits = coinSymbol==="crfi" ? 1 : coinSymbol==="etnx" ? 1 : coinSymbol==="etnxp" ? 1 : coinSymbol==="etnxc" ? 1 : coinSymbol==="ltnx" ? 1 : coinSymbol==="gldx" ? 1 : units;
+    formatCoinTransaction: function(coins, coinSymbol, units = 100000000){
+    const coinUnits = coinSymbol==="crfi" ? 1000000000000 : coinSymbol==="etnx" ? 100000000 : coinSymbol==="etnxp" ? 1000000 : coinSymbol==="etnxc" ? 1000000 : coinSymbol==="ltnx" ? 100000000 : coinSymbol==="gldx" ? 1000000000000 : units;
     var balancedCoins = coins * coinUnits; 
     return balancedCoins;
     },
