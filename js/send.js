@@ -10,7 +10,7 @@ $(document).ready(function(){
     };
 }); 
 var coin_checked = {
-	coin: null
+	coin: "NONE"
 };
 var etnx = {
 	balance: null,
@@ -236,12 +236,16 @@ $(document).on("click", "#send", function(){
         sessionStorage.setItem("code", pin_code);
         console.log(pin_code);
 	// check coin
-	var coin_selected = coin_checked.coin.toString();
+	var coin_selected = coin_checked.coin ? coin_checked.coin.toString() : "NONE";
 	console.log('coin_selected',coin_selected);
+	if(coin_selected === "NONE"){
+		console.log("EXPIRED: EMITTER 501M | Error, perhaps this is a mistake. Although our systems indicate no coin selected, and coin selection stored in transaction session may be improperly matched! ");
+		return sendFail("EXPIRED: No coin selected. Please select a coin. Try again momentarily.");
+	}
         const coin_to_transact = sessionStorage.getItem('coin_checked').toString();  console.log('coin_to_transact',coin_to_transact);
 	if(coin_to_transact == null || coin_to_transact == undefined || coin_selected == null || coin_selected == undefined){
-		console.log("EXPIRED: EMITTER 502M | Error, perhaps this is a mistake. Although our systems indicate the coin selected, and coin stored in session are improperly matched! ");
-		return false;
+		console.log("EXPIRED: EMITTER 502M | Error, perhaps this is a mistake. Although our systems indicate the coin selected, and coin selection stored in transaction session may be improperly matched! ");
+		return sendFail("EXPIRED: No coin selected. Please select a coin. Try again momentarily.");
 	};
 	// passport
         const coinAmount = $("#amount").val();
@@ -326,18 +330,21 @@ function sendSuccess(){
     $(".alert-success").css("display", "block");
     $("#spinner-modal").modal('show');
     function clearAlert(){$("#spinner-modal").modal('hide')};
-    setTimeout(clearAlert,7000);
+    setTimeout(clearAlert,15000);
 }
 
 function send_Fail(message){
-    $(".btn-code").css("display", "block");
+    $("#spinner-modal").modal('hide');
+    $(".btn-code").css("display", "none");
     $(".alert-danger").css("display", "block");
-    $(".alert-success").html("Transfer: " + message.tx);
+    $(".alert-danger").html("Transfer error: " + message);
+    $(".webnero_tx_error").html(message.error);
     $(".alert-success").css("display", "none");
-    $("#success_tic").modal('show');
-    function clearAlert(){$("#success_tic").modal('hide')};
-    setTimeout(clearAlert,7000);
+    $("#fail_tic").modal('show');
+    function clearAlert(){$("#fail_tic").modal('hide')};
+    setTimeout(clearAlert,10000);
 }
+
 function send_Success(message){
     $("#spinner-modal").modal('hide');
     $(".btn-code").css("display", "none");
@@ -350,7 +357,7 @@ function send_Success(message){
     $(".alert-success").css("display", "block");
     $("#success_tic").modal('show');
     function clearAlert(){$("#success_tic").modal('hide')};
-    setTimeout(clearAlert,7000);
+    setTimeout(clearAlert,15000);
 }
 
 function sendFail(message){
@@ -360,5 +367,5 @@ function sendFail(message){
     $("#spinner-modal").modal('show');
     $("#success_tic").modal('hide');
     function clearAlert(){$("#spinner-modal").modal('hide')};
-    setTimeout(clearAlert,5000);
+    setTimeout(clearAlert,10000);
 }
