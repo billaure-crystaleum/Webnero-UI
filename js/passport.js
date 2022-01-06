@@ -1096,6 +1096,11 @@ var PassportPipeline = {
         // return this.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
         return sessionStorage.getItem(coinSymbol+"_uuid");
     },
+    getCoinAINDEX: function(coinSymbol){
+        console.log(sessionStorage.getItem(coinSymbol+"_aindex"));
+        // return this.myDecipher(sessionStorage.getItem(coinSymbol+"_aindex"));
+        return sessionStorage.getItem(coinSymbol+"_aindex");
+    },
     set_passport_local: function(passportParams, version){
         if(version == null){
             return sessionStorage.setItem('passport_local', JSON.stringify(passportParams));
