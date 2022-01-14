@@ -18,6 +18,8 @@ $("body").keydown(function() {
 	function enterCase(){
         if($("#login-container").css("display") === 'block')
             document.getElementById("login").click();
+        else if($("#reset-container").css("display") === 'block')
+            document.getElementById("reset").click();
         else if($("#pin-code-container").css("display") === 'block')
             document.getElementById("pin-code").click();
         else if($("#register-container").css("display") === 'block')
