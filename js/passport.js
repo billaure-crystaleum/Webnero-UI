@@ -1444,8 +1444,7 @@ var PassportPipeline = {
                         this.passportParams.etnxp_aindex = passportLogin.data.etnxp_aindex ? parseInt(passportLogin.data.etnxp_aindex) : "NONE";
                         PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
                         PassportPipeline.setSmartCoinAindex(coinSymbol, passportLogin);
-                        PassportPipeline.ctrSet(2
-                        PassportPipeline.ctrSet(6););
+                        PassportPipeline.ctrSet(2);
                         console.log(passportLogin);
                     case 'ltnx':
                         PassportPipeline.ctrSet(3);
