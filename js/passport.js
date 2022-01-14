@@ -285,7 +285,7 @@ var PassportPipeline = {
                 PassportPipeline.setBlockchainInfo(coinSymbol, status, height, txcount, top_block_hash);
                 if(status != "OK"){
                     $("#daemon-status").css("color", "FireBrick");
-                }; else {
+                } else {
                     $("#daemon-status").css("color", "SpringGreen");
                 };
                 return;
