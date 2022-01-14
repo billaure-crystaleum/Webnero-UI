@@ -812,12 +812,12 @@ var PassportPipeline = {
         form.amount = passportParams.amount ? parseInt(passportParams.amount) : null;
         form.receiver = passportParams.receiver ? passportParams.receiver : null;
         form.pid = passportParams.pid ? passportParams.pid : null;
-        form.url = passportParams.url ? passportParams.url : PassportPipeline.getPassportApi(passportParams.coin);
+        form.url = passportParams.url ? passportParams.url : PassportPipeline.getPassportApi(passportParams.coin.toString());
         console.log(form);
         if (!passportParams.password || !passportParams.code|| !passportParams.coin) { return false; }
         return $.ajax({
             url: passportParams.url,
-            coin: coinSymbol.toString(),
+            coin: passportParams.coin.toString(),
             type: 'POST',
             cache: false,
             data: form
@@ -875,7 +875,6 @@ var PassportPipeline = {
     remoteCallX: function(passportParam){
         return $.ajax({
                     url: PassportPipeline.getPassportApi("all"),
-                    coin: coinSymbol.toString(),
                     type: 'POST',
                     cache: false,
                     data: passportParam
