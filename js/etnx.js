@@ -314,11 +314,8 @@ var ModelViewController = {
             $.event.trigger({
                 type: "init.done",
                 coin: coinSymbol
-            });        
-            if(!PassportPipeline.hasValidSession())
-            {
-                location.href = "verify.html";
-            };
+            }); 
+            location.href = "verify.html";       
     },
     initDashboard: function(){
             location.href = "index.html";
