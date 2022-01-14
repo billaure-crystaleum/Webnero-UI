@@ -1114,11 +1114,29 @@ var PassportPipeline = {
         };
     },
     getCoinUUID: function(coinSymbol){
+        if(coinSymbol === 'all'){
+            let uuidObject = {
+                etnx_uuid: parseInt(sessionStorage.getItem("etnx_uuid")),
+                etnx_uuid: parseInt(sessionStorage.getItem("etnxp_uuid")),
+                ltnx_uuid: parseInt(sessionStorage.getItem("ltnx_uuid")),
+                gldx_uuid: parseInt(sessionStorage.getItem("gldx_uuid")),
+                crfi_uuid: parseInt(sessionStorage.getItem("crfi_uuid"))
+            }; return uuidObject;
+        };
         console.log(sessionStorage.getItem(coinSymbol+"_uuid"));
         // return this.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
         return sessionStorage.getItem(coinSymbol+"_uuid");
     },
     getCoinAINDEX: function(coinSymbol){
+        if(coinSymbol === 'all'){
+            let uuidObject = {
+                etnx_uuid: parseInt(sessionStorage.getItem("etnx_aindex")),
+                etnx_uuid: parseInt(sessionStorage.getItem("etnxp_aindex")),
+                ltnx_uuid: parseInt(sessionStorage.getItem("ltnx_aindex")),
+                gldx_uuid: parseInt(sessionStorage.getItem("gldx_aindex")),
+                crfi_uuid: parseInt(sessionStorage.getItem("crfi_aindex"))
+            }; return uuidObject;
+        };
         console.log(sessionStorage.getItem(coinSymbol+"_aindex"));
         // return this.myDecipher(sessionStorage.getItem(coinSymbol+"_aindex"));
         return sessionStorage.getItem(coinSymbol+"_aindex");
@@ -1336,9 +1354,19 @@ var PassportPipeline = {
         const cxid = PassportPipeline.getCoinUUID("crfi");
         this.passportParams.crfi_uid = parseInt(cxid);
         this.passportParams.uid_crfi = this.passportParams.crfi_uid;
+        const xIndex = PassportPipeline.getCoinAINDEX("etnx");
+        const xpIndex = PassportPipeline.getCoinAINDEX("etnxp");
+        const lxIndex = PassportPipeline.getCoinAINDEX("ltnx");
+        const gxIndex = PassportPipeline.getCoinAINDEX("gldx");
+        const cxIndex = PassportPipeline.getCoinAINDEX("crfi");
         const passport_active = {
             uid: parseInt(this.passportParams.uid),
             api: this.passportParams.coinAPIurl,
+            etnx_aindex: xIndex ? parseInt(xIndex) : null,
+            etnxp_aindex: xpIndex ? parseInt(xpIndex) : null,
+            ltnx_aindex: lxIndex ? parseInt(lxIndex) : null,
+            gldx_aindex: gxIndex ? parseInt(gxIndex) : null,
+            crfi_aindex: cxIndex ? parseInt(cxIndex) : null,
             uid_etnx: xid ? parseInt(xid) : null,
             etnx_uid: xid ? parseInt(xid) : null,
             uid_etnxp: xpid ? parseInt(xpid) : null,
@@ -1411,8 +1439,8 @@ var PassportPipeline = {
                         console.log(passportLogin);
                     case 'etnxp':
                         PassportPipeline.ctrSet(2);
-                        this.passportParams.uid_etnxp = parseInt(passportLogin.data.etnx_uid);
-                        this.passportParams.etnxp_uid = parseInt(passportLogin.data.etnx_uid);
+                        this.passportParams.uid_etnxp = parseInt(passportLogin.data.etnxp_uid);
+                        this.passportParams.etnxp_uid = parseInt(passportLogin.data.etnxp_uid);
                         this.passportParams.etnxp_aindex = passportLogin.data.etnxp_aindex ? parseInt(passportLogin.data.etnxp_aindex) : "NONE";
                         PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
                         PassportPipeline.setSmartCoinAindex(coinSymbol, passportLogin);
@@ -1421,8 +1449,8 @@ var PassportPipeline = {
                         console.log(passportLogin);
                     case 'ltnx':
                         PassportPipeline.ctrSet(3);
-                        this.passportParams.uid_ltnx = parseInt(passportLogin.data.etnx_uid);
-                        this.passportParams.ltnx_uid = parseInt(passportLogin.data.etnx_uid);
+                        this.passportParams.uid_ltnx = parseInt(passportLogin.data.ltnx_uid);
+                        this.passportParams.ltnx_uid = parseInt(passportLogin.data.ltnx_uid);
                         this.passportParams.ltnx_aindex = passportLogin.data.ltnx_aindex ? parseInt(passportLogin.data.ltnx_aindex) : "NONE";
                         PassportPipeline.setSmartCoinAINDEX(coinSymbol, passportLogin);
                         PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
@@ -1430,8 +1458,8 @@ var PassportPipeline = {
                         console.log(passportLogin);
                     case 'gldx':
                         PassportPipeline.ctrSet(4);
-                        this.passportParams.uid_gldx = parseInt(passportLogin.data.etnx_uid);
-                        this.passportParams.gldx_uid = parseInt(passportLogin.data.etnx_uid);
+                        this.passportParams.uid_gldx = parseInt(passportLogin.data.gldx_uid);
+                        this.passportParams.gldx_uid = parseInt(passportLogin.data.gldx_uid);
                         this.passportParams.gldx_aindex = passportLogin.data.gldx_aindex ? parseInt(passportLogin.data.gldx_aindex) : "NONE";
                         PassportPipeline.setSmartCoinAINDEX(coinSymbol, passportLogin);
                         PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
@@ -1439,8 +1467,8 @@ var PassportPipeline = {
                         console.log(passportLogin);
                     case 'crfi':
                         PassportPipeline.ctrSet(5);
-                        this.passportParams.uid_crfi = parseInt(passportLogin.data.etnx_uid);
-                        this.passportParams.crfi_uid = parseInt(passportLogin.data.etnx_uid);
+                        this.passportParams.uid_crfi = parseInt(passportLogin.data.crfi_uid);
+                        this.passportParams.crfi_uid = parseInt(passportLogin.data.crfi_uid);
                         this.passportParams.crfi_aindex = passportLogin.data.crfi_aindex ? parseInt(passportLogin.data.crfi_aindex) : "NONE";
                         PassportPipeline.setSmartCoinAINDEX(coinSymbol, passportLogin);
                         PassportPipeline.setSmartCoinUUID(coinSymbol, passportLogin);
@@ -1449,14 +1477,14 @@ var PassportPipeline = {
                     case 'all':
                         PassportPipeline.ctrSet(6);
                         this.passportParams.uid_etnx = parseInt(passportLogin.data.etnx_uid);
-                        this.passportParams.uid_etnxp = parseInt(passportLogin.data.etnxp_uid);
-                        this.passportParams.uid_ltnx = parseInt(passportLogin.data.ltnx_uid);
-                        this.passportParams.uid_gldx = parseInt(passportLogin.data.gldx_uid);
-                        this.passportParams.uid_crfi = parseInt(passportLogin.data.crfi_uid);
                         this.passportParams.etnx_uid = parseInt(passportLogin.data.etnx_uid);
+                        this.passportParams.uid_etnxp = parseInt(passportLogin.data.etnxp_uid);
                         this.passportParams.etnxp_uid = parseInt(passportLogin.data.etnxp_uid);
+                        this.passportParams.uid_ltnx = parseInt(passportLogin.data.ltnx_uid);
                         this.passportParams.ltnx_uid = parseInt(passportLogin.data.ltnx_uid);
                         this.passportParams.gldx_uid = parseInt(passportLogin.data.gldx_uid);
+                        this.passportParams.uid_gldx = parseInt(passportLogin.data.gldx_uid);
+                        this.passportParams.uid_crfi = parseInt(passportLogin.data.crfi_uid);
                         this.passportParams.crfi_uid = parseInt(passportLogin.data.crfi_uid);
                         this.passportParams.etnx_aindex = passportLogin.data.etnx_aindex ? parseInt(passportLogin.data.etnx_aindex) : "NONE";
                         this.passportParams.etnxp_aindex = passportLogin.data.etnxp_aindex ? parseInt(passportLogin.data.etnxp_aindex) : "NONE";
@@ -1473,8 +1501,8 @@ var PassportPipeline = {
                 if(passportLogin.hasOwnProperty("error")){
                     return register_operations.registerFail(passportLogin.hasOwnProperty("error"));
                 } else {
-                    if(parseInt(ModelViewController.ctr) === 6 || passportLogin.status === 'success'){
-                        PassportPipeline.myPromises(coinSymbol, passportLogin, this.passportParams);
+                    if(parseInt(PassportPipeline.ctr) >= 6 || passportLogin.status === 'success'){
+                        // PassportPipeline.myPromises(coinSymbol, passportLogin, this.passportParams);
                         return operationCallback(coinSymbol);
                     };                 
                 };             
