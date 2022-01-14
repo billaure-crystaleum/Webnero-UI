@@ -64,7 +64,5 @@ $(document).on("click", "#pin-code", function(){
         PassportPipeline.set_passport_local(passport_registration,"passport_registration");
         // register all coins simultaneously
         PassportPipeline.registerOperation("all", ModelViewController.initVerification, passport_registration);
-      
-
     }
 });
