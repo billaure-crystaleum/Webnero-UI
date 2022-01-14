@@ -4,6 +4,19 @@ $(function() {
 
 window.onload = function() {
   ModelViewController.isLogin = false;
+    
+    $(".etnx-lds-facebook").css("display", "block");
+    $(".etnx-lds-ellipsis").css("display", "block");
+    $(".etnxp-lds-facebook").css("display", "block");
+    $(".etnxp-lds-ellipsis").css("display", "block");
+    $(".ltnx-lds-facebook").css("display", "block");
+    $(".ltnx-lds-ellipsis").css("display", "block");
+    $(".gldx-lds-facebook").css("display", "block");
+    $(".gldx-lds-ellipsis").css("display", "block");
+    $(".crfi-lds-facebook").css("display", "block");
+    $(".crfi-lds-ellipsis").css("display", "block");
+    
+     
   setInterval(PassportPipeline.statusMessage("Folio Updated!"), 9999);
 }
 $(document).ready(function(){
@@ -44,6 +57,7 @@ $(document).ready(function(){
                         code: parseInt(sessionStorage.getItem('code')),
                         coinsAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
                         coinAPIurl: passport_api.toString(),
+                        url: passport_api.toString(),
                         operation: 'poll',
                         method: 'getaddr'
                     };
@@ -118,6 +132,7 @@ $(document).ready(function(){
                         code: parseInt(sessionStorage.getItem('code')),
                         coinsAPIurl: [etnx_api, etnxp_api, ltnx_api, gldx_api, crfi_api, passport_api],
                         coinAPIurl: passport_api.toString(),
+                        url: passport_api.toString(),
                         operation: 'poll',
                         method: 'getaddr'
                     };
