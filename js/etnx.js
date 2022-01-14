@@ -137,6 +137,8 @@ var ModelViewController = {
             const est_Loading = "Loading";
             const etnxLockedBalance = etnxData.balances ? parseFloat(this.formatCoinUnits(etnxData.balances.balance, "etnx")).toFixed(4) : est_Loading;
             const etnxBalance = etnxData.balances ? this.formatCoinUnits(etnxData.balances.unlocked_balance, "etnx") : est_Loading;
+            $(".etnx-lds-facebook").css("display", "none");
+            $(".etnx-lds-ellipsis").css("display", "none");
             $("#etnx-balance").html(etnxLockedBalance);
             $("#etnx-unlocked-balance").html(etnxBalance);
         }
@@ -148,19 +150,10 @@ var ModelViewController = {
             const est_Loading = "Loading";
             const etnxpLockedBalance = etnxpData.balances ? parseFloat(this.formatCoinUnits(etnxpData.balances.balance, "etnxp")).toFixed(4) : est_Loading;
             const etnxpBalance = etnxpData.balances ? this.formatCoinUnits(etnxpData.balances.unlocked_balance, "etnxp") : est_Loading;
+            $(".etnxp-lds-facebook").css("display", "none");
+            $(".etnxp-lds-ellipsis").css("display", "none");
             $("#etnxp-balance").html(etnxpLockedBalance);
             $("#etnxp-unlocked-balance").html(etnxpBalance);
-        }
-        
-        var crfiData = this.getCoinData("crfi");
-        if(crfiData != null){
-            $("#crfi-wallet").html(crfiData.address);
-            console.log(crfiData);
-            const est_Loading = "Loading";
-            const crfiLockedBalance = crfiData.balances ? parseFloat(this.formatCoinUnits(crfiData.balances.balance, "crfi")).toFixed(4) : est_Loading;
-            const crfiBalance = crfiData.balances ? this.formatCoinUnits(crfiData.balances.unlocked_balance, "crfi") : est_Loading;
-            $("#crfi-balance").html(crfiLockedBalance);
-            $("#crfi-unlocked-balance").html(crfiBalance);
         }
                 
         var ltnxData = this.getCoinData("ltnx");
@@ -170,6 +163,8 @@ var ModelViewController = {
             const est_Loading = "Loading";
             const ltnxLockedBalance = ltnxData.balances ? parseFloat(this.formatCoinUnits(ltnxData.balances.balance, "ltnx")).toFixed(4) : est_Loading;
             const ltnxBalance = ltnxData.balances ? this.formatCoinUnits(ltnxData.balances.unlocked_balance, "ltnx") : est_Loading;
+            $(".ltnx-lds-facebook").css("display", "none");
+            $(".ltnx-lds-ellipsis").css("display", "none");
             $("#ltnx-balance").html(ltnxLockedBalance);
             $("#ltnx-unlocked-balance").html(ltnxBalance);
         }
@@ -181,8 +176,23 @@ var ModelViewController = {
             const est_Loading = "Loading";
             const gldxLockedBalance = gldxData.balances ? parseFloat(this.formatCoinUnits(gldxData.balances.balance, "gldx")).toFixed(4) : est_Loading;
             const gldxBalance = gldxData.balances ? this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx") : est_Loading;
-                $("#gldx-balance").html(gldxLockedBalance);
-                $("#gldx-unlocked-balance").html(gldxBalance);
+            $(".gldx-lds-facebook").css("display", "none");
+            $(".gldx-lds-ellipsis").css("display", "none");
+            $("#gldx-balance").html(gldxLockedBalance);
+            $("#gldx-unlocked-balance").html(gldxBalance);
+        }
+        
+        var crfiData = this.getCoinData("crfi");
+        if(crfiData != null){
+            $("#crfi-wallet").html(crfiData.address);
+            console.log(crfiData);
+            const est_Loading = "Loading";
+            const crfiLockedBalance = crfiData.balances ? parseFloat(this.formatCoinUnits(crfiData.balances.balance, "crfi")).toFixed(4) : est_Loading;
+            const crfiBalance = crfiData.balances ? this.formatCoinUnits(crfiData.balances.unlocked_balance, "crfi") : est_Loading;
+            $(".crfi-lds-facebook").css("display", "none");
+            $(".crfi-lds-ellipsis").css("display", "none");
+            $("#crfi-balance").html(crfiLockedBalance);
+            $("#crfi-unlocked-balance").html(crfiBalance);
         }
     },
 
