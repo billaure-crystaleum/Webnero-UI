@@ -53,12 +53,12 @@ $(document).on("click", "#reset-code", function(){
 
 $(document).on("click", "#reset", function(){
     if($("#email").val() != $("#confirm-email").val() || $("#confirm-email").val() != $("#email").val()){
-        let userErr = "Your email does not match. Please correct your email, and try again momentarily.";
+        let userErr = "Email mismatch. Please correct your email address, and try again momentarily.";
         $(".alert-danger").html(userErr)
         resetFail();
         return;
     }
     else {
-    PassportPipeline.resetPassword('all', $("#email").val(), "", "", false)
+    PassportPipeline.resetPassword('all', $("#email").val(), false, false, false)
     }
 });
