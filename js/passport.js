@@ -270,11 +270,11 @@ var PassportPipeline = {
             if(response){
                 let daemonStatus = JSON.parse(response);
                 if(daemonStatus.hasOwnProperty("error")){
-                let daemonError = daemonStatus.error;
-                $(".alert-danger").html(daemonError);
-                console.log(daemonStatus);
-                return;
-                }   
+                    let daemonError = daemonStatus.error;
+                    $(".alert-danger").html(daemonError);
+                    console.log(daemonStatus);
+                    return;
+                };
                 const daemonData = daemonStatus.data;
                 const status = String(daemonData.status);
                 const height = parseInt(daemonData.height);
@@ -285,9 +285,9 @@ var PassportPipeline = {
                 PassportPipeline.setBlockchainInfo(coinSymbol, status, height, txcount, top_block_hash);
                 if(status != "OK"){
                     $("#daemon-status").css("color", "FireBrick");
-                } else {
+                }; else {
                     $("#daemon-status").css("color", "SpringGreen");
-                }
+                };
                 return;
             }
             });
@@ -633,21 +633,21 @@ var PassportPipeline = {
             this.passportParams.email = email;  
             this.passportParams.method = 'reset_password';
             this.setMethod('reset_password');
-        }
+        };
         if(key_set == false){
             this.passportParams.email = email;
-        }
-        if(key_set == true && password != null || key_set == true && password != false){
+        };
+        if(key_set == true && password != null && password != false){
             if(password != repeat){
                 resetFail();
                 return;
-               }
+               };
             this.loadHash();
             this.passportParams.password = password;
             this.passportParams.method = 'reset_password_settings';
             this.setMethod('reset_password_settings');
             console.log(this.passportParams);
-        }        
+        };      
         let resetCoinPassword = function(coinSymbol,passportParam){
             PassportPipeline.remoteCallX(passportParam).then((response) => {
                 console.log("reset init");
@@ -715,7 +715,7 @@ var PassportPipeline = {
                     method: 'reset_password_webnero'
                 }; 
                 PassportPipeline.setMethod('reset_password_webnero');
-                return resetCoinPassword('etnx',passportParam);
+                return resetCoinPassword('all',passportParam);
                 break;
             default:
                 var passportParam = {
@@ -875,6 +875,7 @@ var PassportPipeline = {
     remoteCallX: function(passportParam){
         return $.ajax({
                     url: PassportPipeline.getPassportApi("all"),
+                    coin: "all",
                     type: 'POST',
                     cache: false,
                     data: passportParam
@@ -882,7 +883,7 @@ var PassportPipeline = {
     },   
     remoteCallPassport: function(coinSymbol, passportParams){
         return $.ajax({
-                    url: this.getPassportApi(coinSymbol),
+                    url: PassportPipeline.getPassportApi(coinSymbol),
                     coin: coinSymbol.toString(),
                     type: 'POST',
                     cache: false,
