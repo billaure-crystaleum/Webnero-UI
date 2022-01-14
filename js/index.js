@@ -5,6 +5,11 @@ $(function() {
 window.onload = function() {
   ModelViewController.isLogin = false;
     
+    $(".etnx-bal").css("display", "none");
+    $(".etnxp-bal").css("display", "none");
+    $(".ltnx-bal").css("display", "none");
+    $(".gldx-bal").css("display", "none");
+    $(".crfi-bal").css("display", "none");
     $(".etnx-lds-facebook").css("display", "block");
     $(".etnx-lds-ellipsis").css("display", "block");
     $(".etnxp-lds-facebook").css("display", "block");
@@ -15,7 +20,6 @@ window.onload = function() {
     $(".gldx-lds-ellipsis").css("display", "block");
     $(".crfi-lds-facebook").css("display", "block");
     $(".crfi-lds-ellipsis").css("display", "block");
-    
      
   setInterval(PassportPipeline.statusMessage("Folio Updated!"), 9999);
 }
