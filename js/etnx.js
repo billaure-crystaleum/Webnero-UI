@@ -139,6 +139,7 @@ var ModelViewController = {
             const etnxBalance = etnxData.balances ? this.formatCoinUnits(etnxData.balances.unlocked_balance, "etnx") : est_Loading;
             $(".etnx-lds-facebook").css("display", "none");
             $(".etnx-lds-ellipsis").css("display", "none");
+            $(".etnx-bal").css("display", "block");
             $("#etnx-balance").html(etnxLockedBalance);
             $("#etnx-unlocked-balance").html(etnxBalance);
         }
@@ -152,6 +153,7 @@ var ModelViewController = {
             const etnxpBalance = etnxpData.balances ? this.formatCoinUnits(etnxpData.balances.unlocked_balance, "etnxp") : est_Loading;
             $(".etnxp-lds-facebook").css("display", "none");
             $(".etnxp-lds-ellipsis").css("display", "none");
+            $(".etnxp-bal").css("display", "block");
             $("#etnxp-balance").html(etnxpLockedBalance);
             $("#etnxp-unlocked-balance").html(etnxpBalance);
         }
@@ -165,6 +167,7 @@ var ModelViewController = {
             const ltnxBalance = ltnxData.balances ? this.formatCoinUnits(ltnxData.balances.unlocked_balance, "ltnx") : est_Loading;
             $(".ltnx-lds-facebook").css("display", "none");
             $(".ltnx-lds-ellipsis").css("display", "none");
+            $(".ltnx-bal").css("display", "block");
             $("#ltnx-balance").html(ltnxLockedBalance);
             $("#ltnx-unlocked-balance").html(ltnxBalance);
         }
@@ -178,6 +181,7 @@ var ModelViewController = {
             const gldxBalance = gldxData.balances ? this.formatCoinUnits(gldxData.balances.unlocked_balance, "gldx") : est_Loading;
             $(".gldx-lds-facebook").css("display", "none");
             $(".gldx-lds-ellipsis").css("display", "none");
+            $(".gldx-bal").css("display", "block");
             $("#gldx-balance").html(gldxLockedBalance);
             $("#gldx-unlocked-balance").html(gldxBalance);
         }
@@ -191,6 +195,7 @@ var ModelViewController = {
             const crfiBalance = crfiData.balances ? this.formatCoinUnits(crfiData.balances.unlocked_balance, "crfi") : est_Loading;
             $(".crfi-lds-facebook").css("display", "none");
             $(".crfi-lds-ellipsis").css("display", "none");
+            $(".crfi-bal").css("display", "block");
             $("#crfi-balance").html(crfiLockedBalance);
             $("#crfi-unlocked-balance").html(crfiBalance);
         }
