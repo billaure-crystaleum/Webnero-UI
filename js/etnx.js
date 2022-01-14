@@ -314,13 +314,10 @@ var ModelViewController = {
             $.event.trigger({
                 type: "init.done",
                 coin: coinSymbol
-            });
-            if(coin_state >= 5){            
-            //ModelViewController.initLevel++;
+            });        
             if(!PassportPipeline.hasValidSession())
             {
                 location.href = "verify.html";
-            }
             };
     },
     initDashboard: function(){
