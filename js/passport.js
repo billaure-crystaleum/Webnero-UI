@@ -350,16 +350,12 @@ var PassportPipeline = {
             });
     },    
     getLocalCoinAindex: function(coinSymbol){
-        console.log("getSmartCoinAindex");
+        console.log("getLocalCoinAindex");
         if(!coinSymbol){
-        coinSymbol = 'crfi'; // default crfi
+        coinSymbol = 'all'; // default all
         };
-        PassportPipeline.loadParams();
-        this.passportParams.etnx_aindex = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
-        this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
-        this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
-        this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
-        this.passportParams.uid = parseInt(PassportPipeline.getCoinUUID(coinSymbol));
+        var coinIndex = coinSymbol+"_aindex";
+        this.passportParams.coinIndex = parseInt(sessionStorage.getItem(coinIndex));
     },
     fillBeneficiary: function(coinSymbol, list){
         console.log("fillBeneficiary");
@@ -373,7 +369,7 @@ var PassportPipeline = {
         console.log("name: "+name)
         console.log("email: "+email)
         console.log("address: "+address)
-    document.getElementById("name_span").innerHTML = name;
+        document.getElementById("name_span").innerHTML = name;
         document.getElementById("email_span").innerHTML = email;
         document.getElementById("address_span").innerHTML = address;
     },
