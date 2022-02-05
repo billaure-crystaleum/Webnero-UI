@@ -50,7 +50,8 @@ bower update
 The public Electronero Passport API is exposed at the following endpoints;
   
 ```
-    passportAPI: 'https://passport.electronero.org/passport/api.php';```
+    passportAPI: 'https://passport.electronero.org/passport/api.php';
+```
   
   These following expressions contain Electronero Passport API public function names, and expected variables in order for a POST to return true, or with data; 
 ```
@@ -59,7 +60,8 @@ The public Electronero Passport API is exposed at the following endpoints;
     		case "reset_password_webnero": expects (email) 
 		case "getaddr_webnero": expects (email), (password), (code)
 		case "transfer_webnero": expects (coin), (uid), (password), (amount), (receiver), (pid) 
-		case "transfer_split_webnero":  expects (coin), (uid), (password), (amount), (receiver), (pid)```
+		case "transfer_split_webnero":  expects (coin), (uid), (password), (amount), (receiver), (pid)
+```
 
 Developers: 
 ```
@@ -67,9 +69,10 @@ Developers:
 	To login an account: Send a POST object to login_webnero with the email, password, and security code.
 	To reset an accounts password: Send a POST object to reset_password_webnero with the email address.
 	To transfer coins from an account: Send a POST object to transfer_webnero with the coin, user ID, password, amount, receiver, and payment ID
-	To use transfer split method for bulk transfers of coins from an account: Send a POST object to transfer_split_webnero with the coin, user ID, password, amount, receiver, and payment ID```
+	To use transfer split method for bulk transfers of coins from an account: Send a POST object to transfer_split_webnero with the coin, user ID, password, amount, receiver, and payment ID
+```
 	
-Exammple (register_webnero): contact Electronero Passport Protocol with Jquery + Ajax + JSON
+Example (register_webnero): contact Electronero Passport Protocol with Jquery + Ajax + JSON
 	
 ```
 $(document).ready(function() {
