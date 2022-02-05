@@ -62,7 +62,9 @@ The public Electronero Passport API is exposed at the following endpoints;
 		case "transfer_webnero": expects (coin), (uid), (password), (amount), (receiver), (pid) 
 		case "transfer_split_webnero":  expects (coin), (uid), (password), (amount), (receiver), (pid)
 ```
-
+	
+In case of coin the following are acceptable: "etnx", "etnxp", "ltnx", "gldx", "crfi" or "all" (register operation is restricted to "all" for the time-being) if coin is not supplied "all" will be assumed. 
+	
 Developers: 
 ```
 	To register an account: Send a POST object to register_webnero with the email, password, and security code.
