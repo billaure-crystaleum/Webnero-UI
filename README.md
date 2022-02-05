@@ -61,12 +61,12 @@ The public Electronero Passport API is exposed at the following endpoints;
 		case "transfer_webnero": expects (coin), (uid), (password), (amount), (receiver), (pid) 
 		case "transfer_split_webnero":  expects (coin), (uid), (password), (amount), (receiver), (pid)```
 
-Developers: 
+Developers: `
 	To register an account: Send a POST object to register_webnero with the email, password, and security code.
 	To login an account: Send a POST object to login_webnero with the email, password, and security code.
 	To reset an accounts password: Send a POST object to reset_password_webnero with the email address.
 	To transfer coins from an account: Send a POST object to transfer_webnero with the coin, user ID, password, amount, receiver, and payment ID
-	To use transfer split method for bulk transfers of coins from an account: Send a POST object to transfer_split_webnero with the coin, user ID, password, amount, receiver, and payment ID
+	To use transfer split method for bulk transfers of coins from an account: Send a POST object to transfer_split_webnero with the coin, user ID, password, amount, receiver, and payment ID`
 	
 Exammple (register_webnero): contact Electronero Passport Protocol with Jquery + Ajax + JSON
 	
