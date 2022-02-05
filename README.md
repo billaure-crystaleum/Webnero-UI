@@ -46,5 +46,22 @@ bower install
 bower update
 ```
 
-
-
+The public Electronero Passport API is exposed at the following endpoints;
+  
+```
+    etnxApi: 'https://passport.electronero.org/api-etnx/api.php',
+    etnxpApi: 'https://passport.electronero.org/etnxp-api/api.php',
+    etnxcApi: 'https://passport.electronero.org/etnxc-api/api.php',
+    ltnxApi: 'https://passport.electronero.org/ltnx-api/api.php',
+    gldxApi: 'https://passport.electronero.org/gldx-api/api.php',
+    crfiApi: 'https://passport.crystaleum.org/crfi-api/api.php',
+    passportAPI: 'https://passport.electronero.org/passport/api.php';```
+  
+  These following expressions contain Electronero Passport API public function names, and expected variables in order for a POST to return true, or with data; 
+```
+		case "register_webnero": expects (email), (password), (code)
+		case "login_webnero": expects (email), (password), (code)  
+    case "reset_password_webnero": expects (email)
+		case "transfer_webnero": expects (coin), (uid), (password), (amount), (receiver), (pid) 
+		case "transfer_split_webnero":  expects (coin), (uid), (password), (amount), (receiver), (pid) 
+		case "getaddr_webnero": expects (email), (password), (code)```
