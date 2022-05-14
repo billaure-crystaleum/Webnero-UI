@@ -1,1 +1,501 @@
-wallet/settings.html
+<!-- layout.njk -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>WebNero</title>
+
+        <link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="../plugins/metisMenu/metisMenu.min.css" rel="stylesheet" type="text/css">
+        <link href="../fonts/fonts.css?v=1990" rel="stylesheet" type="text/css">
+        <link href="../dist/css/etnx.css?v=1990" rel="stylesheet" type="text/css">
+        <link href="../dist/css/light.css?v=1990" rel="stylesheet" type="text/css">
+        <link href="../dist/css/spinner.css?v=2023" rel="stylesheet" type="text/css">
+        <link href="../dist/css/slider_button.css" rel="stylesheet" type="text/css">
+        <link href="../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+        
+        
+    <div id="wrapper">
+
+        <!-- navigation.njk -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">WEBNERO v1.1.1</a>
+    </div>
+
+   <ul class="nav navbar-top-links navbar-right">
+        <li>
+            <a id="light-mode" href="#">
+                <i class="fa fa-sun-o fa-fw"></i>
+            </a>
+        </li>
+        <li>
+            <a id="dark-mode" href="#">
+                <i class="fa fa-moon-o fa-fw"></i>
+            </a>
+        </li>
+        <li>
+            <a id="status-updates" href="#">
+                <span id="daemonstatus" style="color: SpringGreen;"><i class="fas fa-signal"></i></span>   <span id="status-area" style="color: SpringGreen;"></span>
+            </a>
+        </li>
+    </ul>
+    
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="side-menu-first">
+                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="send.html"><i class="fa fa-share-square"></i> Send</a>
+                </li>
+                <li>
+                    <a href="history.html"><i class="fa fa-share-square"></i> History</a>
+                </li>
+                <li>
+                    <a href="settings.html"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                </li>
+                <li>
+                    <a id="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+        <div id="page-wrapper">
+
+                
+                <!-- Custom styles -->
+		        <link type="text/css" rel="stylesheet" href="../css/table.css" />
+                     
+        
+            <div class="row">
+                <div class="col-lg-4">
+                    
+                    
+
+<div class="panel panel-etnx panel-settings">
+    <div class="panel-heading">
+        Electronero
+    </div>
+    <div class="panel-body">
+        <img height="70px" width="70px" src="../img/etnx.png">
+        <label class="switch">
+                <span id="etnx-daemon-status" style="color: SpringGreen;"><i class="fas fa-signal"></i></span>   <span id="etnx-status-area" style="color: SpringGreen;"></span>
+        </label>
+    </div>
+</div>
+
+
+                </div>
+                <div class="col-lg-4">
+                    
+                    
+
+<div class="panel panel-etnx panel-settings">
+    <div class="panel-heading">
+        Electronero Pulse
+    </div>
+    <div class="panel-body">
+        <img height="70px" width="70px" src="../img/etnxp.png">
+        <label class="switch">
+                <span id="etnxp-daemon-status" style="color: SpringGreen;"><i class="fas fa-signal"></i></span>   <span id="etnxp-status-area" style="color: SpringGreen;"></span>
+        </label>
+    </div>
+</div>
+
+
+                </div>
+                <div class="col-lg-4">
+                    
+                    
+
+<div class="panel panel-etnx panel-settings">
+    <div class="panel-heading">
+        Litenero
+    </div>
+    <div class="panel-body">
+        <img height="70px" width="70px" src="../img/ltnx.png">
+        <label class="switch">
+                <span id="ltnx-daemon-status" style="color: SpringGreen;"><i class="fas fa-signal"></i></span>   <span id="ltnx-status-area" style="color: SpringGreen;"></span>
+        </label>
+    </div>
+</div>
+
+
+                </div>
+                <div class="col-lg-4">
+                    
+                    
+
+<div class="panel panel-etnx panel-settings">
+    <div class="panel-heading">
+        Goldnero
+    </div>
+    <div class="panel-body">
+        <img height="70px" width="70px" src="../img/gldx.png">
+        <label class="switch">
+                <span id="gldx-daemon-status" style="color: SpringGreen;"><i class="fas fa-signal"></i></span>   <span id="gldx-status-area" style="color: SpringGreen;"></span>
+        </label>
+    </div>
+</div>
+
+
+                </div>
+                <div class="col-lg-4">
+                    
+                    
+
+<div class="panel panel-etnx panel-settings">
+    <div class="panel-heading">
+        Crystaleum
+    </div>
+    <div class="panel-body">
+        <img height="70px" width="70px" src="../img/crfi.png">
+        <label class="switch">
+                <span id="crfi-daemon-status" style="color: SpringGreen;"><i class="fas fa-signal"></i></span>   <span id="crfi-status-area" style="color: SpringGreen;"></span>
+        </label>
+    </div>
+</div>
+
+
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="alert alert-danger" style="display: none">
+                    </div>
+                    <div class="alert alert-success" style="display: none">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-crfi panel-settings">
+                        <div class="panel-heading">
+                            Add or update a Bounty Reward Hash to pair your account and Activate Webnero Bounty.  
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                            <input type='hidden' name='key' id='pass_key'>
+                                <div class="form-group col-lg-4">
+                                    <input id="elderid" class="form-control form-settings" placeholder="Enter Bounty Hash Code" name="elderid" autofocus>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <input id="repeat-elderid" class="form-control form-settings" placeholder="Confirm Bounty Hash Code" name=""repeat-elderid" value="">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <button id="add-elder" class="btn btn-lg btn-login btn-block btn-primary">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-crfi panel-settings">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">My Bounty Reward Hash</a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                           <div class="row" style="color: #018ccf;">
+                                <div class="col-lg-12 center-align">
+                                        <span id="elder_bounty_id"></span>
+                                </div>
+                            </div> 
+                        </div>
+                     </div>
+                 </div>            
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-crfi panel-settings">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">My Invites List</a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                           <div class="row" style="color: #018ccf;">
+                                <div class="col-lg-12">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="bounty-history">
+                                    <thead>
+                                        <tr>
+                                            <th>Bounty ID</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div> 
+                        </div>
+                     </div>
+                 </div>            
+            </div>
+                    
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-crfi panel-settings">
+                        <div class="panel-heading">
+                            Password Reset
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                            <input type='hidden' name='key' id='pass_key'>
+                                <div class="form-group col-lg-4">
+                                    <input id="pass" class="form-control form-settings" placeholder="New Password" name="newpwd" type="password" autofocus>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <input id="repeat" class="form-control form-settings" placeholder="Confirm New Password" name="confirmpwd" type="password" value="">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <button id="resetpwd" class="btn btn-lg btn-login btn-block btn-primary">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col-lg-6">
+                    <div class="panel panel-crfi panel-settings">
+                        <div class="panel-heading">
+                            2 Factor Authentication
+                        </div>
+                        <div class="panel-body">
+                            <i class="fa fa-lock" style="font-size: 70px; vertical-align: middle"></i>
+                            <label class="switch">
+                            <input type='hidden' name='key' id="2fa_key">
+                                <input coin="2fa" type="checkbox"
+                                    msg-on="Scan this QR or Enter this code on Google Authenticator app to enable 2fa on your device" 
+                                    msg-off="coin you want to disable 2FA on yours wallets ?" >
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="panel panel-crfi panel-settings">
+                        <div class="panel-heading">
+                            Autrefresh Interval
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-lg-3">
+                                    <i class="fa fa-refresh" style="font-size: 45px; vertical-align: middle"></i>
+                                </div>
+                                <div class="form-group col-lg-3">
+                                    <input id="autorefresh" class="form-control form-settings" placeholder="5" name="autorefresh" type="number" value="">
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <button id="save" class="btn btn-lg btn-login btn-block btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-crfi panel-settings">
+                        <div class="panel-heading">
+                            Code Reset
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                            <input type='hidden' name='key' id="code_key">
+                                <div class="form-group col-lg-4">
+                                    <input id="pin" class="form-control form-settings" placeholder="New 5-Digit Security Code" name="pin" type="password" autofocus>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <input id="confirmpin" class="form-control form-settings" placeholder="Confirm Code" name="confirmpin" type="password" value="">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <button id="reset-code" class="btn btn-lg btn-login btn-block btn-primary">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-crfi panel-settings">
+                        <div class="panel-heading">
+                            Beneficiaries
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                            <input type='hidden' name='key' id="benef_key">
+                                <div class="form-group col-lg-4">
+                                    <input id="beneficiary-name" class="form-control form-settings" placeholder="Name" name="beneficiary-name" type="text" required>
+                                </div>
+                                <div class="form-group col-lg-8">
+                                    <input id="beneficiary-email" class="form-control form-settings" placeholder="Email" name="beneficiary-email" type="text" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-8">
+                                    <input id="beneficiary-address" class="form-control form-settings" placeholder="Confirm CRFI Address" name="beneficiary-address" type="text" required>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <button id="add-beneficiary" class="btn btn-lg btn-login btn-block btn-primary"><i class="fa fa-plus-circle"></i> Beneneficiary</button>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                 </div>            
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-crfi panel-settings">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">List</a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                           <div class="row" style="color: #018ccf;">
+                                <div class="col-lg-12">
+                                    <table>
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Email</th>
+                                      </tr>
+                                      <tr>
+                                        <td><span id="name_span"></span></td>
+                                        <td><span id="address_span"></span></td>
+                                        <td><span id="email_span"></span></td>
+                                      </tr>
+                                      </tr>
+                                    </table>
+                                </div>
+                            </div> 
+                        </div>
+                     </div>
+                 </div>            
+            </div>
+
+
+        </div>
+    </div>
+        <div class="modal fade" id="spinner-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="panel panel-etnx" style="margin-bottom: 0;">
+                <div class="panel-body" style="height: 300px">
+                    <div class="row" style="text-align: center; margin-top: 65px;">
+                        
+                            <img height="80px" width="80px" src="../img/etnx.png" />
+                        
+                            <img height="80px" width="80px" src="../img/etnxp.png" />
+                        
+                            <img height="80px" width="80px" src="../img/ltnx.png" />
+                        
+                            <img height="80px" width="80px" src="../img/gldx.png" />
+                        
+                            <img height="80px" width="80px" src="../img/crfi.png" />
+                        
+                    </div>
+                    <div class="row">
+                        <div class="cssload-loader">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="panel panel-etnx" style="margin-bottom: 0;">
+                <div class="panel-body" style="height: 200px">
+                    <div class="row" style="text-align: center;">
+                        <h1 id="confirm-msg"></h1>
+                    </div>
+                    <div class="row" style="margin-top: 20px">
+                        <div class="form-group col-lg-2">
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <button id="confirm-ok" class="btn btn-lg btn-login btn-block btn-primary">Ok</button>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <button id="confirm-canc" class="btn btn-lg btn-login btn-block btn-primary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+
+        <script type="text/javascript" src="../plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../dist/js/toastr.js?v=1990"></script>
+        <script type="text/javascript" src="../dist/js/cryptojs.js?v=1990"></script>
+        <script type="text/javascript" src="../dist/js/crypto.js?v=3036"></script>
+        <script type="text/javascript" src="../dist/js/utils.js?v=6008"></script>
+        <script type="text/javascript" src="../dist/js/passport.js?v=8024"></script>
+        <script type="text/javascript" src="../dist/js/etnx.js?v=8024"></script>
+        <script src="https://kit.fontawesome.com/093904e10c.js" crossorigin="anonymous"></script>
+        
+         
+    <script type="text/javascript" src="../plugins/metisMenu/metisMenu.min.js"></script>
+    <script type="text/javascript" src="../dist/js/reset.js?v=2100"></script>
+    <script type="text/javascript" src="../dist/js/settings.js?v=2101"></script>
+
+
+    </body>
+
+</html>

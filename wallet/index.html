@@ -18,7 +18,7 @@
         <link href="../fonts/fonts.css?v=1990" rel="stylesheet" type="text/css">
         <link href="../dist/css/etnx.css?v=1990" rel="stylesheet" type="text/css">
         <link href="../dist/css/light.css?v=1990" rel="stylesheet" type="text/css">
-        <link href="../dist/css/spinner.css" rel="stylesheet" type="text/css">
+        <link href="../dist/css/spinner.css?v=2023" rel="stylesheet" type="text/css">
         <link href="../dist/css/slider_button.css" rel="stylesheet" type="text/css">
         <link href="../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -103,14 +103,14 @@
                 <img height="70px" width="70px" src="../img/etnx.png" />
             </div>
             <div class="col-xs-9 text-right">
-                <div id="etnx-balance" class="huge"></div>
-                <div>Balance</div>
+                <div id="etnx-balance" class="huge"><div class="etnx-lds-facebook" style="float:right;margin-right:5%;"><div></div><div></div><div></div></div></div>
+                <div class="etnx-bal">Balance</div>
             </div>
         </div>
     </div>
     <div class="panel-footer">
-        <span class="pull-left">Unlocked Balance</span>
-        <span id="etnx-unlocked-balance" class="pull-right"></span>
+        <span class="pull-left etnx-bal">Unlocked Balance</span>
+        <span id="etnx-unlocked-balance" class="pull-right"><div class="etnx-lds-ellipsis"><div></div><div></div><div></div><div></div></div></span>
         <div class="clearfix"></div>
     </div>                       
 </div>
@@ -128,14 +128,14 @@
                 <img height="70px" width="70px" src="../img/etnxp.png" />
             </div>
             <div class="col-xs-9 text-right">
-                <div id="etnxp-balance" class="huge"></div>
-                <div>Balance</div>
+                <div id="etnxp-balance" class="huge"><div class="etnxp-lds-facebook" style="float:right;margin-right:5%;"><div></div><div></div><div></div></div></div>
+                <div class="etnxp-bal">Balance</div>
             </div>
         </div>
     </div>
     <div class="panel-footer">
-        <span class="pull-left">Unlocked Balance</span>
-        <span id="etnxp-unlocked-balance" class="pull-right"></span>
+        <span class="pull-left etnxp-bal">Unlocked Balance</span>
+        <span id="etnxp-unlocked-balance" class="pull-right"><div class="etnxp-lds-ellipsis"><div></div><div></div><div></div><div></div></div></span>
         <div class="clearfix"></div>
     </div>                       
 </div>
@@ -153,14 +153,14 @@
                 <img height="70px" width="70px" src="../img/ltnx.png" />
             </div>
             <div class="col-xs-9 text-right">
-                <div id="ltnx-balance" class="huge"></div>
-                <div>Balance</div>
+                <div id="ltnx-balance" class="huge"><div class="ltnx-lds-facebook" style="float:right;margin-right:5%;"><div></div><div></div><div></div></div></div>
+                <div class="ltnx-bal">Balance</div>
             </div>
         </div>
     </div>
     <div class="panel-footer">
-        <span class="pull-left">Unlocked Balance</span>
-        <span id="ltnx-unlocked-balance" class="pull-right"></span>
+        <span class="pull-left ltnx-bal">Unlocked Balance</span>
+        <span id="ltnx-unlocked-balance" class="pull-right"><div class="ltnx-lds-ellipsis"><div></div><div></div><div></div><div></div></div></span>
         <div class="clearfix"></div>
     </div>                       
 </div>
@@ -180,14 +180,14 @@
                 <img height="70px" width="70px" src="../img/gldx.png" />
             </div>
             <div class="col-xs-9 text-right">
-                <div id="gldx-balance" class="huge"></div>
-                <div>Balance</div>
+                <div id="gldx-balance" class="huge"><div class="gldx-lds-facebook" style="float:right;margin-right:5%;"><div></div><div></div><div></div></div></div>
+                <div class="gldx-bal">Balance</div>
             </div>
         </div>
     </div>
     <div class="panel-footer">
-        <span class="pull-left">Unlocked Balance</span>
-        <span id="gldx-unlocked-balance" class="pull-right"></span>
+        <span class="pull-left gldx-bal">Unlocked Balance</span>
+        <span id="gldx-unlocked-balance" class="pull-right"><div class="gldx-lds-ellipsis"><div></div><div></div><div></div><div></div></div></span>
         <div class="clearfix"></div>
     </div>                       
 </div>
@@ -205,14 +205,14 @@
                 <img height="70px" width="70px" src="../img/crfi.png" />
             </div>
             <div class="col-xs-9 text-right">
-                <div id="crfi-balance" class="huge"></div>
-                <div>Balance</div>
+                <div id="crfi-balance" class="huge"><div class="crfi-lds-facebook" style="float:right;margin-right:5%;"><div></div><div></div><div></div></div></div>
+                <div class="crfi-bal">Balance</div>
             </div>
         </div>
     </div>
     <div class="panel-footer">
-        <span class="pull-left">Unlocked Balance</span>
-        <span id="crfi-unlocked-balance" class="pull-right"></span>
+        <span class="pull-left crfi-bal">Unlocked Balance</span>
+        <span id="crfi-unlocked-balance" class="pull-right"><div class="crfi-lds-ellipsis"><div></div><div></div><div></div><div></div></div></span>
         <div class="clearfix"></div>
     </div>                       
 </div>
@@ -384,21 +384,22 @@
 
 
 
-
         <script type="text/javascript" src="../plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../dist/js/toastr.js?v=1990"></script>
+        <script type="text/javascript" src="../dist/js/cryptojs.js?v=1990"></script>
         <script type="text/javascript" src="../dist/js/crypto.js?v=3036"></script>
-        <script type="text/javascript" src="../dist/js/utils.js?v=6006"></script>
-        <script type="text/javascript" src="../dist/js/passport.js?v=6070"></script>
-        <script type="text/javascript" src="../dist/js/etnx.js?v=6069"></script>
+        <script type="text/javascript" src="../dist/js/utils.js?v=6008"></script>
+        <script type="text/javascript" src="../dist/js/passport.js?v=8024"></script>
+        <script type="text/javascript" src="../dist/js/etnx.js?v=8024"></script>
         <script src="https://kit.fontawesome.com/093904e10c.js" crossorigin="anonymous"></script>
         
          
     <script type="text/javascript" src="../dist/js/locals.js?v=1990"></script>
     <script type="text/javascript" src="../plugins/metisMenu/metisMenu.min.js"></script>
-    <script type="text/javascript" src="../plugins/qrious/qrious.js?v=2023"></script>
-    <script type="text/javascript" src="../dist/js/qr-gen.js?v=2123"></script>
-    <script type="text/javascript" src="../dist/js/index.js?v=6051"></script>
+    <script type="text/javascript" src="../plugins/qrious/qrious.js?v=2024"></script>
+    <script type="text/javascript" src="../dist/js/qr-gen.js?v=2124"></script>
+    <script type="text/javascript" src="../dist/js/index.js?v=8108"></script>
 
 
     </body>
