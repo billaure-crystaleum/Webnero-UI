@@ -228,6 +228,13 @@
                 </div>
                 <div role="form">
                     <fieldset>
+                        <div class="row" style="position: relative; top:0;margin-bottom:3%;padding-bottom:2%;"> 
+                        <ul style="list-style-type: none;margin: 0;padding: 0;">
+                          <li style="display: inline; text-align:left;padding-left:2%;"><button class="btn-login" onclick="window.location.href='https://webnero.electronero.org/login.html'">return</button></li>
+                          <li style="display: inline; padding-right:20%;"></li>
+                          <li style="display: inline; text-align:right; position: absolute; right: 0;padding-right:2%;"><button class="btn-login" onclick="window.location.href='https://t.me/etnxsupport'">help</button></li>
+                        </ul>
+                        </div>
                         <div id="pin-form" class="form-group" style="text-align: center">
                             <input id="digit-1" class="form-control inputDigit" type="password" style="width: 34px; display: inline-block" disabled>
                             <input id="digit-2" class="form-control inputDigit" type="password" style="width: 34px; display: inline-block" disabled>
@@ -251,9 +258,10 @@
                             <button id="9" type="button" class="digit btn btn-lg btn-login btn-primary btn-circle">9</button>
                         </div>
                         <div class="form-group" style="text-align: center">
+                            <button id="off" type="button" class="btn btn-lg btn-login btn-primary btn-circle" disabled></button>
                             <button id="0" type="button" class="digit btn btn-lg btn-login btn-primary btn-circle">0</button>
+                            <button id="del" type="button" class="btn btn-lg btn-login btn-primary btn-circle " style="font-size: 0.875em;left:-2%;">del</button>
                         </div>
-                        <button id="del" type="button" class="btn btn-lg btn-login btn-block btn-primary">Delete</button>
                         <button id="pin-code" type="button" class="btn btn-lg btn-login btn-block btn-primary">Submit</button>
                     </fieldset>
                 </div>
@@ -261,6 +269,7 @@
         </div>
     </div>
 </div>
+
     </div>
     <div class="modal fade" id="spinner-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" style="display: none;">
     <div class="modal-dialog">

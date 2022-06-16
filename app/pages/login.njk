@@ -2,7 +2,19 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-<div class="login-root bodyfade">
+<div class="container">
+    <div class="row bodyfade" style="margin-top:10%;">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="power-button login-panel panel panel-etnx">
+                <div class="power-button power-switch" style="text-align: center">
+                    <img width="25%" height="25%" src="icons/cloud-network.gif" />
+                    <p class="panel-heading" >start Nero{OS}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dashboard login-root bodyfade">
     <div class="container">
         <div id="login-container" class="row bodyfade">
             <div class="col-md-4 col-md-offset-4">
@@ -64,6 +76,18 @@
 </div>
 {% endblock %}
 {% block scripts %} 
+    <script type="text/javascript">
+        $(function() {
+            $(".power-button").css("display", "block");
+            $(".power-switch").css("display", "block");
+            $(".dashboard").css("display", "none");
+            $(document).on("click", ".power-switch", function(){
+                $(".power-button").css("display", "none");
+                $(".power-switch").css("display", "none");
+                $(".dashboard").css("display", "block");
+            });
+        });
+    </script>
     <script type="text/javascript" src="../dist/js/pin-code-utils.js?v=6001"></script>
     <script type="text/javascript" src="../dist/js/login-utils.js?v=6022"></script>
     <script type="text/javascript" src="../dist/js/login.js?v=8104"></script>

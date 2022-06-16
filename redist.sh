@@ -1,0 +1,1 @@
+cp -r -f icons/ dev/icons
