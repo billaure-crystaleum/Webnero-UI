@@ -4,5 +4,7 @@ test/
 node_modules/
 plugins/
 dist/
+krystal/
+krystol/
 raw_blockchain/
 package-lock.json
