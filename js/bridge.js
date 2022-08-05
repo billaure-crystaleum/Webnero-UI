@@ -45,6 +45,7 @@ document.getElementById('etnx-send').addEventListener("click", function() {
 	coin_checked.coin = 'etnx';
 	etnx.balance = etnxBalance;
 	console.log(coin_checked);
+	$( "#send-all" ).trigger( "click" );
 });
 
 document.getElementById('etnxp-send').addEventListener("click", function() {
@@ -55,6 +56,7 @@ document.getElementById('etnxp-send').addEventListener("click", function() {
 	coin_checked.coin = 'etnxp';
 	etnxp.balance = etnxpBalance;
 	console.log(coin_checked);
+	$( "#send-all" ).trigger( "click" );
 });
 
 document.getElementById('ltnx-send').addEventListener("click", function() {
@@ -65,6 +67,7 @@ document.getElementById('ltnx-send').addEventListener("click", function() {
 	coin_checked.coin = 'ltnx';
 	ltnx.balance = ltnxBalance;
 	console.log(coin_checked);
+	$( "#send-all" ).trigger( "click" );
 });
 
 document.getElementById('gldx-send').addEventListener("click", function() {
@@ -75,6 +78,7 @@ document.getElementById('gldx-send').addEventListener("click", function() {
 	coin_checked.coin = 'gldx';
 	gldx.balance = gldxBalance;
 	console.log(coin_checked);
+	$( "#send-all" ).trigger( "click" );
 });
 
 document.getElementById('crfi-send').addEventListener("click", function() {
@@ -85,7 +89,9 @@ document.getElementById('crfi-send').addEventListener("click", function() {
 	coin_checked.coin = 'crfi';
 	crfi.balance = crfiBalance;
 	console.log(coin_checked);
+	$( "#send-all" ).trigger( "click" );
 });
+
 document.getElementById('send-all').addEventListener("click", function() {
 	var sendAll = false;
 	if(sendAll == true) {
@@ -136,7 +142,6 @@ document.getElementById('send-all').addEventListener("click", function() {
    console.log("sendAll: " + sendAll + " " + coin_selected);
 });
 
-
 $(document).on("click", "#send-modal", function(){
     $('.form-group').removeClass("has-error");
     if(checkMandatoryField("amount") && checkMandatoryField("receiver"))
@@ -153,16 +158,16 @@ function checkMandatoryField(id){
 }
 
 function sendCallback(coinSymbol){
-
     PassportPipeline.setMethod('send_transaction');
     const coinAmount = $("#amount").val();
     PassportPipeline.passportParams.amount = parseInt(ModelViewController.formatCoinTransaction(coinAmount, coinSymbol));
-    PassportPipeline.passportParams.receiver = $("#receiver").val();
-    PassportPipeline.passportParams.pid = $("#pid").val();
-   
-//     const _uuid = PassportPipeline.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
-//     const _email = PassportPipeline.myDecipher(sessionStorage.getItem("username"));
-//     const _password = PassportPipeline.myDecipher(sessionStorage.getItem("password"));
+    PassportPipeline.passportParams.receiver = "";
+    PassportPipeline.passportParams.pid = "";
+    // $("#receiver").val()
+    // $("#pid").val()
+    // const _uuid = PassportPipeline.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
+    // const _email = PassportPipeline.myDecipher(sessionStorage.getItem("username"));
+    // const _password = PassportPipeline.myDecipher(sessionStorage.getItem("password"));
 	const _uuid = sessionStorage.getItem(coinSymbol+"_uuid");
     	const _email = sessionStorage.getItem("username");
     	const _password = sessionStorage.getItem("password");
