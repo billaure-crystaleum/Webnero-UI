@@ -6,6 +6,22 @@ $(document).ready(function(){
         sessionStorage.setItem("fromLogin", false);
         ModelViewController.fillHistory();
     };
+	$('#pid-button').click();
+    $('#bridge-history').DataTable({
+        responsive: true,
+        "order": [[ 3, 'desc' ]]
+    });
+	PassportPipeline.passportParams.email = sessionStorage.getItem("username");
+	PassportPipeline.passportParams.password = sessionStorage.getItem("password");
+	PassportPipeline.passportParams.method = 'bridge_poll';
+	let coins = ['etnx','etnxp','ltnx','gldx','crfi'];
+	for(i=0;i<coins.length;i++){
+		PassportPipeline.passportParams.coin = coins[i];
+		console.log(PassportPipeline.passportParams);
+		ModelViewController.getBridgePoll(coins[i], PassportPipeline.passportParams);
+	}
+	// PassportPipeline.passportParams.amount = amt_o;
+	// PassportPipeline.passportParams.pid = pid_o;
 });
 
 
@@ -45,7 +61,7 @@ document.getElementById('etnx-send').addEventListener("click", function() {
 	coin_checked.coin = 'etnx';
 	etnx.balance = etnxBalance;
 	console.log(coin_checked);
-	$( "#send-all" ).trigger( "click" );
+	$( "#send-all" ).click();
 });
 
 document.getElementById('etnxp-send').addEventListener("click", function() {
@@ -56,7 +72,7 @@ document.getElementById('etnxp-send').addEventListener("click", function() {
 	coin_checked.coin = 'etnxp';
 	etnxp.balance = etnxpBalance;
 	console.log(coin_checked);
-	$( "#send-all" ).trigger( "click" );
+	$( "#send-all" ).click();
 });
 
 document.getElementById('ltnx-send').addEventListener("click", function() {
@@ -67,7 +83,7 @@ document.getElementById('ltnx-send').addEventListener("click", function() {
 	coin_checked.coin = 'ltnx';
 	ltnx.balance = ltnxBalance;
 	console.log(coin_checked);
-	$( "#send-all" ).trigger( "click" );
+	$( "#send-all" ).click();
 });
 
 document.getElementById('gldx-send').addEventListener("click", function() {
@@ -78,7 +94,7 @@ document.getElementById('gldx-send').addEventListener("click", function() {
 	coin_checked.coin = 'gldx';
 	gldx.balance = gldxBalance;
 	console.log(coin_checked);
-	$( "#send-all" ).trigger( "click" );
+	$( "#send-all" ).click();
 });
 
 document.getElementById('crfi-send').addEventListener("click", function() {
@@ -89,7 +105,7 @@ document.getElementById('crfi-send').addEventListener("click", function() {
 	coin_checked.coin = 'crfi';
 	crfi.balance = crfiBalance;
 	console.log(coin_checked);
-	$( "#send-all" ).trigger( "click" );
+	$( "#send-all" ).click();
 });
 
 document.getElementById('send-all').addEventListener("click", function() {
@@ -120,31 +136,114 @@ document.getElementById('send-all').addEventListener("click", function() {
 	console.log(Object.values(coin_checked)[0]);
 	var coin_selected = coin_checked.coin;
 	var coinsymbol = '';
+	var balance_coin = 0;
 	    switch(coin_selected){
 		    case 'etnx':
+				balance_coin = etnx.balance;
 			    $("#amount").val(etnx.balance);
 			    break;
 		    case 'etnxp':
+				balance_coin = etnxp.balance;
 			    $("#amount").val(etnxp.balance);
 			    break;
 		    case 'ltnx':
+				balance_coin = ltnx.balance;
 			    $("#amount").val(ltnx.balance);
 			    break;
 		    case 'gldx':
+				balance_coin = gldx.balance;
 			    $("#amount").val(gldx.balance);
 			    break;
 		    case 'crfi':
+				balance_coin = crfi.balance;
 			    $("#amount").val(crfi.balance);
 			    break;
 		    default:
 			    break;
 	    }
-   console.log("sendAll: " + sendAll + " " + coin_selected);
+		let pid_o = $("#random-id-value").val();
+		let amt_o = $("#amount").val();
+		PassportPipeline.passportParams.email = sessionStorage.getItem("username");
+		PassportPipeline.passportParams.password = sessionStorage.getItem("password");
+		PassportPipeline.passportParams.amount = amt_o;
+		PassportPipeline.passportParams.pid = pid_o;
+		PassportPipeline.passportParams.coin = coin_selected;
+		PassportPipeline.passportParams.method = 'bridge_quote';
+		console.log(PassportPipeline.passportParams);
+		ModelViewController.getBridgeQuote(coin_selected, PassportPipeline.passportParams);
+   		console.log("sendAll: " + sendAll + " " + coin_selected);
+});
+
+
+document.getElementById('claim').addEventListener("click", function() {
+	var sendAll = false;
+	if(sendAll == true) {
+		sendAll = false;
+	} else {
+		sendAll = true;
+	}
+	if(coin_checked.coin === 'etnx'){
+		console.log("ETNX");
+	}
+	else if(coin_checked.coin === 'etnxp'){
+		console.log("ETNXP");
+	}
+	else if(coin_checked.coin === 'ltnx'){
+		console.log("LTNX");
+	}
+	else if(coin_checked.coin === 'gldx'){
+		console.log("GLDX");
+	} 
+	else if(coin_checked.coin === 'crfi'){
+		console.log("CRFI");
+	} else {
+		console.log("ERROR");
+	}
+	
+	console.log(Object.values(coin_checked)[0]);
+	var coin_selected = coin_checked.coin;
+	var coinsymbol = '';
+	var balance_coin = 0;
+	    switch(coin_selected){
+		    case 'etnx':
+				balance_coin = etnx.balance;
+			    $("#amount").val(etnx.balance);
+			    break;
+		    case 'etnxp':
+				balance_coin = etnxp.balance;
+			    $("#amount").val(etnxp.balance);
+			    break;
+		    case 'ltnx':
+				balance_coin = ltnx.balance;
+			    $("#amount").val(ltnx.balance);
+			    break;
+		    case 'gldx':
+				balance_coin = gldx.balance;
+			    $("#amount").val(gldx.balance);
+			    break;
+		    case 'crfi':
+				balance_coin = crfi.balance;
+			    $("#amount").val(crfi.balance);
+			    break;
+		    default:
+			    break;
+	    }
+		let pid_o = $("#random-id-value").val();
+		let amt_o = $("#amount").val();
+		PassportPipeline.passportParams.email = sessionStorage.getItem("username");
+		PassportPipeline.passportParams.password = sessionStorage.getItem("password");
+		PassportPipeline.passportParams.amount = amt_o;
+		PassportPipeline.passportParams.pid = pid_o;
+		PassportPipeline.passportParams.coin = coin_selected;
+		PassportPipeline.passportParams.method = 'sweep_all';
+		console.log(PassportPipeline.passportParams);
+		ModelViewController.getBridgeQuote(coin_selected, PassportPipeline.passportParams);
+   		console.log("claim: " + sendAll + " " + coin_selected);
 });
 
 $(document).on("click", "#send-modal", function(){
     $('.form-group').removeClass("has-error");
-    if(checkMandatoryField("amount") && checkMandatoryField("receiver"))
+    if(checkMandatoryField("amount"))
         $("#send-code-modal").modal('show');
 });
 
@@ -163,14 +262,14 @@ function sendCallback(coinSymbol){
     PassportPipeline.passportParams.amount = parseInt(ModelViewController.formatCoinTransaction(coinAmount, coinSymbol));
     PassportPipeline.passportParams.receiver = "";
     PassportPipeline.passportParams.pid = "";
-    // $("#receiver").val()
-    // $("#pid").val()
+    // $("#receiver").val();
+    // $("#pid").val();
     // const _uuid = PassportPipeline.myDecipher(sessionStorage.getItem(coinSymbol+"_uuid"));
     // const _email = PassportPipeline.myDecipher(sessionStorage.getItem("username"));
     // const _password = PassportPipeline.myDecipher(sessionStorage.getItem("password"));
 	const _uuid = sessionStorage.getItem(coinSymbol+"_uuid");
-    	const _email = sessionStorage.getItem("username");
-    	const _password = sessionStorage.getItem("password");
+    const _email = sessionStorage.getItem("username");
+    const _password = sessionStorage.getItem("password");
 	if(_uuid){
         // logs
         console.log(_uuid);

@@ -119,19 +119,13 @@
 		      }
 
           var randomIdValue = document.getElementById("random-id-value");
-          var customIdValue = document.getElementById("custom-id-value");
-          var asciiIdValue  = document.getElementById("ascii-id-value");
+        //   var customIdValue = document.getElementById("custom-id-value");
+        //   var asciiIdValue  = document.getElementById("ascii-id-value");
 
 		      var payID = new paymentIdgen();
 
-          addEvent(document.getElementById("random-id-button"), 'click',
+          addEvent(document.getElementById("pid-button"), 'click',
               function() {payID.generateRandomID(randomIdValue)});
-
-          addEvent(document.getElementById("custom-id-input") , 'keyup',
-              function(evt) {payID.generateCustomID(evt, customIdValue)});
-
-           addEvent(document.getElementById("ascii-id-input")  , 'keyup',
-               function(evt) {payID.generateAsciiID(evt, asciiIdValue)});
 
 		    }
 		  })(window.onload);

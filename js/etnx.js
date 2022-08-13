@@ -86,6 +86,10 @@ var ModelViewController = {
         
         return localStorage.setItem(coin+"Data", data);       
     },
+    setBridgeData: function(coin, data){
+        
+        return localStorage.setItem(coin+"Bridge", data);       
+    },
     getCoinData: function(coin){
         if(coin){
             function whichData(coinData){
@@ -98,8 +102,6 @@ var ModelViewController = {
                     return whichData("etnxData");
                 case 'etnxp':
                     return whichData("etnxpData");
-                case 'etnxc':
-                    return whichData("etnxcData");
                 case 'ltnx':
                     return whichData("ltnxData");
                 case 'gldx':
@@ -110,12 +112,109 @@ var ModelViewController = {
                     break;
             }; 
         } else {
-             // loop through coins.coin and get all coinData
+            // loop through coins.coin and get all coinData
             let coins = ModelViewController.coins.coin;
             for (var i=0;i<coins.length;i++) {
                 ModelViewController.getCoinData(coins[i]);
+            };
         };
-    };
+    },
+    getBridgeData: function(coin){
+        if(coin){
+            function whichBridge(coinBridge){
+                ModelViewController.coinState++ 
+                try{ return JSON.parse(localStorage.getItem(coinBridge)); }
+                catch(e) { console.log(e); return null; }
+            }
+            switch (coin) {
+                case 'etnx':
+                    return whichBridge("etnxBridge");
+                case 'etnxp':
+                    return whichBridge("etnxpBridge");
+                case 'ltnx':
+                    return whichBridge("ltnxBridge");
+                case 'gldx':
+                    return whichBridge("gldxBridge");
+                case 'crfi':
+                    return whichBridge("crfiBridge");
+                default:
+                    break;
+            }; 
+        } else {
+             // loop through coins.coin and get all coinData
+            let coins = ModelViewController.coins.coin;
+            for (var i=0;i<coins.length;i++) {
+                ModelViewController.getBridgeData(coins[i]);
+            };
+        };
+    },
+    getBridgeQuote: function(coin, passportParams){
+        if(coin){
+            console.log("3");
+            let coinSymbol = coin;
+            this.passportParams = passportParams;
+            console.log("passportParams:");
+            console.log(this.passportParams);
+            PassportPipeline.remoteSmartBridgeTx(this.passportParams).then((response) => {
+                if(response){
+                    console.log(response); 
+                    let passportBalance = JSON.parse(response);
+                    console.log(passportBalance);
+                    if(passportBalance.hasOwnProperty("error")){
+                        console.log(passportBalance.hasOwnProperty("error"));
+                    }
+                    else if(!passportBalance.hasOwnProperty("error")) {
+                        ModelViewController.setBridgeData(coinSymbol, response);
+                        console.log(coinSymbol.toLowerCase());
+                        ModelViewController.fillBridge(coinSymbol.toLowerCase());
+                        $.event.trigger({
+                            type: "init.done",
+                            coin: coinSymbol
+                        });
+                    }
+                }
+            });
+        } else {
+            // loop through coins.coin and get all coinData
+            // let coins = ModelViewController.coins.coin;
+            // for (var i=0;i<coins.length;i++) {
+            //     ModelViewController.getBridgeQuote(coins[i]);
+            // };
+        };
+    },
+    getBridgePoll: function(coin, passportParams){
+        if(coin){
+            console.log("3");
+            let coinSymbol = coin;
+            this.passportParams = passportParams;
+            console.log("passportParams:");
+            console.log(this.passportParams);
+            PassportPipeline.remoteSmartBridgeTx(this.passportParams).then((response) => {
+                if(response){
+                    console.log(response); 
+                    let passportBalance = JSON.parse(response);
+                    console.log(passportBalance);
+                    if(passportBalance.hasOwnProperty("error")){
+                        console.log(passportBalance.hasOwnProperty("error"));
+                    }
+                    else if(!passportBalance.hasOwnProperty("error")) {
+                        // ModelViewController.setBridgeData(coinSymbol, response);
+                        // console.log(coinSymbol.toLowerCase());
+                        ModelViewController.fillBridgeRows("ETNX", passportBalance.data);
+                        $.event.trigger({
+                            type: "init.done",
+                            coin: coinSymbol
+                        });
+                    }
+                }
+            });
+        } else {
+            // loop through coins.coin and get all coinData
+            // let coins = ModelViewController.coins.coin;
+            // for (var i=0;i<coins.length;i++) {
+            //     ModelViewController.getBridgeQuote(coins[i]);
+            // };
+        };
     },
     formatCoinTransaction: function(coins, coinSymbol, units = 100000000){
     const coinUnits = coinSymbol==="crfi" ? 1000000000000 : coinSymbol==="etnx" ? 100000000 : coinSymbol==="etnxp" ? 1000000 : coinSymbol==="etnxc" ? 1000000 : coinSymbol==="ltnx" ? 100000000 : coinSymbol==="gldx" ? 1000000000000 : units;
@@ -127,6 +226,45 @@ var ModelViewController = {
     var coinDecimalPlaces = coinUnits.toString().length - 1;
     var balancedCoins = (parseInt(coins || 0) / coinUnits).toFixed(units || coinDecimalPlaces);
     return balancedCoins;
+    },
+    fillBridge: function(coin){   
+        console.log(coin)   
+        if(coin == "etnx"){
+            var etnxBridge = this.getBridgeData("etnx");
+            if(etnxBridge != null){
+                console.log(etnxBridge);
+                $("#claim-amount").html(etnxBridge.data.quote.quote);
+            }
+        }
+        if(coin == "etnxp"){
+            var etnxpBridge = this.getBridgeData("etnxp");
+            if(etnxpBridge != null){
+                console.log(etnxpBridge);
+                $("#claim-amount").html(etnxpBridge.data.quote.quote);
+            }
+        }
+        if(coin == "ltnx"){
+            var ltnxBridge = this.getBridgeData("ltnx");
+            if(ltnxBridge != null){
+                console.log(ltnxBridge);
+                $("#claim-amount").html(ltnxBridge.data.quote.quote);
+            }
+        }
+        if(coin == "gldx"){
+            var gldxBridge = this.getBridgeData("gldx");
+            if(gldxBridge != null){
+                console.log(gldxBridge);
+                $("#claim-amount").html(gldxBridge.data.quote.quote);
+            }
+        }
+        if(coin == "crfi"){
+            var crfiBridge = this.getBridgeData("crfi");
+            if(crfiBridge != null){
+                console.log(crfiBridge);
+                console.log(crfiBridge.data.quote.quote);
+                $("#claim-amount").html(crfiBridge.data.quote.quote);
+            }
+        }
     },
     fillData: function(){      
 
@@ -200,8 +338,48 @@ var ModelViewController = {
             $("#crfi-unlocked-balance").html(crfiBalance);
         }
     },
-
     fillHistory: function(){
+        var etnxData = this.getCoinData("etnx");
+        if(etnxData != null){
+            if(etnxData.txs.in || etnxData.txs.out){
+                this.fillHistoryRows("ETNX", "Receive", etnxData.txs.in);
+                this.fillHistoryRows("ETNX", "Send", etnxData.txs.out);
+            }
+        }
+        
+        var etnxpData = this.getCoinData("etnxp");
+        if(etnxpData != null){
+            if(etnxpData.txs.in || etnxpData.txs.out){
+                this.fillHistoryRows("ETNXP", "Receive", etnxpData.txs.in);
+                this.fillHistoryRows("ETNXP", "Send", etnxpData.txs.out);
+            }
+        }
+        
+        var crfiData = this.getCoinData("crfi");
+        if(crfiData != null){
+            if(crfiData.txs.in || crfiData.txs.out){
+                this.fillHistoryRows("CRFI", "Receive", crfiData.txs.in);
+                this.fillHistoryRows("CRFI", "Send", crfiData.txs.out);
+            }
+        }
+       
+        var ltnxData = this.getCoinData("ltnx");
+        if(ltnxData != null){
+            if(ltnxData.txs.in || ltnxData.txs.out){
+                this.fillHistoryRows("LTNX", "Receive", ltnxData.txs.in);
+                this.fillHistoryRows("LTNX", "Send", ltnxData.txs.out);
+            }
+        }
+
+        var gldxData = this.getCoinData("gldx");
+        if(gldxData != null){
+            if(gldxData.txs.in || gldxData.txs.out){
+                this.fillHistoryRows("GLDX", "Receive", gldxData.txs.in);
+                this.fillHistoryRows("GLDX", "Send", gldxData.txs.out);
+            }
+        }
+    },
+    fillBridgeClaims: function(){
         var etnxData = this.getCoinData("etnx");
         if(etnxData != null){
             if(etnxData.txs.in || etnxData.txs.out){
@@ -254,6 +432,20 @@ var ModelViewController = {
     },
     fillHistoryRows: function(coin, type, items){
         var tbody = $("#transaction-history").find('tbody');
+        var count = 0;
+        for(count>0; count < items.length; count++){
+            var item = items[count];
+            tbody.append( "<tr class='row_" + coin +"'>" +
+                            "<td>" + coin + "</td>" + 
+                            "<td>" + type + "</td>" + 
+                            "<td>" + this.formatCoinUnits(item.amount, coin.toLowerCase()) + "</td>" + 
+                            "<td>" + "<a href='"+this.blockchainExplorerLink(true, parseInt(item.height), item.txid, coin.toLowerCase())+"'>" + item.height + "</td>" + 
+                            "<td>" + "<a href='"+this.blockchainExplorerLink(false, parseInt(item.height), item.txid, coin.toLowerCase())+"'>" + item.txid + "</a>" + "</td>" + 
+                          "</tr>" );
+        }
+    },  
+    fillBridgeRows: function(coin, items){
+        var tbody = $("#bridge-history").find('tbody');
         var count = 0;
         for(count>0; count < items.length; count++){
             var item = items[count];

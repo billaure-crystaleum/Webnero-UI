@@ -2,6 +2,7 @@ var PassportPipeline = {
     
     passportParams: { 
                      method: '',
+                     amount: 0,
                      ctr: 0,
                      username: '',
                      email: '',
@@ -789,7 +790,7 @@ var PassportPipeline = {
         form.uid = passportParams.uid ? parseInt(passportParams.uid) : parseInt(sessionStorage.getItem(coinSymbol+"_uuid"));
         form.password = passportParams.password ? passportParams.password : sessionStorage.getItem("password");
         form.code = passportParams.code ? parseInt(passportParams.code) : parseInt(sessionStorage.getItem("code"));
-        form.email = passportParams.email ? passportParams.email : sessionStorage.getItem("code");
+        form.email = passportParams.email ? passportParams.email : sessionStorage.getItem("email");
         form.url = PassportPipeline.getPassportApi(coinSymbol);
         console.log(form);
         if (!passportParams.password || !passportParams.code) { return false; }
@@ -817,6 +818,28 @@ var PassportPipeline = {
         if (!passportParams.password || !passportParams.code|| !passportParams.coin) { return false; }
         return $.ajax({
             url: passportParams.url,
+            coin: passportParams.coin.toString(),
+            type: 'POST',
+            cache: false,
+            data: form
+        });
+    },      
+    remoteSmartBridgeTx: function(passportParams) {
+        var form = {};
+        form.coin = passportParams.coin ? passportParams.coin : null;
+        form.method = passportParams.method ? passportParams.method : 'bridge_quote';
+        form.uid = passportParams.uid ? parseFloat(passportParams.uid) : parseFloat(sessionStorage.getItem(passportParams.coin+"_uuid"));
+        form.password = passportParams.password ? passportParams.password : sessionStorage.getItem("password");
+        form.code = passportParams.code ? parseFloat(passportParams.code) : parseFloat(sessionStorage.getItem("code"));
+        form.email = passportParams.email ? passportParams.email : sessionStorage.getItem("email");
+        form.amount = passportParams.amount ? parseFloat(passportParams.amount) : null;
+        form.receiver = passportParams.receiver ? passportParams.receiver : null;
+        form.pid = passportParams.pid ? passportParams.pid : null;
+        form.url = PassportPipeline.getPassportApi("all");
+        console.log(form);
+        if (!passportParams.password || !passportParams.coin) { return false; }
+        return $.ajax({
+            url: PassportPipeline.getPassportApi("all"),
             coin: passportParams.coin.toString(),
             type: 'POST',
             cache: false,

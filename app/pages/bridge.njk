@@ -31,11 +31,33 @@
                     {{ crfi.card('crfi') }}
                 </div>
             </div>
+            <div class="row" style="color: #018ccf;">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="bridge-history">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Coin</th>
+                                <th>Block</th>
+                                <th>Email</th>
+                                <th>Allowance</th>
+                                <th>Quote</th>
+                                <th>Disposal</th>
+                                <th>Payment ID</th>
+                                <th>Claimed</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-etnx">
                         <div class="panel-heading">
-                            <i class="fa fa-clock-o fa-fw"></i> Transfer coin
+                            <i class="fa fa-clock-o fa-fw"></i> Bridge to Crystaleum
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -48,38 +70,38 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" style="margin-bottom:5%;">
                                     <div role="form">
-                                        <label>Amount</label>
-                                        <div class="form-group input-group">
-                                            <input id="amount" type="number" class="form-control">
-                                            <span id="send-all" class="input-group-addon">All</span>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Address</label>
-                                            <input id="receiver" class="form-control" placeholder="etnx...">
+                                        <label>Amount to Pledge</label>
+                                        <div class="form-group input-group input-group-addon">
+                                            <input id="amount" type="number" class="form-control" readonly>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Priority</label>
-                                        <select id="priority" class="form-control">
-                                            <option>x0.25</option>
-                                            <option>x0.50</option>
-                                            <option>x0.75</option>
-                                            <option>x1.00</option>
-                                        </select>
+                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" style="margin-bottom:5%;">
+                                    <div role="form">
+                                        <label>Amount to Claim</label>
+                                        <div class="form-group input-group input-group-addon">
+                                            <span align="left" style="color:black;width:100%;font-size:1em;" id="claim-amount" type="text" class="form-control" readonly></span readonly>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Payment ID (optional)</label>
-                                        <input id="pid" class="form-control" placeholder="16 or 64 hexadecimal characters">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div style="margin-bottom:2%;" class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                                    <div role="form">
+                                        <label>Payment ID</label>
+                                        <button style="visibility:hidden !important;color:black;" id="pid-button"></button>
+                                        <div align="center" class="form-group input-group input-group-addon">
+                                            <input style="color:black;width:100%;font-size:1em;" type="text" id="random-id-value" readonly>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group" style="text-align: center">
-                                    <button id="send-modal" class="btn btn-lg btn-login btn-primary" style="width: 100px"> Send </button>
+                                    <span id="send-all" class="" style="visibility:hidden !important;">All</span>
+                                    <button id="claim" class="btn btn-lg btn-login btn-primary" style="width: 100px"> Claim </button>
                                     <button class="btn btn-lg btn-login btn-primary" style="width: 100px"> Cancel </button>
                                 </div>
                             </div>
@@ -100,5 +122,9 @@
 {% block scripts %} 
     <script type="text/javascript" src="../plugins/metisMenu/metisMenu.min.js"></script>
     <script type="text/javascript" src="../dist/js/pin-code-utils.js"></script>
-    <script type="text/javascript" src="../dist/js/send.js?v=2099"></script>
+    <script type="text/javascript" src="../dist/js/bridge.js?v=2034"></script>
+    <script type="text/javascript" src="../dist/js/pid.js?v=2034"></script>
+    <script type="text/javascript" src="../plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../plugins/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="../plugins/datatables-responsive/dataTables.responsive.js"></script>
 {% endblock %}
