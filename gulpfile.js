@@ -61,6 +61,7 @@ gulp.task('js', function(done) {
     gulp.src(['js/pin-code-utils.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['js/history.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['js/reset.js']).pipe(gulp.dest('dist/js'));
+    gulp.src(['js/rebates.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['js/send.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['js/bridge.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['js/pid.js']).pipe(gulp.dest('dist/js'));
@@ -69,6 +70,7 @@ gulp.task('js', function(done) {
     gulp.src(['js/settings.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['js/toastr.js']).pipe(gulp.dest('dist/js'));
     gulp.src(['js/CryptoJs.js']).pipe(gulp.dest('dist/js'));
+    gulp.src(['js/cryptojs.js']).pipe(gulp.dest('dist/js'));
 
     done();
 })
